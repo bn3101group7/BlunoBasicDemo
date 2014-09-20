@@ -46,6 +46,7 @@ public class MainActivity  extends BlunoLibrary {
 				buttonScanOnClickProcess();										//Alert Dialog for selecting the BLE device
 			}
 		});*/
+        //test commit
         buttonScan = (Button) findViewById(R.id.buttonScan);					//initial the button for scanning the BLE device
 	}
 
