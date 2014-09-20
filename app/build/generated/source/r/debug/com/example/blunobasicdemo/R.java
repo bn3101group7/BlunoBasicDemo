@@ -24,7 +24,7 @@ public final class R {
         public static final int device_address=0x7f080007;
         public static final int device_name=0x7f080006;
         public static final int editText2=0x7f080002;
-        public static final int serialReveicedText=0x7f080001;
+        public static final int serialReceivedText=0x7f080001;
         public static final int serialSendText=0x7f080004;
         public static final int textView1=0x7f080000;
     }

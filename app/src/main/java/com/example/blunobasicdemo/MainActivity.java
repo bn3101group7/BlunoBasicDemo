@@ -7,6 +7,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity  extends BlunoLibrary {
 	private Button buttonScan;
@@ -22,7 +23,7 @@ public class MainActivity  extends BlunoLibrary {
         
         serialBegin(115200);													//set the Uart Baudrate on BLE chip to 115200
 		
-        serialReceivedText=(TextView) findViewById(R.id.serialReveicedText);	//initial the EditText of the received data
+        serialReceivedText=(TextView) findViewById(R.id.serialReceivedText);	//initial the EditText of the received data
         serialSendText=(EditText) findViewById(R.id.serialSendText);			//initial the EditText of the sending data
         
         /*buttonSerialSend = (Button) findViewById(R.id.buttonSerialSend);		//initial the button for sending the data
@@ -112,12 +113,26 @@ public class MainActivity  extends BlunoLibrary {
 		}
 	}
 
+    public Boolean isNumeric(String str) {
+        try {
+            float f = Float.parseFloat(str);
+        }
+        catch(NumberFormatException nfe) {
+            return false;
+        }
+        return true;
+    }
+
 	@Override
 	public void onSerialReceived(String theString) {							//Once connection data received, this function will be called
 		// TODO Auto-generated method stub
 		serialReceivedText.append(theString);							//append the text into the EditText
 		//The Serial data from the BLUNO may be sub-packaged, so using a buffer to hold the String is a good choice.
-					
+        if(isNumeric(theString)) {
+            if (Float.parseFloat(theString) > 1) {
+                Toast.makeText(this, "yes", Toast.LENGTH_SHORT).show();
+            }
+        }
 	}
 
 }
