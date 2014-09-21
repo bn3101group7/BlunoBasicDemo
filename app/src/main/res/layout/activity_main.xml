@@ -78,7 +78,41 @@
             android:id="@+id/skinSpinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/gender_cat"
+            android:text="@string/gender_cat"
+            android:gravity="center"
+            android:textSize="16sp"/>
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/genderSpinner"/>
         </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonSendSkin"
+            android:text="@string/send_skin"
+            android:onClick="sendSkin"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonSendGender"
+            android:text="@string/send_gender"
+            android:onClick="sendGender"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonSendBoth"
+            android:text="@string/send_both"
+            android:onClick="sendBoth"/>
+    </LinearLayout>
 
 
 </LinearLayout>

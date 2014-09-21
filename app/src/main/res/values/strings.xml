@@ -21,6 +21,10 @@
     <string name="received_text">Received Data: </string>
     <string name="button_send1">Send 1</string>
     <string name="skin_cat">Skin Colour</string>
+    <string name="send_skin">Send Skin</string>
+    <string name="gender_cat">Gender</string>
+    <string name="send_gender">Send Gender</string>
+    <string name="send_both">Send Both</string>
 
     <!-- Menu items -->
     <string name="menu_connect">Connect</string>

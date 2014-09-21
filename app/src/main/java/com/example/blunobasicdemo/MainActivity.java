@@ -20,6 +20,7 @@ public class MainActivity  extends BlunoLibrary {
 	private EditText serialSendText;
 	private TextView serialReceivedText;
     private Spinner skinSpinner;
+    private Spinner genderSpinner;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +57,7 @@ public class MainActivity  extends BlunoLibrary {
         //test commit
         buttonScan = (Button) findViewById(R.id.buttonScan);					//initial the button for scanning the BLE device
         addItemsToSkinSpinner();
+        addItemsToGenderSpinner();
 	}
 
     public void scanDevice(View V) {
@@ -84,9 +86,43 @@ public class MainActivity  extends BlunoLibrary {
         list.add("Tanned");
         list.add("Very tanned");
 
-        ArrayAdapter<String> weightDataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
-        weightDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        skinSpinner.setAdapter(weightDataAdapter);
+        ArrayAdapter<String> skinDataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
+        skinDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        skinSpinner.setAdapter(skinDataAdapter);
+    }
+
+    public void addItemsToGenderSpinner() {
+        genderSpinner = (Spinner) findViewById(R.id.genderSpinner);
+        List<String> list = new ArrayList<String>();
+        list.add("Please select your gender");
+        list.add("Male");
+        list.add("Female");
+
+        ArrayAdapter<String> genderDataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
+        genderDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        genderSpinner.setAdapter(genderDataAdapter);
+    }
+
+    public void sendSkin(View V) {
+        skinSpinner = (Spinner) findViewById(R.id.skinSpinner);
+        if(skinSpinner.getSelectedItemPosition()!=0) {
+            serialSend(String.valueOf(skinSpinner.getSelectedItemPosition()));
+        }
+    }
+
+    public void sendGender(View V) {
+        genderSpinner = (Spinner) findViewById(R.id.genderSpinner);
+        if(genderSpinner.getSelectedItemPosition()!=0) {
+            serialSend(String.valueOf(genderSpinner.getSelectedItemPosition()));
+        }
+    }
+
+    public void sendBoth(View V) {
+        skinSpinner = (Spinner) findViewById(R.id.skinSpinner);
+        genderSpinner = (Spinner) findViewById(R.id.genderSpinner);
+        if(skinSpinner.getSelectedItemPosition()!=0 && genderSpinner.getSelectedItemPosition()!=0) {
+            serialSend(String.valueOf(skinSpinner.getSelectedItemPosition())+String.valueOf(genderSpinner.getSelectedItemPosition()));
+        }
     }
 
     @Override
