@@ -4,16 +4,22 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity  extends BlunoLibrary {
 	private Button buttonScan;
 	private Button buttonSerialSend;
 	private EditText serialSendText;
 	private TextView serialReceivedText;
+    private Spinner skinSpinner;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +55,7 @@ public class MainActivity  extends BlunoLibrary {
 		});*/
         //test commit
         buttonScan = (Button) findViewById(R.id.buttonScan);					//initial the button for scanning the BLE device
+        addItemsToSkinSpinner();
 	}
 
     public void scanDevice(View V) {
@@ -59,15 +66,30 @@ public class MainActivity  extends BlunoLibrary {
         serialSend(serialSendText.getText().toString());
     }
 
+    public void sendData1(View V) {
+        serialSend("12");
+    }
+
 	protected void onResume(){
 		super.onResume();
 		System.out.println("BlUNOActivity onResume");
 		onResumeProcess();														//onResume Process by BlunoLibrary
 	}
-	
-	
-	
-	@Override
+
+    public void addItemsToSkinSpinner() {
+        skinSpinner = (Spinner) findViewById(R.id.skinSpinner);
+        List<String> list = new ArrayList<String>();
+        list.add("Please select the colour of your skin");
+        list.add("Fair");
+        list.add("Tanned");
+        list.add("Very tanned");
+
+        ArrayAdapter<String> weightDataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
+        weightDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        skinSpinner.setAdapter(weightDataAdapter);
+    }
+
+    @Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		onActivityResultProcess(requestCode, resultCode, data);					//onActivityResult Process by BlunoLibrary
 		super.onActivityResult(requestCode, resultCode, data);

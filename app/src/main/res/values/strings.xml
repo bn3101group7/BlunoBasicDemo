@@ -15,6 +15,13 @@
     <string name="unknown_characteristic">Unknown characteristic</string>
     <string name="unknown_service">Unknown service</string>
 
+    <string name="button_scan">Scan</string>
+    <string name="send_data">Send Data</string>
+    <string name="send_text">Data sending Area</string>
+    <string name="received_text">Received Data: </string>
+    <string name="button_send1">Send 1</string>
+    <string name="skin_cat">Skin Colour</string>
+
     <!-- Menu items -->
     <string name="menu_connect">Connect</string>
     <string name="menu_disconnect">Disconnect</string>
