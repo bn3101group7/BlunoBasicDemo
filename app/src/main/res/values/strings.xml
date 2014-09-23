@@ -27,10 +27,11 @@
     <string name="send_both">Send Both</string>
 
     <!-- Menu items -->
-    <string name="menu_connect">Connect</string>
+    <string name="menu_connecting">Connecting</string>
     <string name="menu_disconnect">Disconnect</string>
+    <string name="menu_disconnecting">Disconnecting</string>
     <string name="menu_scan">Scan</string>
-    <string name="menu_stop">Stop</string>
+    <string name="menu_scanning">Scanning</string>
     <string name="action_settings">Action settings</string>
     
 

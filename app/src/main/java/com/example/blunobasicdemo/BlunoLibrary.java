@@ -41,7 +41,7 @@ public abstract  class BlunoLibrary  extends Activity{
 //		mainContext=theContext;
 //	}
 	
-	public abstract void onConectionStateChange(connectionStateEnum theconnectionStateEnum);
+	//public abstract void onConectionStateChange(connectionStateEnum theconnectionStateEnum);
 	public abstract void onSerialReceived(String theString);
 	public void serialSend(String theString){
 		if (mConnectionState == connectionStateEnum.isConnected) {
@@ -95,7 +95,8 @@ public abstract  class BlunoLibrary  extends Activity{
 		public void run() {
         	if(mConnectionState==connectionStateEnum.isConnecting)
 			mConnectionState=connectionStateEnum.isToScan;
-			onConectionStateChange(mConnectionState);
+			//onConectionStateChange(mConnectionState);
+            invalidateOptionsMenu();
 			mBluetoothLeService.close();
 		}};
 		
@@ -105,7 +106,8 @@ public abstract  class BlunoLibrary  extends Activity{
 		public void run() {
         	if(mConnectionState==connectionStateEnum.isDisconnecting)
 			mConnectionState=connectionStateEnum.isToScan;
-			onConectionStateChange(mConnectionState);
+			//onConectionStateChange(mConnectionState);
+            invalidateOptionsMenu();
 			mBluetoothLeService.close();
 		}};
     
@@ -149,19 +151,22 @@ public abstract  class BlunoLibrary  extends Activity{
 		        if(mDeviceName.equals("No Device Available") && mDeviceAddress.equals("No Address Available"))
 		        {
 		        	mConnectionState=connectionStateEnum.isToScan;
-		        	onConectionStateChange(mConnectionState);
+		        	//onConectionStateChange(mConnectionState);
+                    invalidateOptionsMenu();
 		        }
 		        else{
 		        	if (mBluetoothLeService.connect(mDeviceAddress)) {
 				        Log.d(TAG, "Connect request success");
 			        	mConnectionState=connectionStateEnum.isConnecting;
-			        	onConectionStateChange(mConnectionState);
+			        	//onConectionStateChange(mConnectionState);
+                        invalidateOptionsMenu();
 			            mHandler.postDelayed(mConnectingOverTimeRunnable, 10000);
 		        	}
 			        else {
 				        Log.d(TAG, "Connect request fail");
 			        	mConnectionState=connectionStateEnum.isToScan;
-			        	onConectionStateChange(mConnectionState);
+			        	//onConectionStateChange(mConnectionState);
+                        invalidateOptionsMenu();
 					}
 		        }
 			}
@@ -173,7 +178,8 @@ public abstract  class BlunoLibrary  extends Activity{
 				System.out.println("mBluetoothAdapter.stopLeScan");
 
 	        	mConnectionState=connectionStateEnum.isToScan;
-	        	onConectionStateChange(mConnectionState);
+	        	//onConectionStateChange(mConnectionState);
+                invalidateOptionsMenu();
 				mScanDeviceDialog.dismiss();
 
 				scanLeDevice(false);
@@ -210,7 +216,8 @@ public abstract  class BlunoLibrary  extends Activity{
 		mainContext.unregisterReceiver(mGattUpdateReceiver);
 		mLeDeviceListAdapter.clear();
     	mConnectionState=connectionStateEnum.isToScan;
-    	onConectionStateChange(mConnectionState);
+    	//onConectionStateChange(mConnectionState);
+        invalidateOptionsMenu();
 		mScanDeviceDialog.dismiss();
 		if(mBluetoothLeService!=null)
 		{
@@ -292,7 +299,8 @@ public abstract  class BlunoLibrary  extends Activity{
             } else if (BluetoothLeService.ACTION_GATT_DISCONNECTED.equals(action)) {
                 mConnected = false;
                 mConnectionState = connectionStateEnum.isToScan;
-                onConectionStateChange(mConnectionState);
+                //onConectionStateChange(mConnectionState);
+                invalidateOptionsMenu();
             	mHandler.removeCallbacks(mDisonnectingOverTimeRunnable);
             	mBluetoothLeService.close();
             } else if (BluetoothLeService.ACTION_GATT_SERVICES_DISCOVERED.equals(action)) {
@@ -315,13 +323,15 @@ public abstract  class BlunoLibrary  extends Activity{
 						mSCharacteristic=mSerialPortCharacteristic;
 						mBluetoothLeService.setCharacteristicNotification(mSCharacteristic, true);
 						mConnectionState = connectionStateEnum.isConnected;
-						onConectionStateChange(mConnectionState);
+						//onConectionStateChange(mConnectionState);
+                        invalidateOptionsMenu();
 						
 					}
             		else {
             			Toast.makeText(mainContext, "Please select DFRobot devices",Toast.LENGTH_SHORT).show();
                         mConnectionState = connectionStateEnum.isToScan;
-                        onConectionStateChange(mConnectionState);
+                        //onConectionStateChange(mConnectionState);
+                        invalidateOptionsMenu();
 					}
             	}
             	else if (mSCharacteristic==mSerialPortCharacteristic) {
@@ -345,13 +355,15 @@ public abstract  class BlunoLibrary  extends Activity{
     	switch (mConnectionState) {
 		case isNull:
 			mConnectionState=connectionStateEnum.isScanning;
-			onConectionStateChange(mConnectionState);
+			//onConectionStateChange(mConnectionState);
+            invalidateOptionsMenu();
 			scanLeDevice(true);
 			mScanDeviceDialog.show();
 			break;
 		case isToScan:
 			mConnectionState=connectionStateEnum.isScanning;
-			onConectionStateChange(mConnectionState);
+			//onConectionStateChange(mConnectionState);
+            invalidateOptionsMenu();
 			scanLeDevice(true);
 			mScanDeviceDialog.show();
 			break;
@@ -368,7 +380,8 @@ public abstract  class BlunoLibrary  extends Activity{
 
 //			mBluetoothLeService.close();
 			mConnectionState=connectionStateEnum.isDisconnecting;
-			onConectionStateChange(mConnectionState);
+			//onConectionStateChange(mConnectionState);
+            invalidateOptionsMenu();
 			break;
 		case isDisconnecting:
 			
@@ -487,7 +500,8 @@ public abstract  class BlunoLibrary  extends Activity{
         if (mModelNumberCharacteristic==null || mSerialPortCharacteristic==null || mCommandCharacteristic==null) {
 			Toast.makeText(mainContext, "Please select DFRobot devices",Toast.LENGTH_SHORT).show();
             mConnectionState = connectionStateEnum.isToScan;
-            onConectionStateChange(mConnectionState);
+            //onConectionStateChange(mConnectionState);
+            invalidateOptionsMenu();
 		}
         else {
         	mSCharacteristic=mModelNumberCharacteristic;

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -57,7 +58,7 @@ public class MainActivity  extends BlunoLibrary {
 			}
 		});*/
         //test commit
-        buttonScan = (Button) findViewById(R.id.buttonScan);					//initial the button for scanning the BLE device
+        //buttonScan = (Button) findViewById(R.id.buttonScan);					//initial the button for scanning the BLE device
         addItemsToSkinSpinner();
         addItemsToGenderSpinner();
 	}
@@ -67,7 +68,62 @@ public class MainActivity  extends BlunoLibrary {
         // Inflate the menu items for use in the action bar
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main, menu);
+        if(mConnectionState.equals(connectionStateEnum.isNull)||mConnectionState.equals(connectionStateEnum.isToScan)){
+            menu.findItem(R.id.menu_scan).setVisible(true);
+            menu.findItem(R.id.menu_scanning).setVisible(false);
+            menu.findItem(R.id.menu_connecting).setVisible(false);
+            menu.findItem(R.id.menu_disconnect).setVisible(false);
+            menu.findItem(R.id.menu_disconnecting).setVisible(false);
+            menu.findItem(R.id.menu_refresh).setActionView(null);
+        }
+        else if(mConnectionState.equals(connectionStateEnum.isScanning)) {
+            menu.findItem(R.id.menu_scan).setVisible(false);
+            menu.findItem(R.id.menu_scanning).setVisible(true);
+            menu.findItem(R.id.menu_connecting).setVisible(false);
+            menu.findItem(R.id.menu_disconnect).setVisible(false);
+            menu.findItem(R.id.menu_disconnecting).setVisible(false);
+            menu.findItem(R.id.menu_refresh).setActionView(R.layout.actionbar_progress_indeterminate);
+        }
+        else if(mConnectionState.equals(connectionStateEnum.isConnecting)) {
+            menu.findItem(R.id.menu_scan).setVisible(false);
+            menu.findItem(R.id.menu_scanning).setVisible(false);
+            menu.findItem(R.id.menu_connecting).setVisible(true);
+            menu.findItem(R.id.menu_disconnect).setVisible(false);
+            menu.findItem(R.id.menu_disconnecting).setVisible(false);
+            menu.findItem(R.id.menu_refresh).setActionView(R.layout.actionbar_progress_indeterminate);
+        }
+        else if(mConnectionState.equals(connectionStateEnum.isConnected)) {
+            menu.findItem(R.id.menu_scan).setVisible(false);
+            menu.findItem(R.id.menu_scanning).setVisible(false);
+            menu.findItem(R.id.menu_connecting).setVisible(false);
+            menu.findItem(R.id.menu_disconnect).setVisible(true);
+            menu.findItem(R.id.menu_disconnecting).setVisible(false);
+            menu.findItem(R.id.menu_refresh).setActionView(null);
+        }
+        else if(mConnectionState.equals(connectionStateEnum.isDisconnecting)) {
+            menu.findItem(R.id.menu_scan).setVisible(false);
+            menu.findItem(R.id.menu_scanning).setVisible(false);
+            menu.findItem(R.id.menu_connecting).setVisible(false);
+            menu.findItem(R.id.menu_disconnect).setVisible(false);
+            menu.findItem(R.id.menu_disconnecting).setVisible(true);
+            menu.findItem(R.id.menu_refresh).setActionView(R.layout.actionbar_progress_indeterminate);
+        }
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_scan:
+                buttonScanOnClickProcess();
+                break;
+            case R.id.menu_scanning:
+                buttonScanOnClickProcess();
+                break;
+            case R.id.menu_disconnect:
+                buttonScanOnClickProcess();
+        }
+        return true;
     }
 
     public void scanDevice(View V) {
@@ -161,7 +217,7 @@ public class MainActivity  extends BlunoLibrary {
         onDestroyProcess();														//onDestroy Process by BlunoLibrary
     }
 
-	@Override
+	/*@Override
 	public void onConectionStateChange(connectionStateEnum theConnectionState) {//Once connection state changes, this function will be called
         switch (theConnectionState) {											//Four connection state
 		    case isConnected:
@@ -182,7 +238,7 @@ public class MainActivity  extends BlunoLibrary {
     		default:
     			break;
 		}
-	}
+	}*/
 
     public Boolean isNumeric(String str) {
         try {

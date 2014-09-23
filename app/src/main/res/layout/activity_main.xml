@@ -13,12 +13,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <Button
-            android:id="@+id/buttonScan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/button_scan"
-            android:onClick="scanDevice"/>
-        <Button
             android:id="@+id/buttonSerialSend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

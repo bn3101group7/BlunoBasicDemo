@@ -1,24 +1,33 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-
+    <item
+        android:id="@+id/menu_refresh"
+        android:checkable="false"
+        android:orderInCategory="1"
+        android:showAsAction="ifRoom"/>
     <item
         android:id="@+id/menu_scan"
         android:orderInCategory="100"
         android:showAsAction="ifRoom|withText"
         android:title="@string/menu_scan"/>
     <item
-        android:id="@+id/menu_connect"
-        android:orderInCategory="100"
+        android:id="@+id/menu_scanning"
+        android:orderInCategory="101"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/menu_scanning"/>
+    <item
+        android:id="@+id/menu_connecting"
+        android:orderInCategory="102"
         android:showAsAction="always|withText"
-        android:title="@string/menu_connect"/>
+        android:title="@string/menu_connecting"/>
     <item
         android:id="@+id/menu_disconnect"
         android:orderInCategory="103"
         android:showAsAction="ifRoom|withText"
         android:title="@string/menu_disconnect"/>
     <item
-        android:id="@+id/menu_stop"
-        android:orderInCategory="101"
+        android:id="@+id/menu_disconnecting"
+        android:orderInCategory="103"
         android:showAsAction="ifRoom|withText"
-        android:title="@string/menu_stop"/>
+        android:title="@string/menu_disconnecting"/>
 
 </menu>
