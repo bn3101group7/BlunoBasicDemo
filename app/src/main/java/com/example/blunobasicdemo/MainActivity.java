@@ -2,6 +2,8 @@ package com.example.blunobasicdemo;
 
 import android.os.Bundle;
 import android.content.Intent;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -60,6 +62,14 @@ public class MainActivity  extends BlunoLibrary {
         addItemsToGenderSpinner();
 	}
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
     public void scanDevice(View V) {
         buttonScanOnClickProcess();                                             //Alert Dialog for selecting the BLE device
     }
@@ -108,6 +118,9 @@ public class MainActivity  extends BlunoLibrary {
         if(skinSpinner.getSelectedItemPosition()!=0) {
             serialSend(String.valueOf(skinSpinner.getSelectedItemPosition()));
         }
+        if(mConnectionState.equals(connectionStateEnum.isNull)){            //checking for connectionState for actionbar item change in the future
+            Toast.makeText(this, "yes", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void sendGender(View V) {
@@ -150,24 +163,24 @@ public class MainActivity  extends BlunoLibrary {
 
 	@Override
 	public void onConectionStateChange(connectionStateEnum theConnectionState) {//Once connection state changes, this function will be called
-		switch (theConnectionState) {											//Four connection state
-		case isConnected:
-			buttonScan.setText("Connected");
-			break;
-		case isConnecting:
-			buttonScan.setText("Connecting");
-			break;
-		case isToScan:
-			buttonScan.setText("Scan");
-			break;
-		case isScanning:
-			buttonScan.setText("Scanning");
-			break;
-		case isDisconnecting:
-			buttonScan.setText("isDisconnecting");
-			break;
-		default:
-			break;
+        switch (theConnectionState) {											//Four connection state
+		    case isConnected:
+			    buttonScan.setText("Connected");
+			    break;
+		    case isConnecting:
+    			buttonScan.setText("Connecting");
+    			break;
+    		case isToScan:
+    			buttonScan.setText("Scan");
+    			break;
+    		case isScanning:
+    			buttonScan.setText("Scanning");
+    			break;
+    		case isDisconnecting:
+    			buttonScan.setText("isDisconnecting");
+    			break;
+    		default:
+    			break;
 		}
 	}
 
