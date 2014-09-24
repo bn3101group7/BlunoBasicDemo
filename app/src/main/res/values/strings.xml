@@ -34,5 +34,6 @@
     <string name="action_settings">Action settings</string>
     <string name="title_activity_display_message">Results</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_notification_receiver">Received Notification</string>
 
 </resources>
