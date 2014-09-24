@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">BlunoBasicDemo</string> 
+    <string name="app_name">BlunoBasicDemo</string>
     <string name="ble_not_supported">BLE is not supported</string>
     <string name="label_data">Data:</string>
     <string name="label_device_address">Device address:</string>
@@ -14,7 +14,6 @@
     <string name="unknown_device">Unknown device</string>
     <string name="unknown_characteristic">Unknown characteristic</string>
     <string name="unknown_service">Unknown service</string>
-
     <string name="button_scan">Scan</string>
     <string name="send_data">Send Data</string>
     <string name="send_text">Data sending Area</string>
@@ -33,6 +32,7 @@
     <string name="menu_scan">Scan</string>
     <string name="menu_scanning">Scanning</string>
     <string name="action_settings">Action settings</string>
-    
+    <string name="title_activity_display_message">Results</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>

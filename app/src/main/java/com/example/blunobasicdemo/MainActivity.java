@@ -26,7 +26,9 @@ public class MainActivity  extends BlunoLibrary {
     private Spinner genderSpinner;
 	//test commit
 
-	@Override
+    public final static String EXTRA_MESSAGE = "com.example.blunobasicdemo.MESSAGE";
+
+    @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
@@ -35,7 +37,7 @@ public class MainActivity  extends BlunoLibrary {
         serialBegin(115200);													//set the Uart Baudrate on BLE chip to 115200
 		
         serialReceivedText=(TextView) findViewById(R.id.serialReceivedText);	//initial the EditText of the received data
-        serialSendText=(EditText) findViewById(R.id.serialSendText);			//initial the EditText of the sending data
+        //serialSendText=(EditText) findViewById(R.id.serialSendText);			//initial the EditText of the sending data
         
         /*buttonSerialSend = (Button) findViewById(R.id.buttonSerialSend);		//initial the button for sending the data
         buttonSerialSend.setOnClickListener(new OnClickListener() {
@@ -171,20 +173,17 @@ public class MainActivity  extends BlunoLibrary {
     }
 
     public void sendSkin(View V) {
-        skinSpinner = (Spinner) findViewById(R.id.skinSpinner);
-        if(skinSpinner.getSelectedItemPosition()!=0) {
-            serialSend(String.valueOf(skinSpinner.getSelectedItemPosition()));
-        }
-        if(mConnectionState.equals(connectionStateEnum.isNull)){            //checking for connectionState for actionbar item change in the future
-            Toast.makeText(this, "yes", Toast.LENGTH_SHORT).show();
-        }
+        Toast.makeText(this, serialReceivedText.getText().toString(), Toast.LENGTH_SHORT).show();
+        serialReceivedText.getEditableText().clear();
     }
 
     public void sendGender(View V) {
-        genderSpinner = (Spinner) findViewById(R.id.genderSpinner);
-        if(genderSpinner.getSelectedItemPosition()!=0) {
-            serialSend(String.valueOf(genderSpinner.getSelectedItemPosition()));
-        }
+        Intent intent = new Intent(this, DisplayMessageActivity.class);
+        TextView textView = (TextView) findViewById(R.id.serialReceivedText);
+        String message = textView.getText().toString();
+        intent.putExtra(EXTRA_MESSAGE, message);
+        startActivity(intent);
+
     }
 
     public void sendBoth(View V) {
