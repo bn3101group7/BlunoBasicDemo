@@ -18,23 +18,25 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f08000a;
-        public static final int buttonSendBoth=0x7f080007;
-        public static final int buttonSendGender=0x7f080006;
-        public static final int buttonSendSkin=0x7f080005;
-        public static final int device_address=0x7f080009;
-        public static final int device_name=0x7f080008;
-        public static final int genderSpinner=0x7f080004;
-        public static final int gender_cat=0x7f080003;
-        public static final int menu_connecting=0x7f08000e;
-        public static final int menu_disconnect=0x7f08000f;
-        public static final int menu_disconnecting=0x7f080010;
-        public static final int menu_refresh=0x7f08000b;
-        public static final int menu_scan=0x7f08000c;
-        public static final int menu_scanning=0x7f08000d;
-        public static final int serialReceivedText=0x7f080000;
-        public static final int skinCat=0x7f080001;
-        public static final int skinSpinner=0x7f080002;
+        public static final int action_settings=0x7f08000c;
+        public static final int buttonSendBoth=0x7f080009;
+        public static final int buttonSendGender=0x7f080008;
+        public static final int buttonSendSkin=0x7f080007;
+        public static final int device_address=0x7f08000b;
+        public static final int device_name=0x7f08000a;
+        public static final int genderSpinner=0x7f080006;
+        public static final int gender_cat=0x7f080005;
+        public static final int menu_connecting=0x7f080010;
+        public static final int menu_disconnect=0x7f080011;
+        public static final int menu_disconnecting=0x7f080012;
+        public static final int menu_refresh=0x7f08000d;
+        public static final int menu_scan=0x7f08000e;
+        public static final int menu_scanning=0x7f08000f;
+        public static final int resultDisplay=0x7f080000;
+        public static final int serialReceivedText=0x7f080002;
+        public static final int skinCat=0x7f080003;
+        public static final int skinSpinner=0x7f080004;
+        public static final int startAlarm=0x7f080001;
     }
     public static final class layout {
         public static final int actionbar_progress_indeterminate=0x7f030000;
@@ -72,12 +74,13 @@ public final class R {
         public static final int send_gender=0x7f050016;
         public static final int send_skin=0x7f050017;
         public static final int send_text=0x7f050018;
-        public static final int skin_cat=0x7f050019;
-        public static final int title_activity_display_message=0x7f05001a;
-        public static final int title_devices=0x7f05001b;
-        public static final int unknown_characteristic=0x7f05001c;
-        public static final int unknown_device=0x7f05001d;
-        public static final int unknown_service=0x7f05001e;
+        public static final int set_alarm=0x7f050019;
+        public static final int skin_cat=0x7f05001a;
+        public static final int title_activity_display_message=0x7f05001b;
+        public static final int title_devices=0x7f05001c;
+        public static final int unknown_characteristic=0x7f05001d;
+        public static final int unknown_device=0x7f05001e;
+        public static final int unknown_service=0x7f05001f;
     }
     public static final class style {
         /** 

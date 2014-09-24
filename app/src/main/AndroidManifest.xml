@@ -49,6 +49,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.blunobasicdemo.MainActivity" />
         </activity>
+
+        <receiver
+            android:name=".OneShotAlarm"
+            android:enabled="true"
+            android:exported="false" >
+        </receiver>
     </application>
 
 </manifest>
