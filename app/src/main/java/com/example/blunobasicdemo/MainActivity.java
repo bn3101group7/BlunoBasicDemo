@@ -24,7 +24,8 @@ public class MainActivity  extends BlunoLibrary {
 	private TextView serialReceivedText;
     private Spinner skinSpinner;
     private Spinner genderSpinner;
-	
+	//test commit
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
