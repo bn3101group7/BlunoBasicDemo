@@ -126,7 +126,7 @@ public class MainActivity  extends BlunoLibrary {
         }
         return true;
     }
-
+/*
     public void scanDevice(View V) {
         buttonScanOnClickProcess();                                             //Alert Dialog for selecting the BLE device
     }
@@ -138,7 +138,7 @@ public class MainActivity  extends BlunoLibrary {
     public void sendData1(View V) {
         serialSend("12");
     }
-
+*/
 	protected void onResume(){
 		super.onResume();
 		System.out.println("BlUNOActivity onResume");
