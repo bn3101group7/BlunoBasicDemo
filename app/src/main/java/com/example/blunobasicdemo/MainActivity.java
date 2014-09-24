@@ -172,12 +172,7 @@ public class MainActivity  extends BlunoLibrary {
         genderSpinner.setAdapter(genderDataAdapter);
     }
 
-    public void sendSkin(View V) {
-        Toast.makeText(this, serialReceivedText.getText().toString(), Toast.LENGTH_SHORT).show();
-        serialReceivedText.getEditableText().clear();
-    }
-
-    public void sendGender(View V) {
+    public void displayResults(View V) {
         Intent intent = new Intent(this, DisplayMessageActivity.class);
         TextView textView = (TextView) findViewById(R.id.serialReceivedText);
         String message = textView.getText().toString();
@@ -190,6 +185,7 @@ public class MainActivity  extends BlunoLibrary {
         skinSpinner = (Spinner) findViewById(R.id.skinSpinner);
         genderSpinner = (Spinner) findViewById(R.id.genderSpinner);
         if(skinSpinner.getSelectedItemPosition()!=0 && genderSpinner.getSelectedItemPosition()!=0) {
+            serialReceivedText.getEditableText().clear();
             serialSend(String.valueOf(skinSpinner.getSelectedItemPosition())+String.valueOf(genderSpinner.getSelectedItemPosition()));
         }
     }

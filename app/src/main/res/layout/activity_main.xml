@@ -54,15 +54,9 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/buttonSendSkin"
-            android:text="@string/send_skin"
-            android:onClick="sendSkin"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/buttonSendGender"
-            android:text="@string/send_gender"
-            android:onClick="sendGender"/>
+            android:id="@+id/buttonDisplayResults"
+            android:text="@string/display_results"
+            android:onClick="displayResults"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

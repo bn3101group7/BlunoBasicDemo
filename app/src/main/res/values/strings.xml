@@ -22,7 +22,7 @@
     <string name="skin_cat">Skin Colour</string>
     <string name="send_skin">Send Skin</string>
     <string name="gender_cat">Gender</string>
-    <string name="send_gender">Send Gender</string>
+    <string name="display_results">Display Results</string>
     <string name="send_both">Send Both</string>
 
     <!-- Menu items -->
