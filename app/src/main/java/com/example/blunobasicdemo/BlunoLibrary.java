@@ -409,13 +409,13 @@ public abstract  class BlunoLibrary  extends Activity{
 			if(!mScanning)
 			{
 				mScanning = true;
-				mBluetoothAdapter.startLeScan(mLeScanCallback);
+				//mBluetoothAdapter.startLeScan(mLeScanCallback);
 			}
 		} else {
 			if(mScanning)
 			{
 				mScanning = false;
-				mBluetoothAdapter.stopLeScan(mLeScanCallback);
+				//mBluetoothAdapter.stopLeScan(mLeScanCallback);
 			}
 		}
 	}
@@ -441,21 +441,21 @@ public abstract  class BlunoLibrary  extends Activity{
     };
 	
 	// Device scan callback.
-	private BluetoothAdapter.LeScanCallback mLeScanCallback = new BluetoothAdapter.LeScanCallback() {
-
-		@Override
-		public void onLeScan(final BluetoothDevice device, int rssi,
-				byte[] scanRecord) {
-			((Activity) mainContext).runOnUiThread(new Runnable() {
-				@Override
-				public void run() {
-					System.out.println("mLeScanCallback onLeScan run ");
-					mLeDeviceListAdapter.addDevice(device);
-					mLeDeviceListAdapter.notifyDataSetChanged();
-				}
-			});
-		}
-	};
+	//private BluetoothAdapter.LeScanCallback mLeScanCallback = new BluetoothAdapter.LeScanCallback() {
+//
+//		@Override
+//		public void onLeScan(final BluetoothDevice device, int rssi,
+//				byte[] scanRecord) {
+//			((Activity) mainContext).runOnUiThread(new Runnable() {
+//				@Override
+//				public void run() {
+//					System.out.println("mLeScanCallback onLeScan run ");
+//					mLeDeviceListAdapter.addDevice(device);
+//					mLeDeviceListAdapter.notifyDataSetChanged();
+//				}
+//			});
+//		}
+//	};
 	
     private void getGattServices(List<BluetoothGattService> gattServices) {
         if (gattServices == null) return;

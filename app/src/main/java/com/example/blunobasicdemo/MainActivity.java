@@ -7,12 +7,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,8 +25,7 @@ public class MainActivity  extends BlunoLibrary {
 	private TextView serialReceivedText;
     private Spinner skinSpinner;
     private Spinner genderSpinner;
-
-    private static final Integer[] skinTone = {R.drawable.blank,R.drawable.type_i,R.drawable.type_ii,R.drawable.type_iii,R.drawable.type_iv,R.drawable.type_v,R.drawable.type_vi};
+	//test commit
 
     public final static String EXTRA_MESSAGE = "com.example.blunobasicdemo.MESSAGE";
 
@@ -68,6 +65,8 @@ public class MainActivity  extends BlunoLibrary {
         //buttonScan = (Button) findViewById(R.id.buttonScan);					//initial the button for scanning the BLE device
         addItemsToSkinSpinner();
         addItemsToGenderSpinner();
+        addListenerToSpinner();
+
 	}
 
     @Override
@@ -150,7 +149,7 @@ public class MainActivity  extends BlunoLibrary {
 		System.out.println("BlUNOActivity onResume");
 		onResumeProcess();														//onResume Process by BlunoLibrary
 	}
-    /*
+
     public void addItemsToSkinSpinner() {
         skinSpinner = (Spinner) findViewById(R.id.skinSpinner);
         List<String> list = new ArrayList<String>();
@@ -162,53 +161,6 @@ public class MainActivity  extends BlunoLibrary {
         ArrayAdapter<String> skinDataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
         skinDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         skinSpinner.setAdapter(skinDataAdapter);
-    }*/
-
-    public void addItemsToSkinSpinner() {
-        skinSpinner = (Spinner) findViewById(R.id.skinSpinner);
-        skinSpinner.setAdapter(new MySkinAdapter());
-    }
-
-    private static class SkinViewHolder {
-        ImageView imageViewSkin;
-    }
-
-    private class MySkinAdapter extends BaseAdapter {
-        public int getCount(){
-            return skinTone.length;
-        }
-
-        @Override
-        public Integer getItem(int position) {
-            return skinTone[position];
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View itemView = convertView;
-            SkinViewHolder skinViewHolder;
-            //do we have a view?
-            if(convertView == null) {
-                //we don't have a view so create one
-                itemView = getLayoutInflater().inflate(R.layout.spinner_row,parent, false);
-                skinViewHolder = new SkinViewHolder();
-                skinViewHolder.imageViewSkin = (ImageView) itemView.findViewById(R.id.spinnerImage);
-                //set the tag for this view to the current image view holder
-                itemView.setTag(skinViewHolder);
-            }
-            else {
-                //we have a view to get the tagged view
-                skinViewHolder = (SkinViewHolder) itemView.getTag();
-            }
-            //display the current image
-            skinViewHolder.imageViewSkin.setImageDrawable(getResources().getDrawable(skinTone[position]));
-            return itemView;
-        }
     }
 
     public void addItemsToGenderSpinner() {
@@ -226,14 +178,10 @@ public class MainActivity  extends BlunoLibrary {
     public void displayResults(View V) {
         Intent intent = new Intent(this, DisplayMessageActivity.class);
         TextView textView = (TextView) findViewById(R.id.serialReceivedText);
-        if(textView.getText().toString().equals("")){
-            Toast.makeText(this,"Please select something", Toast.LENGTH_SHORT).show();
-        }
-        else {
-            String message = textView.getText().toString();
-            intent.putExtra(EXTRA_MESSAGE, message);
-            startActivity(intent);
-        }
+        String message = textView.getText().toString();
+        intent.putExtra(EXTRA_MESSAGE, message);
+        startActivity(intent);
+
     }
 
     public void sendBoth(View V) {
@@ -313,4 +261,37 @@ public class MainActivity  extends BlunoLibrary {
         }
 	}
 
+    /**
+     * This function is added to enable the buttons only after the user have selected the
+     * necessary options from the spinner.
+     */
+
+    public void addListenerToSpinner(){
+        skinSpinner = (Spinner) findViewById(R.id.skinSpinner);
+        genderSpinner = (Spinner) findViewById(R.id.genderSpinner);
+
+        skinSpinner.setOnItemSelectedListener(new MyOnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                Button buttonDisplayResults = (Button) findViewById(R.id.buttonDisplayResults);
+                Button buttonSendBoth = (Button) findViewById(R.id.buttonSendBoth);
+                if(skinSpinner.getSelectedItemPosition()!=0 &&
+                        genderSpinner.getSelectedItemPosition()!=0) {
+                    buttonDisplayResults.setEnabled(true);
+                    buttonSendBoth.setEnabled(true);
+                }
+            }
+        });
+
+        genderSpinner.setOnItemSelectedListener(new MyOnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                Button buttonDisplayResults = (Button) findViewById(R.id.buttonDisplayResults);
+                Button buttonSendBoth = (Button) findViewById(R.id.buttonSendBoth);
+                if(skinSpinner.getSelectedItemPosition()!=0 &&
+                        genderSpinner.getSelectedItemPosition()!=0) {
+                    buttonDisplayResults.setEnabled(true);
+                    buttonSendBoth.setEnabled(true);
+                }
+            }
+        });
+    }
 }
