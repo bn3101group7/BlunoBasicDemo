@@ -281,6 +281,10 @@ buttonScanOnClickProcess(); //Alert Dialog for selecting the BLE device
         }
     }
 
+    /**
+     *  This functions will enable or disable the buttons depending on the bluetooth connectivity
+     *  status.
+     */
     public void ActivateButton(boolean yes_or_no_) {
         Button buttonDisplayResults = (Button) findViewById(R.id.buttonDisplayResults);
         Button buttonSendBoth = (Button) findViewById(R.id.buttonSendBoth);
