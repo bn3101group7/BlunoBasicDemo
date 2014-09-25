@@ -92,10 +92,7 @@ buttonScanOnClickProcess(); //Alert Dialog for selecting the BLE device
             menu.findItem(R.id.menu_disconnecting).setVisible(false);
             menu.findItem(R.id.menu_refresh).setActionView(null);
 
-            Button buttonDisplayResults = (Button) findViewById(R.id.buttonDisplayResults);
-            Button buttonSendBoth = (Button) findViewById(R.id.buttonSendBoth);
-            buttonDisplayResults.setEnabled(true);
-            buttonSendBoth.setEnabled(true);
+            ActivateButton(true);
         }
         else if(mConnectionState.equals(connectionStateEnum.isDisconnecting)) {
             menu.findItem(R.id.menu_scan).setVisible(false);
@@ -104,6 +101,8 @@ buttonScanOnClickProcess(); //Alert Dialog for selecting the BLE device
             menu.findItem(R.id.menu_disconnect).setVisible(false);
             menu.findItem(R.id.menu_disconnecting).setVisible(true);
             menu.findItem(R.id.menu_refresh).setActionView(R.layout.actionbar_progress_indeterminate);
+
+            ActivateButton(false);
         }
         return super.onCreateOptionsMenu(menu);
     }
@@ -279,6 +278,20 @@ buttonScanOnClickProcess(); //Alert Dialog for selecting the BLE device
             if (Float.parseFloat(theString) > 1) {
                 Toast.makeText(this, "yes", Toast.LENGTH_SHORT).show();
             }
+        }
+    }
+
+    public void ActivateButton(boolean yes_or_no_) {
+        Button buttonDisplayResults = (Button) findViewById(R.id.buttonDisplayResults);
+        Button buttonSendBoth = (Button) findViewById(R.id.buttonSendBoth);
+
+        if (yes_or_no_ == true) {
+            buttonDisplayResults.setEnabled(true);
+            buttonSendBoth.setEnabled(true);
+        }
+        else {
+            buttonDisplayResults.setEnabled(false);
+            buttonSendBoth.setEnabled(false);
         }
     }
 }
