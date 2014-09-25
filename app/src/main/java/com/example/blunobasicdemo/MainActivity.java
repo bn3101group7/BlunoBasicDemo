@@ -91,6 +91,11 @@ buttonScanOnClickProcess(); //Alert Dialog for selecting the BLE device
             menu.findItem(R.id.menu_disconnect).setVisible(true);
             menu.findItem(R.id.menu_disconnecting).setVisible(false);
             menu.findItem(R.id.menu_refresh).setActionView(null);
+
+            Button buttonDisplayResults = (Button) findViewById(R.id.buttonDisplayResults);
+            Button buttonSendBoth = (Button) findViewById(R.id.buttonSendBoth);
+            buttonDisplayResults.setEnabled(true);
+            buttonSendBoth.setEnabled(true);
         }
         else if(mConnectionState.equals(connectionStateEnum.isDisconnecting)) {
             menu.findItem(R.id.menu_scan).setVisible(false);
