@@ -19,11 +19,14 @@
     <string name="send_text">Data sending Area</string>
     <string name="received_text">Received Data: </string>
     <string name="button_send1">Send 1</string>
+    <string name="display_results">Display Results</string>
+    <string name="send_both">Send Both</string>
+
+    <!--Categories-->
     <string name="skin_cat">Skin Colour</string>
     <string name="eye_cat">Eye Colour</string>
     <string name="hair_cat">Hair Colour</string>
-    <string name="display_results">Display Results</string>
-    <string name="send_both">Send Both</string>
+    <string name="freckles_cat">Freckles</string>
 
     <!-- Menu items -->
     <string name="menu_connecting">Connecting</string>
@@ -34,7 +37,8 @@
     <string name="blank"></string>
     <string name="action_settings">Action settings</string>
     <string name="title_activity_display_message">Results</string>
-    <string name="hello_world">Hello world!</string>
+
+    <string name="advice">Please head indoor or seek shade</string>
     <string name="title_activity_notification_receiver">Received Notification</string>
 
 </resources>

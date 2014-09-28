@@ -23,6 +23,7 @@ public class MainActivity extends BlunoLibrary {
     private Spinner skinSpinner;
     private Spinner eyeSpinner;
     private Spinner hairSpinner;
+    private Spinner frecklesSpinner;
     private static final Integer[] skinTone = {R.drawable.blank,R.drawable.type_i,R.drawable.type_ii,R.drawable.type_iii,R.drawable.type_iv,R.drawable.type_v,R.drawable.type_vi};
     public final static String EXTRA_MESSAGE = "com.example.blunobasicdemo.MESSAGE";
     @Override
@@ -32,32 +33,33 @@ public class MainActivity extends BlunoLibrary {
         onCreateProcess();	//onCreate Process by BlunoLibrary
         serialBegin(115200);	//set the Uart Baudrate on BLE chip to 115200
         serialReceivedText=(TextView) findViewById(R.id.serialReceivedText);	//initial the EditText of the received data
-//serialSendText=(EditText) findViewById(R.id.serialSendText); //initial the EditText of the sending data
-/*buttonSerialSend = (Button) findViewById(R.id.buttonSerialSend); //initial the button for sending the data
-buttonSerialSend.setOnClickListener(new OnClickListener() {
-@Override
-public void onClick(View v) {
-// TODO Auto-generated method stub
-serialSend(serialSendText.getText().toString()); //send the data to the BLUNO
-}
-});
-buttonScan = (Button) findViewById(R.id.buttonScan); //initial the button for scanning the BLE device
-buttonScan.setOnClickListener(new OnClickListener() {
-@Override
-public void onClick(View v) {
-// TODO Auto-generated method stub
-buttonScanOnClickProcess(); //Alert Dialog for selecting the BLE device
-}
-});*/
-//test commit
-//buttonScan = (Button) findViewById(R.id.buttonScan); //initial the button for scanning the BLE device
+        //serialSendText=(EditText) findViewById(R.id.serialSendText); //initial the EditText of the sending data
+        /*buttonSerialSend = (Button) findViewById(R.id.buttonSerialSend); //initial the button for sending the data
+        buttonSerialSend.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                serialSend(serialSendText.getText().toString()); //send the data to the BLUNO
+            }
+        });
+        buttonScan = (Button) findViewById(R.id.buttonScan); //initial the button for scanning the BLE device
+        buttonScan.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                buttonScanOnClickProcess(); //Alert Dialog for selecting the BLE device
+            }
+        });*/
+        //test commit
+        //buttonScan = (Button) findViewById(R.id.buttonScan); //initial the button for scanning the BLE device
         addItemsToSkinSpinner();
         addItemsToEyeSpinner();
         addItemsToHairSpinner();
+        addItemsToFrecklesSpinner();
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-// Inflate the menu items for use in the action bar
+    // Inflate the menu items for use in the action bar
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main, menu);
         if(mConnectionState.equals(connectionStateEnum.isNull)||mConnectionState.equals(connectionStateEnum.isToScan)){
@@ -171,20 +173,20 @@ buttonScanOnClickProcess(); //Alert Dialog for selecting the BLE device
         public View getView(int position, View convertView, ViewGroup parent) {
             View itemView = convertView;
             SkinViewHolder skinViewHolder;
-//do we have a view?
+            //do we have a view?
             if(convertView == null) {
-//we don't have a view so create one
+                //we don't have a view so create one
                 itemView = getLayoutInflater().inflate(R.layout.spinner_row,parent, false);
                 skinViewHolder = new SkinViewHolder();
                 skinViewHolder.imageViewSkin = (ImageView) itemView.findViewById(R.id.spinnerImage);
-//set the tag for this view to the current image view holder
+                //set the tag for this view to the current image view holder
                 itemView.setTag(skinViewHolder);
             }
             else {
-//we have a view to get the tagged view
+                //we have a view to get the tagged view
                 skinViewHolder = (SkinViewHolder) itemView.getTag();
             }
-//display the current image
+            //display the current image
             skinViewHolder.imageViewSkin.setImageDrawable(getResources().getDrawable(skinTone[position]));
             return itemView;
         }
@@ -193,9 +195,9 @@ buttonScanOnClickProcess(); //Alert Dialog for selecting the BLE device
         eyeSpinner = (Spinner) findViewById(R.id.eyeSpinner);
         List<String> list = new ArrayList<String>();
         list.add("Please select your natural eye colour");
-        list.add("Green");
-        list.add("Blue");
-        list.add("Hazel");
+        list.add("Light blue, gray or green");
+        list.add("Blue, gray or green");
+        list.add("Dark blue, gray or green");
         list.add("Brown");
         list.add("Black");
         ArrayAdapter<String> eyeDataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
@@ -206,14 +208,28 @@ buttonScanOnClickProcess(); //Alert Dialog for selecting the BLE device
         hairSpinner = (Spinner) findViewById(R.id.hairSpinner);
         List<String> list = new ArrayList<String>();
         list.add("Please select your natural hair colour");
-        list.add("Red");
-        list.add("Blonde");
+        list.add("Sandy red");
+        list.add("Blond");
+        list.add("Chestnut or dark blond");
         list.add("Brown");
-        list.add("Dark Brown");
         list.add("Black");
         ArrayAdapter<String> hairDataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
         hairDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         hairSpinner.setAdapter(hairDataAdapter);
+    }
+
+    public void addItemsToFrecklesSpinner() {
+        frecklesSpinner = (Spinner) findViewById(R.id.frecklesSpinner);
+        List<String> list = new ArrayList<String>();
+        list.add("Number of freckles in unexposed areas");
+        list.add("Many");
+        list.add("Several");
+        list.add("Few");
+        list.add("Rare");
+        list.add("None");
+        ArrayAdapter<String> frecklesDataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
+        frecklesDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        frecklesSpinner.setAdapter(frecklesDataAdapter);
     }
     public void displayResults(View V) {
         Intent intent = new Intent(this, DisplayMessageActivity.class);
@@ -231,11 +247,12 @@ buttonScanOnClickProcess(); //Alert Dialog for selecting the BLE device
         skinSpinner = (Spinner) findViewById(R.id.skinSpinner);
         eyeSpinner = (Spinner) findViewById(R.id.eyeSpinner);
         hairSpinner = (Spinner) findViewById(R.id.hairSpinner);
+        frecklesSpinner = (Spinner) findViewById(R.id.frecklesSpinner);
         if(skinSpinner.getSelectedItemPosition()!=0 && eyeSpinner.getSelectedItemPosition()!=0 &&
-                hairSpinner.getSelectedItemPosition() != 0) {
+                hairSpinner.getSelectedItemPosition() !=0 && frecklesSpinner.getSelectedItemPosition() !=0) {
             serialReceivedText.getEditableText().clear();
             serialSend(String.valueOf(skinSpinner.getSelectedItemPosition())+String.valueOf(eyeSpinner.getSelectedItemPosition())+
-            String.valueOf(hairSpinner.getSelectedItemPosition()));
+                    String.valueOf(hairSpinner.getSelectedItemPosition())+String.valueOf(frecklesSpinner.getSelectedItemPosition()));
         }
     }
     @Override
@@ -290,9 +307,9 @@ buttonScanOnClickProcess(); //Alert Dialog for selecting the BLE device
     }
     @Override
     public void onSerialReceived(String theString) {	//Once connection data received, this function will be called
-// TODO Auto-generated method stub
+        // TODO Auto-generated method stub
         serialReceivedText.append(theString);	//append the text into the EditText
-//The Serial data from the BLUNO may be sub-packaged, so using a buffer to hold the String is a good choice.
+        //The Serial data from the BLUNO may be sub-packaged, so using a buffer to hold the String is a good choice.
     }
 
     /**
