@@ -1,6 +1,7 @@
 package com.example.blunobasicdemo;
 import android.os.Bundle;
 import android.content.Intent;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -18,12 +19,10 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 public class MainActivity extends BlunoLibrary {
-    private Button buttonScan;
-    private Button buttonSerialSend;
-    private EditText serialSendText;
     private TextView serialReceivedText;
     private Spinner skinSpinner;
     private Spinner eyeSpinner;
+    private Spinner hairSpinner;
     private static final Integer[] skinTone = {R.drawable.blank,R.drawable.type_i,R.drawable.type_ii,R.drawable.type_iii,R.drawable.type_iv,R.drawable.type_v,R.drawable.type_vi};
     public final static String EXTRA_MESSAGE = "com.example.blunobasicdemo.MESSAGE";
     @Override
@@ -54,6 +53,7 @@ buttonScanOnClickProcess(); //Alert Dialog for selecting the BLE device
 //buttonScan = (Button) findViewById(R.id.buttonScan); //initial the button for scanning the BLE device
         addItemsToSkinSpinner();
         addItemsToEyeSpinner();
+        addItemsToHairSpinner();
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -202,6 +202,19 @@ buttonScanOnClickProcess(); //Alert Dialog for selecting the BLE device
         eyeDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         eyeSpinner.setAdapter(eyeDataAdapter);
     }
+    public void addItemsToHairSpinner() {
+        hairSpinner = (Spinner) findViewById(R.id.hairSpinner);
+        List<String> list = new ArrayList<String>();
+        list.add("Please select your natural hair colour");
+        list.add("Red");
+        list.add("Blonde");
+        list.add("Brown");
+        list.add("Dark Brown");
+        list.add("Black");
+        ArrayAdapter<String> hairDataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
+        hairDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        hairSpinner.setAdapter(hairDataAdapter);
+    }
     public void displayResults(View V) {
         Intent intent = new Intent(this, DisplayMessageActivity.class);
         TextView textView = (TextView) findViewById(R.id.serialReceivedText);
@@ -217,9 +230,12 @@ buttonScanOnClickProcess(); //Alert Dialog for selecting the BLE device
     public void sendBoth(View V) {
         skinSpinner = (Spinner) findViewById(R.id.skinSpinner);
         eyeSpinner = (Spinner) findViewById(R.id.eyeSpinner);
-        if(skinSpinner.getSelectedItemPosition()!=0 && eyeSpinner.getSelectedItemPosition()!=0) {
+        hairSpinner = (Spinner) findViewById(R.id.hairSpinner);
+        if(skinSpinner.getSelectedItemPosition()!=0 && eyeSpinner.getSelectedItemPosition()!=0 &&
+                hairSpinner.getSelectedItemPosition() != 0) {
             serialReceivedText.getEditableText().clear();
-            serialSend(String.valueOf(skinSpinner.getSelectedItemPosition())+String.valueOf(eyeSpinner.getSelectedItemPosition()));
+            serialSend(String.valueOf(skinSpinner.getSelectedItemPosition())+String.valueOf(eyeSpinner.getSelectedItemPosition())+
+            String.valueOf(hairSpinner.getSelectedItemPosition()));
         }
     }
     @Override
@@ -277,11 +293,6 @@ buttonScanOnClickProcess(); //Alert Dialog for selecting the BLE device
 // TODO Auto-generated method stub
         serialReceivedText.append(theString);	//append the text into the EditText
 //The Serial data from the BLUNO may be sub-packaged, so using a buffer to hold the String is a good choice.
-        if(isNumeric(theString)) {
-            if (Float.parseFloat(theString) > 1) {
-                Toast.makeText(this, "yes", Toast.LENGTH_SHORT).show();
-            }
-        }
     }
 
     /**

@@ -21,6 +21,7 @@
     <string name="button_send1">Send 1</string>
     <string name="skin_cat">Skin Colour</string>
     <string name="eye_cat">Eye Colour</string>
+    <string name="hair_cat">Hair Colour</string>
     <string name="display_results">Display Results</string>
     <string name="send_both">Send Both</string>
 

@@ -17,7 +17,6 @@ import java.util.Calendar;
 
 
 public class DisplayMessageActivity extends Activity {
-    private final static String TAG = "displaymsg";
     private TextView resultDisplay;
     private char[] uvTime = new char[2];
     private int msgLength;
@@ -28,7 +27,6 @@ public class DisplayMessageActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_message);
-
         receiveResult();
         displayMessage();
     }
@@ -46,34 +44,34 @@ public class DisplayMessageActivity extends Activity {
         String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
         msgLength = message.length();
         uvTime[0] = message.charAt(msgLength - 12);
-        uvTime[1] = message.charAt(msgLength-11);
+        uvTime[1] = message.charAt(msgLength - 11);
         Toast.makeText(this, String.valueOf(uvTime), Toast.LENGTH_SHORT).show();
         setAlarm(Integer.parseInt(new String(uvTime)));
     }
 
      public void setAlarm(int time) {
-        // When the alarm goes off, we want to broadcast an Intent to our
-        // BroadcastReceiver. Here we make an Intent with an explicit class
-        // name to have our own receiver (which has been published in
-        // AndroidManifest.xml) instantiated and called, and then create an
-        // IntentSender to have the intent executed as a broadcast.
-        Intent intent = new Intent(DisplayMessageActivity.this, OneShotAlarm.class);
-        PendingIntent sender = PendingIntent.getBroadcast(DisplayMessageActivity.this, 0,
+         // When the alarm goes off, we want to broadcast an Intent to our
+         // BroadcastReceiver. Here we make an Intent with an explicit class
+         // name to have our own receiver (which has been published in
+         // AndroidManifest.xml) instantiated and called, and then create an
+         // IntentSender to have the intent executed as a broadcast.
+         Intent intent = new Intent(DisplayMessageActivity.this, OneShotAlarm.class);
+         PendingIntent sender = PendingIntent.getBroadcast(DisplayMessageActivity.this, 0,
                 intent, 0);
-        // We want the alarm to go off 30 seconds from now.
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.add(Calendar.SECOND, time);
-        // Schedule the alarm!
-        AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
-        am.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), sender);
-        // Tell the user about what we did.
-        if (mToast != null) {
-            mToast.cancel();
-        }
-        mToast = Toast.makeText(DisplayMessageActivity.this, "one_shot_scheduled",
-                Toast.LENGTH_SHORT);
-        mToast.show();
+         // We want the alarm to go off 30 seconds from now.
+         Calendar calendar = Calendar.getInstance();
+         calendar.setTimeInMillis(System.currentTimeMillis());
+         calendar.add(Calendar.SECOND, time);
+         // Schedule the alarm!
+         AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
+         am.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), sender);
+         // Tell the user about what we did.
+         if (mToast != null) {
+             mToast.cancel();
+         }
+         mToast = Toast.makeText(DisplayMessageActivity.this, "one_shot_scheduled",
+                 Toast.LENGTH_SHORT);
+         mToast.show();
     }
 
     @Override
