@@ -287,6 +287,9 @@ public class MainActivity extends BlunoLibrary {
             serialSend(String.valueOf(skinSpinner.getSelectedItemPosition())+String.valueOf(eyeSpinner.getSelectedItemPosition())+
                     String.valueOf(hairSpinner.getSelectedItemPosition())+String.valueOf(frecklesSpinner.getSelectedItemPosition()));
         }
+        else {
+            Toast.makeText(this, "Please select an option for each category.", Toast.LENGTH_SHORT).show();
+        }
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

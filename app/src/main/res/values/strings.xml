@@ -20,7 +20,7 @@
     <string name="received_text">Received Data: </string>
     <string name="button_send1">Send 1</string>
     <string name="display_results">Display Results</string>
-    <string name="send_both">Send Both</string>
+    <string name="send_both">Send</string>
 
     <!--Categories-->
     <string name="skin_cat">Skin Colour</string>
