@@ -23,7 +23,7 @@ public class MainActivity extends BlunoLibrary {
     private EditText serialSendText;
     private TextView serialReceivedText;
     private Spinner skinSpinner;
-    private Spinner genderSpinner;
+    private Spinner eyeSpinner;
     private static final Integer[] skinTone = {R.drawable.blank,R.drawable.type_i,R.drawable.type_ii,R.drawable.type_iii,R.drawable.type_iv,R.drawable.type_v,R.drawable.type_vi};
     public final static String EXTRA_MESSAGE = "com.example.blunobasicdemo.MESSAGE";
     @Override
@@ -53,7 +53,7 @@ buttonScanOnClickProcess(); //Alert Dialog for selecting the BLE device
 //test commit
 //buttonScan = (Button) findViewById(R.id.buttonScan); //initial the button for scanning the BLE device
         addItemsToSkinSpinner();
-        addItemsToGenderSpinner();
+        addItemsToEyeSpinner();
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -189,15 +189,18 @@ buttonScanOnClickProcess(); //Alert Dialog for selecting the BLE device
             return itemView;
         }
     }
-    public void addItemsToGenderSpinner() {
-        genderSpinner = (Spinner) findViewById(R.id.genderSpinner);
+    public void addItemsToEyeSpinner() {
+        eyeSpinner = (Spinner) findViewById(R.id.eyeSpinner);
         List<String> list = new ArrayList<String>();
-        list.add("Please select your gender");
-        list.add("Male");
-        list.add("Female");
-        ArrayAdapter<String> genderDataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
-        genderDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        genderSpinner.setAdapter(genderDataAdapter);
+        list.add("Please select your natural eye colour");
+        list.add("Green");
+        list.add("Blue");
+        list.add("Hazel");
+        list.add("Brown");
+        list.add("Black");
+        ArrayAdapter<String> eyeDataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
+        eyeDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        eyeSpinner.setAdapter(eyeDataAdapter);
     }
     public void displayResults(View V) {
         Intent intent = new Intent(this, DisplayMessageActivity.class);
@@ -213,10 +216,10 @@ buttonScanOnClickProcess(); //Alert Dialog for selecting the BLE device
     }
     public void sendBoth(View V) {
         skinSpinner = (Spinner) findViewById(R.id.skinSpinner);
-        genderSpinner = (Spinner) findViewById(R.id.genderSpinner);
-        if(skinSpinner.getSelectedItemPosition()!=0 && genderSpinner.getSelectedItemPosition()!=0) {
+        eyeSpinner = (Spinner) findViewById(R.id.eyeSpinner);
+        if(skinSpinner.getSelectedItemPosition()!=0 && eyeSpinner.getSelectedItemPosition()!=0) {
             serialReceivedText.getEditableText().clear();
-            serialSend(String.valueOf(skinSpinner.getSelectedItemPosition())+String.valueOf(genderSpinner.getSelectedItemPosition()));
+            serialSend(String.valueOf(skinSpinner.getSelectedItemPosition())+String.valueOf(eyeSpinner.getSelectedItemPosition()));
         }
     }
     @Override
