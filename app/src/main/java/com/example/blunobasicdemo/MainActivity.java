@@ -1,6 +1,8 @@
 package com.example.blunobasicdemo;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.content.Intent;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
+
 public class MainActivity extends BlunoLibrary {
     private TextView serialReceivedText;
     private Spinner skinSpinner;
@@ -26,6 +29,7 @@ public class MainActivity extends BlunoLibrary {
     private Spinner frecklesSpinner;
     private static final Integer[] skinTone = {R.drawable.blank,R.drawable.type_i,R.drawable.type_ii,R.drawable.type_iii,R.drawable.type_iv,R.drawable.type_v,R.drawable.type_vi};
     public final static String EXTRA_MESSAGE = "com.example.blunobasicdemo.MESSAGE";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +60,26 @@ public class MainActivity extends BlunoLibrary {
         addItemsToEyeSpinner();
         addItemsToHairSpinner();
         addItemsToFrecklesSpinner();
+        addListenerToSpinner();
+
+        SharedPreferences sharedPref = getSharedPreferences("MyPref",MODE_PRIVATE);
+        int skinValue = sharedPref.getInt("skin",-1);
+        if(skinValue != -1) {
+            // set the value of the spinner
+            skinSpinner.setSelection(skinValue);
+        }
+        int eyeValue = sharedPref.getInt("eye",-1);
+        if(eyeValue != -1) {
+            eyeSpinner.setSelection(eyeValue);
+        }
+        int hairValue = sharedPref.getInt("hair", -1);
+        if(hairValue != -1) {
+            hairSpinner.setSelection(hairValue);
+        }
+        int frecValue = sharedPref.getInt("frec", -1);
+        if(frecValue != -1) {
+            frecklesSpinner.setSelection(frecValue);
+        }
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -204,6 +228,7 @@ public class MainActivity extends BlunoLibrary {
         eyeDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         eyeSpinner.setAdapter(eyeDataAdapter);
     }
+
     public void addItemsToHairSpinner() {
         hairSpinner = (Spinner) findViewById(R.id.hairSpinner);
         List<String> list = new ArrayList<String>();
@@ -231,6 +256,14 @@ public class MainActivity extends BlunoLibrary {
         frecklesDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         frecklesSpinner.setAdapter(frecklesDataAdapter);
     }
+
+    public void addListenerToSpinner() {
+        skinSpinner.setOnItemSelectedListener(new MyOnItemSelectedListener(this));
+        eyeSpinner.setOnItemSelectedListener(new MyOnItemSelectedListener(this));
+        hairSpinner.setOnItemSelectedListener(new MyOnItemSelectedListener(this));
+        frecklesSpinner.setOnItemSelectedListener(new MyOnItemSelectedListener(this));
+    }
+
     public void displayResults(View V) {
         Intent intent = new Intent(this, DisplayMessageActivity.class);
         TextView textView = (TextView) findViewById(R.id.serialReceivedText);
@@ -310,6 +343,16 @@ public class MainActivity extends BlunoLibrary {
         // TODO Auto-generated method stub
         serialReceivedText.append(theString);	//append the text into the EditText
         //The Serial data from the BLUNO may be sub-packaged, so using a buffer to hold the String is a good choice.
+        final Toast toast = Toast.makeText(this, "Sending data...", Toast.LENGTH_SHORT);
+        toast.show();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                toast.cancel();
+            }
+        }, 500);
     }
 
     /**
