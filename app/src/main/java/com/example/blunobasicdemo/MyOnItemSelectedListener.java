@@ -6,7 +6,6 @@ import android.content.SharedPreferences.Editor;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 /**
@@ -24,68 +23,49 @@ public class MyOnItemSelectedListener implements OnItemSelectedListener {
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
         switch(parent.getId()) {
             case R.id.eyeSpinner:
-                int eyeChoice = pos;
                 editor = pref.edit();
-                editor.putInt("eye", eyeChoice);
-                editor.commit();
+                editor.putInt("eye", pos);
                 break;
             case R.id.hairSpinner:
-                int hairChoice = pos;
                 editor = pref.edit();
-                editor.putInt("hair", hairChoice);
-                editor.commit();
+                editor.putInt("hair", pos);
                 break;
             case R.id.frecklesSpinner:
-                int frecChoice = pos;
                 editor = pref.edit();
-                editor.putInt("frec", frecChoice);
-                editor.commit();
+                editor.putInt("frec", pos);
                 break;
             case R.id.skinSpinner:
-                int skinChoice = pos;
                 editor = pref.edit();
-                editor.putInt("skin", skinChoice);
-                editor.commit();
+                editor.putInt("skin", pos);
                 break;
             case R.id.burnSpinner:
-                int burnChoice = pos;
                 editor = pref.edit();
-                editor.putInt("burn", burnChoice);
-                editor.commit();
+                editor.putInt("burn", pos);
                 break;
             case R.id.brownFreqSpinner:
-                int brownFreqChoice = pos;
                 editor = pref.edit();
-                editor.putInt("brownFreq", brownFreqChoice);
-                editor.commit();
+                editor.putInt("brownFreq", pos);
                 break;
             case R.id.brownIntSpinner:
-                int brownIntChoice = pos;
                 editor = pref.edit();
-                editor.putInt("brownInt", brownIntChoice);
-                editor.commit();
+                editor.putInt("brownInt", pos);
                 break;
             case R.id.faceSpinner:
-                int faceChoice = pos;
                 editor = pref.edit();
-                editor.putInt("face", faceChoice);
-                editor.commit();
+                editor.putInt("face", pos);
                 break;
             case R.id.tanFreqSpinner:
-                int tanFreqChoice = pos;
                 editor = pref.edit();
-                editor.putInt("tanFreq", tanFreqChoice);
-                editor.commit();
+                editor.putInt("tanFreq", pos);
                 break;
             case R.id.tanHistSpinner:
-                int tanHistChoice = pos;
                 editor = pref.edit();
-                editor.putInt("tanHist", tanHistChoice);
-                editor.commit();
+                editor.putInt("tanHist", pos);
                 break;
             default:
                 break;
         }
+        editor.apply();
         Toast.makeText(parent.getContext(), Integer.toString(pos), Toast.LENGTH_SHORT).show();
     }
     @Override

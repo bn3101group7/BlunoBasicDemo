@@ -5,11 +5,8 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,9 +14,7 @@ import java.util.Calendar;
 
 
 public class DisplayMessageActivity extends Activity {
-    private TextView resultDisplay;
     private char[] uvTime = new char[2];
-    private int msgLength;
 
     Toast mToast;
 
@@ -32,6 +27,7 @@ public class DisplayMessageActivity extends Activity {
     }
 
     public void receiveResult() {
+        TextView resultDisplay;
         Intent intent = getIntent();
         String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
         resultDisplay = (TextView) findViewById(R.id.resultDisplay);
@@ -42,6 +38,7 @@ public class DisplayMessageActivity extends Activity {
     public void displayMessage(){
         Intent intent = getIntent();
         String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+        int msgLength;
         msgLength = message.length();
         uvTime[0] = message.charAt(msgLength - 12);
         uvTime[1] = message.charAt(msgLength - 11);
@@ -87,9 +84,6 @@ public class DisplayMessageActivity extends Activity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+        return id == R.id.action_settings || super.onOptionsItemSelected(item);
     }
 }
