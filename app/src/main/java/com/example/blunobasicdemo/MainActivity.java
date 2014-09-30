@@ -32,6 +32,7 @@ public class MainActivity extends BlunoLibrary {
     private Spinner brownIntSpinner;
     private Spinner faceSpinner;
     private Spinner tanFreqSpinner;
+    private Spinner tanHistSpinner;
 
     private static final Integer[] skinTone = {R.drawable.blank,R.drawable.skin_1,R.drawable.skin_2,
             R.drawable.skin_3,R.drawable.skin_4,R.drawable.skin_5,R.drawable.skin_6};
@@ -78,6 +79,7 @@ public class MainActivity extends BlunoLibrary {
         addItemsToBrownIntSpinner();
         addItemsToFaceSpinner();
         addItemsToTanFreqSpinner();
+        addItemsToTanHistSpinner();
 
         addListenerToSpinner();
 
@@ -118,6 +120,10 @@ public class MainActivity extends BlunoLibrary {
         int tanFreqValue = sharedPref.getInt("tanFreq", -1);
         if(tanFreqValue != -1) {
             tanFreqSpinner.setSelection(tanFreqValue);
+        }
+        int tanHistValue = sharedPref.getInt("tanHist", -1);
+        if(tanHistValue != -1) {
+            tanHistSpinner.setSelection(tanHistValue);
         }
     }
     @Override
@@ -443,6 +449,20 @@ public class MainActivity extends BlunoLibrary {
         tanFreqDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         tanFreqSpinner.setAdapter(tanFreqDataAdapter);
     }
+
+    public void addItemsToTanHistSpinner() {
+        tanHistSpinner = (Spinner) findViewById(R.id.tanHistSpinner);
+        List<String> list = new ArrayList<String>();
+        list.add("When was your last tan?");
+        list.add(">3 months ago");
+        list.add("2-3 months ago");
+        list.add("1-2 months ago");
+        list.add("A few weeks ago");
+        list.add("A few days ago");
+        ArrayAdapter<String> tanHistDataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
+        tanHistDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        tanHistSpinner.setAdapter(tanHistDataAdapter);
+    }
     /*
     public void addItemsToSkinSpinner() {
     skinSpinner = (Spinner) findViewById(R.id.skinSpinner);
@@ -493,6 +513,7 @@ public class MainActivity extends BlunoLibrary {
         brownIntSpinner.setOnItemSelectedListener(new MyOnItemSelectedListener(this));
         faceSpinner.setOnItemSelectedListener(new MyOnItemSelectedListener(this));
         tanFreqSpinner.setOnItemSelectedListener(new MyOnItemSelectedListener(this));
+        tanHistSpinner.setOnItemSelectedListener(new MyOnItemSelectedListener(this));
     }
 
     public void displayResults(View V) {
@@ -512,13 +533,13 @@ public class MainActivity extends BlunoLibrary {
                 skinSpinner.getSelectedItemPosition() * frecklesSpinner.getSelectedItemPosition() *
                 burnSpinner.getSelectedItemPosition() * brownFreqSpinner.getSelectedItemPosition() *
                 brownIntSpinner.getSelectedItemPosition() * faceSpinner.getSelectedItemPosition() *
-                tanFreqSpinner.getSelectedItemPosition()) != 0) {
+                tanFreqSpinner.getSelectedItemPosition() * tanHistSpinner.getSelectedItemPosition()) != 0) {
             serialReceivedText.getEditableText().clear();
             serialSend(String.valueOf(eyeSpinner.getSelectedItemPosition())+String.valueOf(hairSpinner.getSelectedItemPosition())+
                     String.valueOf(skinSpinner.getSelectedItemPosition())+String.valueOf(frecklesSpinner.getSelectedItemPosition())+
                     String.valueOf(burnSpinner.getSelectedItemPosition())+String.valueOf(brownFreqSpinner.getSelectedItemPosition())+
                     String.valueOf(brownIntSpinner.getSelectedItemPosition())+String.valueOf(faceSpinner.getSelectedItemPosition())+
-                    String.valueOf(tanFreqSpinner.getSelectedItemPosition()));
+                    String.valueOf(tanFreqSpinner.getSelectedItemPosition())+String.valueOf(tanHistSpinner.getSelectedItemPosition()));
         }
         else {
             Toast.makeText(this, "Please select an option for each category.", Toast.LENGTH_SHORT).show();

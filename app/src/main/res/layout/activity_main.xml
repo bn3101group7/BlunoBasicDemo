@@ -147,6 +147,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/tanFreqSpinner"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tan_hist_cat"
+                android:text="@string/tan_hist_cat"
+                android:gravity="center"
+                android:textSize="16sp"/>
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tanHistSpinner"/>
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

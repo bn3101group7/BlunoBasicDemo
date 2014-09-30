@@ -28,7 +28,6 @@ public class MyOnItemSelectedListener implements OnItemSelectedListener {
                 editor = pref.edit();
                 editor.putInt("eye", eyeChoice);
                 editor.commit();
-                //Toast.makeText(parent.getContext(), Integer.toString(pos),Toast.LENGTH_SHORT).show();
                 break;
             case R.id.hairSpinner:
                 int hairChoice = pos;
@@ -46,7 +45,6 @@ public class MyOnItemSelectedListener implements OnItemSelectedListener {
                 editor = pref.edit();
                 editor.putInt("skin", skinChoice);
                 editor.commit();
-                //Toast.makeText(parent.getContext(), Integer.toString(pos),Toast.LENGTH_SHORT).show();
                 break;
             case R.id.burnSpinner:
                 int burnChoice = pos;
@@ -76,6 +74,12 @@ public class MyOnItemSelectedListener implements OnItemSelectedListener {
                 int tanFreqChoice = pos;
                 editor = pref.edit();
                 editor.putInt("tanFreq", tanFreqChoice);
+                editor.commit();
+                break;
+            case R.id.tanHistSpinner:
+                int tanHistChoice = pos;
+                editor = pref.edit();
+                editor.putInt("tanHist", tanHistChoice);
                 editor.commit();
                 break;
             default:
