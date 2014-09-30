@@ -27,7 +27,9 @@ public class MainActivity extends BlunoLibrary {
     private Spinner eyeSpinner;
     private Spinner hairSpinner;
     private Spinner frecklesSpinner;
-    private static final Integer[] skinTone = {R.drawable.blank,R.drawable.type_i,R.drawable.type_ii,R.drawable.type_iii,R.drawable.type_iv,R.drawable.type_v,R.drawable.type_vi};
+    private static final Integer[] skinTone = {R.drawable.blank,R.drawable.type_1,R.drawable.type_2,R.drawable.type_3,R.drawable.type_4,R.drawable.type_5,R.drawable.type_6};
+    private static final Integer[] hairColour = {R.drawable.blank,R.drawable.hair_1,R.drawable.hair_2,R.drawable.hair_3,R.drawable.hair_4,R.drawable.hair_5,R.drawable.hair_6};
+    private static final Integer[] eyeColour = {R.drawable.blank,R.drawable.eye_1,R.drawable.eye_2,R.drawable.eye_3,R.drawable.eye_4,R.drawable.eye_5};
     public final static String EXTRA_MESSAGE = "com.example.blunobasicdemo.MESSAGE";
 
     @Override
@@ -215,6 +217,7 @@ public class MainActivity extends BlunoLibrary {
             return itemView;
         }
     }
+    /*
     public void addItemsToEyeSpinner() {
         eyeSpinner = (Spinner) findViewById(R.id.eyeSpinner);
         List<String> list = new ArrayList<String>();
@@ -228,7 +231,51 @@ public class MainActivity extends BlunoLibrary {
         eyeDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         eyeSpinner.setAdapter(eyeDataAdapter);
     }
+    */
+    public void addItemsToEyeSpinner() {
+        eyeSpinner = (Spinner) findViewById(R.id.eyeSpinner);
+        eyeSpinner.setAdapter(new MyEyeAdapter());
+    }
 
+    private static class EyeViewHolder {
+        ImageView imageViewEye;
+    }
+
+    private class MyEyeAdapter extends BaseAdapter {
+        public int getCount(){
+            return eyeColour.length;
+        }
+        @Override
+        public Integer getItem(int position) {
+            return eyeColour[position];
+        }
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View itemView = convertView;
+            EyeViewHolder eyeViewHolder;
+            //do we have a view?
+            if(convertView == null) {
+                //we don't have a view so create one
+                itemView = getLayoutInflater().inflate(R.layout.spinner_row,parent, false);
+                eyeViewHolder = new EyeViewHolder();
+                eyeViewHolder.imageViewEye = (ImageView) itemView.findViewById(R.id.spinnerImage);
+                //set the tag for this view to the current image view holder
+                itemView.setTag(eyeViewHolder);
+            }
+            else {
+                //we have a view to get the tagged view
+                eyeViewHolder = (EyeViewHolder) itemView.getTag();
+            }
+            //display the current image
+            eyeViewHolder.imageViewEye.setImageDrawable(getResources().getDrawable(eyeColour[position]));
+            return itemView;
+        }
+    }
+    /*
     public void addItemsToHairSpinner() {
         hairSpinner = (Spinner) findViewById(R.id.hairSpinner);
         List<String> list = new ArrayList<String>();
@@ -241,6 +288,50 @@ public class MainActivity extends BlunoLibrary {
         ArrayAdapter<String> hairDataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
         hairDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         hairSpinner.setAdapter(hairDataAdapter);
+    }
+    */
+    public void addItemsToHairSpinner() {
+        hairSpinner = (Spinner) findViewById(R.id.hairSpinner);
+        hairSpinner.setAdapter(new MyHairAdapter());
+    }
+
+    private static class HairViewHolder {
+        ImageView imageViewHair;
+    }
+
+    private class MyHairAdapter extends BaseAdapter {
+        public int getCount(){
+            return hairColour.length;
+        }
+        @Override
+        public Integer getItem(int position) {
+            return hairColour[position];
+        }
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View itemView = convertView;
+            HairViewHolder hairViewHolder;
+            //do we have a view?
+            if(convertView == null) {
+                //we don't have a view so create one
+                itemView = getLayoutInflater().inflate(R.layout.spinner_row,parent, false);
+                hairViewHolder = new HairViewHolder();
+                hairViewHolder.imageViewHair = (ImageView) itemView.findViewById(R.id.spinnerImage);
+                //set the tag for this view to the current image view holder
+                itemView.setTag(hairViewHolder);
+            }
+            else {
+                //we have a view to get the tagged view
+                hairViewHolder = (HairViewHolder) itemView.getTag();
+            }
+            //display the current image
+            hairViewHolder.imageViewHair.setImageDrawable(getResources().getDrawable(hairColour[position]));
+            return itemView;
+        }
     }
 
     public void addItemsToFrecklesSpinner() {

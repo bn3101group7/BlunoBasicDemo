@@ -17,13 +17,30 @@ public final class R {
     public static final class drawable {
         public static final int android=0x7f020000;
         public static final int blank=0x7f020001;
-        public static final int ic_launcher=0x7f020002;
-        public static final int type_i=0x7f020003;
-        public static final int type_ii=0x7f020004;
-        public static final int type_iii=0x7f020005;
-        public static final int type_iv=0x7f020006;
-        public static final int type_v=0x7f020007;
-        public static final int type_vi=0x7f020008;
+        public static final int eye_1=0x7f020002;
+        public static final int eye_2=0x7f020003;
+        public static final int eye_3=0x7f020004;
+        public static final int eye_4=0x7f020005;
+        public static final int eye_5=0x7f020006;
+        public static final int hair_1=0x7f020007;
+        public static final int hair_2=0x7f020008;
+        public static final int hair_3=0x7f020009;
+        public static final int hair_4=0x7f02000a;
+        public static final int hair_5=0x7f02000b;
+        public static final int hair_6=0x7f02000c;
+        public static final int ic_launcher=0x7f02000d;
+        public static final int type_1=0x7f02000e;
+        public static final int type_2=0x7f02000f;
+        public static final int type_3=0x7f020010;
+        public static final int type_4=0x7f020011;
+        public static final int type_5=0x7f020012;
+        public static final int type_6=0x7f020013;
+        public static final int type_i=0x7f020014;
+        public static final int type_ii=0x7f020015;
+        public static final int type_iii=0x7f020016;
+        public static final int type_iv=0x7f020017;
+        public static final int type_v=0x7f020018;
+        public static final int type_vi=0x7f020019;
     }
     public static final class id {
         public static final int action_settings=0x7f08000f;
