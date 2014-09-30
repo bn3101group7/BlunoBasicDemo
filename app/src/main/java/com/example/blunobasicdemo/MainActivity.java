@@ -30,6 +30,7 @@ public class MainActivity extends BlunoLibrary {
     private Spinner burnSpinner;
     private Spinner brownFreqSpinner;
     private Spinner brownIntSpinner;
+    private Spinner faceSpinner;
     private static final Integer[] skinTone = {R.drawable.blank,R.drawable.skin_1,R.drawable.skin_2,
             R.drawable.skin_3,R.drawable.skin_4,R.drawable.skin_5,R.drawable.skin_6};
     private static final Integer[] hairColour = {R.drawable.blank,R.drawable.hair_1,R.drawable.hair_2,
@@ -73,6 +74,7 @@ public class MainActivity extends BlunoLibrary {
         addItemsToBurnSpinner();
         addItemsToBrownFreqSpinner();
         addItemsToBrownIntSpinner();
+        addItemsToFaceSpinner();
 
         addListenerToSpinner();
 
@@ -101,6 +103,14 @@ public class MainActivity extends BlunoLibrary {
         int brownFreqValue = sharedPref.getInt("brownFreq", -1);
         if(brownFreqValue != -1) {
             brownFreqSpinner.setSelection(brownFreqValue);
+        }
+        int brownIntValue = sharedPref.getInt("brownInt", -1);
+        if(brownIntValue != -1) {
+            brownIntSpinner.setSelection(brownIntValue);
+        }
+        int faceValue = sharedPref.getInt("face", -1);
+        if(faceValue != -1) {
+            faceSpinner.setSelection(faceValue);
         }
     }
     @Override
@@ -398,6 +408,20 @@ public class MainActivity extends BlunoLibrary {
             return itemView;
         }
     }
+
+    public void addItemsToFaceSpinner() {
+        faceSpinner = (Spinner) findViewById(R.id.faceSpinner);
+        List<String> list = new ArrayList<String>();
+        list.add("How sensitive is your face to the sun?");
+        list.add("Very sensitive");
+        list.add("Sensitive");
+        list.add("Sometimes");
+        list.add("Resistant");
+        list.add("Never had a problem");
+        ArrayAdapter<String> faceDataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
+        faceDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        faceSpinner.setAdapter(faceDataAdapter);
+    }
     /*
     public void addItemsToSkinSpinner() {
     skinSpinner = (Spinner) findViewById(R.id.skinSpinner);
@@ -446,6 +470,7 @@ public class MainActivity extends BlunoLibrary {
         burnSpinner.setOnItemSelectedListener(new MyOnItemSelectedListener(this));
         brownFreqSpinner.setOnItemSelectedListener(new MyOnItemSelectedListener(this));
         brownIntSpinner.setOnItemSelectedListener(new MyOnItemSelectedListener(this));
+        faceSpinner.setOnItemSelectedListener(new MyOnItemSelectedListener(this));
     }
 
     public void displayResults(View V) {
@@ -464,12 +489,12 @@ public class MainActivity extends BlunoLibrary {
         if((eyeSpinner.getSelectedItemPosition() * hairSpinner.getSelectedItemPosition() *
                 skinSpinner.getSelectedItemPosition() * frecklesSpinner.getSelectedItemPosition() *
                 burnSpinner.getSelectedItemPosition() * brownFreqSpinner.getSelectedItemPosition() *
-                brownIntSpinner.getSelectedItemPosition()) != 0) {
+                brownIntSpinner.getSelectedItemPosition() * faceSpinner.getSelectedItemPosition()) != 0) {
             serialReceivedText.getEditableText().clear();
             serialSend(String.valueOf(eyeSpinner.getSelectedItemPosition())+String.valueOf(hairSpinner.getSelectedItemPosition())+
                     String.valueOf(skinSpinner.getSelectedItemPosition())+String.valueOf(frecklesSpinner.getSelectedItemPosition())+
                     String.valueOf(burnSpinner.getSelectedItemPosition())+String.valueOf(brownFreqSpinner.getSelectedItemPosition())+
-                    String.valueOf(brownIntSpinner.getSelectedItemPosition()));
+                    String.valueOf(brownIntSpinner.getSelectedItemPosition())+String.valueOf(faceSpinner.getSelectedItemPosition()));
         }
         else {
             Toast.makeText(this, "Please select an option for each category.", Toast.LENGTH_SHORT).show();

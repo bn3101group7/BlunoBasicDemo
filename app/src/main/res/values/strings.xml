@@ -30,6 +30,7 @@
     <string name="burn_cat">Inclination to sunburn</string>
     <string name="brown_freq_cat">Tendency to tan</string>
     <string name="brown_int_cat">Intensity of tan</string>
+    <string name="face_cat">Face sensitivity</string>
 
     <!-- Menu items -->
     <string name="menu_connecting">Connecting</string>

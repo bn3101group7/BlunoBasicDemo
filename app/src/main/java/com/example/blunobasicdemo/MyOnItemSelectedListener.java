@@ -66,6 +66,12 @@ public class MyOnItemSelectedListener implements OnItemSelectedListener {
                 editor.putInt("brownInt", brownIntChoice);
                 editor.commit();
                 break;
+            case R.id.faceSpinner:
+                int faceChoice = pos;
+                editor = pref.edit();
+                editor.putInt("face", faceChoice);
+                editor.commit();
+                break;
             default:
                 break;
         }
