@@ -40,6 +40,7 @@ public class MyOnItemSelectedListener implements OnItemSelectedListener {
                 editor = pref.edit();
                 editor.putInt("frec", frecChoice);
                 editor.commit();
+                break;
             case R.id.skinSpinner:
                 int skinChoice = pos;
                 editor = pref.edit();

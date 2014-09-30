@@ -23,9 +23,9 @@
     <string name="send_both">Send</string>
 
     <!--Categories-->
-    <string name="skin_cat">Skin Colour</string>
     <string name="eye_cat">Eye Colour</string>
     <string name="hair_cat">Hair Colour</string>
+    <string name="skin_cat">Skin Colour</string>
     <string name="freckles_cat">Freckles</string>
     <string name="burn_cat">Inclination to sunburn</string>
     <string name="brown_freq_cat">Tendency to tan</string>

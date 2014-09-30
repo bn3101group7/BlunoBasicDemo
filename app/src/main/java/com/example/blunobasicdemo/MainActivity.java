@@ -3,17 +3,14 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.content.Intent;
 import android.os.Handler;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -51,25 +48,7 @@ public class MainActivity extends BlunoLibrary {
         onCreateProcess();	//onCreate Process by BlunoLibrary
         serialBegin(115200);	//set the Uart Baudrate on BLE chip to 115200
         serialReceivedText=(TextView) findViewById(R.id.serialReceivedText);	//initial the EditText of the received data
-        //serialSendText=(EditText) findViewById(R.id.serialSendText); //initial the EditText of the sending data
-        /*buttonSerialSend = (Button) findViewById(R.id.buttonSerialSend); //initial the button for sending the data
-        buttonSerialSend.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                serialSend(serialSendText.getText().toString()); //send the data to the BLUNO
-            }
-        });
-        buttonScan = (Button) findViewById(R.id.buttonScan); //initial the button for scanning the BLE device
-        buttonScan.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                buttonScanOnClickProcess(); //Alert Dialog for selecting the BLE device
-            }
-        });*/
-        //test commit
-        //buttonScan = (Button) findViewById(R.id.buttonScan); //initial the button for scanning the BLE device
+
         addItemsToEyeSpinner();
         addItemsToHairSpinner();
         addItemsToSkinSpinner();
@@ -94,7 +73,6 @@ public class MainActivity extends BlunoLibrary {
         }
         int skinValue = sharedPref.getInt("skin",-1);
         if(skinValue != -1) {
-            // set the value of the spinner
             skinSpinner.setSelection(skinValue);
         }
         int frecValue = sharedPref.getInt("frec", -1);
@@ -191,17 +169,7 @@ public class MainActivity extends BlunoLibrary {
         }
         return true;
     }
-    /*
-    public void scanDevice(View V) {
-    buttonScanOnClickProcess(); //Alert Dialog for selecting the BLE device
-    }
-    public void sendData(View V) { //send the data to the BLUNO
-    serialSend(serialSendText.getText().toString());
-    }
-    public void sendData1(View V) {
-    serialSend("12");
-    }
-    */
+
     protected void onResume(){
         super.onResume();
         System.out.println("BlUNOActivity onResume");
@@ -277,20 +245,15 @@ public class MainActivity extends BlunoLibrary {
         public View getView(int position, View convertView, ViewGroup parent) {
             View itemView = convertView;
             HairViewHolder hairViewHolder;
-            //do we have a view?
             if(convertView == null) {
-                //we don't have a view so create one
                 itemView = getLayoutInflater().inflate(R.layout.spinner_row,parent, false);
                 hairViewHolder = new HairViewHolder();
                 hairViewHolder.imageViewHair = (ImageView) itemView.findViewById(R.id.spinnerImage);
-                //set the tag for this view to the current image view holder
                 itemView.setTag(hairViewHolder);
             }
             else {
-                //we have a view to get the tagged view
                 hairViewHolder = (HairViewHolder) itemView.getTag();
             }
-            //display the current image
             hairViewHolder.imageViewHair.setImageDrawable(getResources().getDrawable(hairColour[position]));
             return itemView;
         }
@@ -319,20 +282,15 @@ public class MainActivity extends BlunoLibrary {
         public View getView(int position, View convertView, ViewGroup parent) {
             View itemView = convertView;
             SkinViewHolder skinViewHolder;
-            //do we have a view?
             if(convertView == null) {
-                //we don't have a view so create one
                 itemView = getLayoutInflater().inflate(R.layout.spinner_row,parent, false);
                 skinViewHolder = new SkinViewHolder();
                 skinViewHolder.imageViewSkin = (ImageView) itemView.findViewById(R.id.spinnerImage);
-                //set the tag for this view to the current image view holder
                 itemView.setTag(skinViewHolder);
             }
             else {
-                //we have a view to get the tagged view
                 skinViewHolder = (SkinViewHolder) itemView.getTag();
             }
-            //display the current image
             skinViewHolder.imageViewSkin.setImageDrawable(getResources().getDrawable(skinTone[position]));
             return itemView;
         }
@@ -403,20 +361,15 @@ public class MainActivity extends BlunoLibrary {
         public View getView(int position, View convertView, ViewGroup parent) {
             View itemView = convertView;
             BrownIntViewHolder brownIntViewHolder;
-            //do we have a view?
             if(convertView == null) {
-                //we don't have a view so create one
                 itemView = getLayoutInflater().inflate(R.layout.spinner_row,parent, false);
                 brownIntViewHolder = new BrownIntViewHolder();
                 brownIntViewHolder.imageViewBrownInt = (ImageView) itemView.findViewById(R.id.spinnerImage);
-                //set the tag for this view to the current image view holder
                 itemView.setTag(brownIntViewHolder);
             }
             else {
-                //we have a view to get the tagged view
                 brownIntViewHolder = (BrownIntViewHolder) itemView.getTag();
             }
-            //display the current image
             brownIntViewHolder.imageViewBrownInt.setImageDrawable(getResources().getDrawable(brownInt[position]));
             return itemView;
         }
@@ -463,45 +416,6 @@ public class MainActivity extends BlunoLibrary {
         tanHistDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         tanHistSpinner.setAdapter(tanHistDataAdapter);
     }
-    /*
-    public void addItemsToSkinSpinner() {
-    skinSpinner = (Spinner) findViewById(R.id.skinSpinner);
-    List<String> list = new ArrayList<String>();
-    list.add("Please select the colour of your skin");
-    list.add("Fair");
-    list.add("Tanned");
-    list.add("Very tanned");
-    ArrayAdapter<String> skinDataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
-    skinDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-    skinSpinner.setAdapter(skinDataAdapter);
-    }
-    public void addItemsToEyeSpinner() {
-        eyeSpinner = (Spinner) findViewById(R.id.eyeSpinner);
-        List<String> list = new ArrayList<String>();
-        list.add("Please select your natural eye colour");
-        list.add("Light blue, gray or green");
-        list.add("Blue, gray or green");
-        list.add("Dark blue, gray or green");
-        list.add("Brown");
-        list.add("Black");
-        ArrayAdapter<String> eyeDataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
-        eyeDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        eyeSpinner.setAdapter(eyeDataAdapter);
-    }
-    public void addItemsToHairSpinner() {
-        hairSpinner = (Spinner) findViewById(R.id.hairSpinner);
-        List<String> list = new ArrayList<String>();
-        list.add("Please select your natural hair colour");
-        list.add("Sandy red");
-        list.add("Blond");
-        list.add("Chestnut or dark blond");
-        list.add("Brown");
-        list.add("Black");
-        ArrayAdapter<String> hairDataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
-        hairDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        hairSpinner.setAdapter(hairDataAdapter);
-    }
-    */
 
     public void addListenerToSpinner() {
         skinSpinner.setOnItemSelectedListener(new MyOnItemSelectedListener(this));
@@ -564,28 +478,7 @@ public class MainActivity extends BlunoLibrary {
         super.onDestroy();
         onDestroyProcess();	//onDestroy Process by BlunoLibrary
     }
-    /*@Override
-    public void onConectionStateChange(connectionStateEnum theConnectionState) {//Once connection state changes, this function will be called
-    switch (theConnectionState) { //Four connection state
-    case isConnected:
-    buttonScan.setText("Connected");
-    break;
-    case isConnecting:
-    buttonScan.setText("Connecting");
-    break;
-    case isToScan:
-    buttonScan.setText("Scan");
-    break;
-    case isScanning:
-    buttonScan.setText("Scanning");
-    break;
-    case isDisconnecting:
-    buttonScan.setText("isDisconnecting");
-    break;
-    default:
-    break;
-    }
-    }*/
+
     public Boolean isNumeric(String str) {
         try {
             float f = Float.parseFloat(str);
@@ -616,11 +509,11 @@ public class MainActivity extends BlunoLibrary {
      *  This functions will enable or disable the buttons depending on the bluetooth connectivity
      *  status.
      */
-    public void ActivateButton(boolean yes_or_no_) {
+    public void ActivateButton(boolean trueFalse) {
         Button buttonDisplayResults = (Button) findViewById(R.id.buttonDisplayResults);
         Button buttonSendData = (Button) findViewById(R.id.buttonSendData);
 
-        if (yes_or_no_ == true) {
+        if (trueFalse) {
             buttonDisplayResults.setEnabled(true);
             buttonSendData.setEnabled(true);
         }
