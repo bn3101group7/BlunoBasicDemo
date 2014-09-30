@@ -31,6 +31,7 @@
     <string name="brown_freq_cat">Tendency to tan</string>
     <string name="brown_int_cat">Intensity of tan</string>
     <string name="face_cat">Face sensitivity</string>
+    <string name="tan_freq_cat">Tan frequency</string>
 
     <!-- Menu items -->
     <string name="menu_connecting">Connecting</string>

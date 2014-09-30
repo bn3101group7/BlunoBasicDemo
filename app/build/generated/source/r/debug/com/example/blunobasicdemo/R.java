@@ -40,21 +40,15 @@ public final class R {
         public static final int skin_4=0x7f020016;
         public static final int skin_5=0x7f020017;
         public static final int skin_6=0x7f020018;
-        public static final int type_1=0x7f020019;
-        public static final int type_2=0x7f02001a;
-        public static final int type_3=0x7f02001b;
-        public static final int type_4=0x7f02001c;
-        public static final int type_5=0x7f02001d;
-        public static final int type_6=0x7f02001e;
-        public static final int type_i=0x7f02001f;
-        public static final int type_ii=0x7f020020;
-        public static final int type_iii=0x7f020021;
-        public static final int type_iv=0x7f020022;
-        public static final int type_v=0x7f020023;
-        public static final int type_vi=0x7f020024;
+        public static final int type_i=0x7f020019;
+        public static final int type_ii=0x7f02001a;
+        public static final int type_iii=0x7f02001b;
+        public static final int type_iv=0x7f02001c;
+        public static final int type_v=0x7f02001d;
+        public static final int type_vi=0x7f02001e;
     }
     public static final class id {
-        public static final int action_settings=0x7f080017;
+        public static final int action_settings=0x7f080019;
         public static final int brownFreqSpinner=0x7f08000f;
         public static final int brownIntSpinner=0x7f080011;
         public static final int brown_freq_cat=0x7f08000e;
@@ -63,8 +57,8 @@ public final class R {
         public static final int burn_cat=0x7f08000c;
         public static final int buttonDisplayResults=0x7f080001;
         public static final int buttonSendData=0x7f080002;
-        public static final int device_address=0x7f080015;
-        public static final int device_name=0x7f080014;
+        public static final int device_address=0x7f080017;
+        public static final int device_name=0x7f080016;
         public static final int eyeSpinner=0x7f080005;
         public static final int eye_cat=0x7f080004;
         public static final int faceSpinner=0x7f080013;
@@ -73,17 +67,19 @@ public final class R {
         public static final int freckles_cat=0x7f08000a;
         public static final int hairSpinner=0x7f080007;
         public static final int hair_cat=0x7f080006;
-        public static final int menu_connecting=0x7f08001b;
-        public static final int menu_disconnect=0x7f08001c;
-        public static final int menu_disconnecting=0x7f08001d;
-        public static final int menu_refresh=0x7f080018;
-        public static final int menu_scan=0x7f080019;
-        public static final int menu_scanning=0x7f08001a;
+        public static final int menu_connecting=0x7f08001d;
+        public static final int menu_disconnect=0x7f08001e;
+        public static final int menu_disconnecting=0x7f08001f;
+        public static final int menu_refresh=0x7f08001a;
+        public static final int menu_scan=0x7f08001b;
+        public static final int menu_scanning=0x7f08001c;
         public static final int resultDisplay=0x7f080000;
         public static final int serialReceivedText=0x7f080003;
         public static final int skinCat=0x7f080008;
         public static final int skinSpinner=0x7f080009;
-        public static final int spinnerImage=0x7f080016;
+        public static final int spinnerImage=0x7f080018;
+        public static final int tanFreqSpinner=0x7f080015;
+        public static final int tan_freq_cat=0x7f080014;
     }
     public static final class layout {
         public static final int actionbar_progress_indeterminate=0x7f030000;
@@ -131,12 +127,13 @@ public final class R {
         public static final int send_data=0x7f05001d;
         public static final int send_text=0x7f05001e;
         public static final int skin_cat=0x7f05001f;
-        public static final int title_activity_display_message=0x7f050020;
-        public static final int title_activity_notification_receiver=0x7f050021;
-        public static final int title_devices=0x7f050022;
-        public static final int unknown_characteristic=0x7f050023;
-        public static final int unknown_device=0x7f050024;
-        public static final int unknown_service=0x7f050025;
+        public static final int tan_freq_cat=0x7f050020;
+        public static final int title_activity_display_message=0x7f050021;
+        public static final int title_activity_notification_receiver=0x7f050022;
+        public static final int title_devices=0x7f050023;
+        public static final int unknown_characteristic=0x7f050024;
+        public static final int unknown_device=0x7f050025;
+        public static final int unknown_service=0x7f050026;
     }
     public static final class style {
         /** 

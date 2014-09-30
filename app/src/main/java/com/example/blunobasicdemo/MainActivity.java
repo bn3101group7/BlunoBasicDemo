@@ -31,6 +31,8 @@ public class MainActivity extends BlunoLibrary {
     private Spinner brownFreqSpinner;
     private Spinner brownIntSpinner;
     private Spinner faceSpinner;
+    private Spinner tanFreqSpinner;
+
     private static final Integer[] skinTone = {R.drawable.blank,R.drawable.skin_1,R.drawable.skin_2,
             R.drawable.skin_3,R.drawable.skin_4,R.drawable.skin_5,R.drawable.skin_6};
     private static final Integer[] hairColour = {R.drawable.blank,R.drawable.hair_1,R.drawable.hair_2,
@@ -75,6 +77,7 @@ public class MainActivity extends BlunoLibrary {
         addItemsToBrownFreqSpinner();
         addItemsToBrownIntSpinner();
         addItemsToFaceSpinner();
+        addItemsToTanFreqSpinner();
 
         addListenerToSpinner();
 
@@ -111,6 +114,10 @@ public class MainActivity extends BlunoLibrary {
         int faceValue = sharedPref.getInt("face", -1);
         if(faceValue != -1) {
             faceSpinner.setSelection(faceValue);
+        }
+        int tanFreqValue = sharedPref.getInt("tanFreq", -1);
+        if(tanFreqValue != -1) {
+            tanFreqSpinner.setSelection(tanFreqValue);
         }
     }
     @Override
@@ -422,6 +429,20 @@ public class MainActivity extends BlunoLibrary {
         faceDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         faceSpinner.setAdapter(faceDataAdapter);
     }
+
+    public void addItemsToTanFreqSpinner() {
+        tanFreqSpinner = (Spinner) findViewById(R.id.tanFreqSpinner);
+        List<String> list = new ArrayList<String>();
+        list.add("How often do you tan?");
+        list.add("Never");
+        list.add("Seldom");
+        list.add("Sometimes");
+        list.add("Often");
+        list.add("Always");
+        ArrayAdapter<String> tanFreqDataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
+        tanFreqDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        tanFreqSpinner.setAdapter(tanFreqDataAdapter);
+    }
     /*
     public void addItemsToSkinSpinner() {
     skinSpinner = (Spinner) findViewById(R.id.skinSpinner);
@@ -471,6 +492,7 @@ public class MainActivity extends BlunoLibrary {
         brownFreqSpinner.setOnItemSelectedListener(new MyOnItemSelectedListener(this));
         brownIntSpinner.setOnItemSelectedListener(new MyOnItemSelectedListener(this));
         faceSpinner.setOnItemSelectedListener(new MyOnItemSelectedListener(this));
+        tanFreqSpinner.setOnItemSelectedListener(new MyOnItemSelectedListener(this));
     }
 
     public void displayResults(View V) {
@@ -489,12 +511,14 @@ public class MainActivity extends BlunoLibrary {
         if((eyeSpinner.getSelectedItemPosition() * hairSpinner.getSelectedItemPosition() *
                 skinSpinner.getSelectedItemPosition() * frecklesSpinner.getSelectedItemPosition() *
                 burnSpinner.getSelectedItemPosition() * brownFreqSpinner.getSelectedItemPosition() *
-                brownIntSpinner.getSelectedItemPosition() * faceSpinner.getSelectedItemPosition()) != 0) {
+                brownIntSpinner.getSelectedItemPosition() * faceSpinner.getSelectedItemPosition() *
+                tanFreqSpinner.getSelectedItemPosition()) != 0) {
             serialReceivedText.getEditableText().clear();
             serialSend(String.valueOf(eyeSpinner.getSelectedItemPosition())+String.valueOf(hairSpinner.getSelectedItemPosition())+
                     String.valueOf(skinSpinner.getSelectedItemPosition())+String.valueOf(frecklesSpinner.getSelectedItemPosition())+
                     String.valueOf(burnSpinner.getSelectedItemPosition())+String.valueOf(brownFreqSpinner.getSelectedItemPosition())+
-                    String.valueOf(brownIntSpinner.getSelectedItemPosition())+String.valueOf(faceSpinner.getSelectedItemPosition()));
+                    String.valueOf(brownIntSpinner.getSelectedItemPosition())+String.valueOf(faceSpinner.getSelectedItemPosition())+
+                    String.valueOf(tanFreqSpinner.getSelectedItemPosition()));
         }
         else {
             Toast.makeText(this, "Please select an option for each category.", Toast.LENGTH_SHORT).show();
