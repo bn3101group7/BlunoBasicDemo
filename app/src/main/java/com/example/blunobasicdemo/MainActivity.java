@@ -27,8 +27,9 @@ public class MainActivity extends BlunoLibrary {
     private Spinner eyeSpinner;
     private Spinner hairSpinner;
     private Spinner frecklesSpinner;
-    private static final Integer[] skinTone = {R.drawable.blank,R.drawable.type_1,R.drawable.type_2,R.drawable.type_3,R.drawable.type_4,R.drawable.type_5,R.drawable.type_6};
-    private static final Integer[] hairColour = {R.drawable.blank,R.drawable.hair_1,R.drawable.hair_2,R.drawable.hair_3,R.drawable.hair_4,R.drawable.hair_5,R.drawable.hair_6};
+    private Spinner burnSpinner;
+    private static final Integer[] skinTone = {R.drawable.blank,R.drawable.skin_1,R.drawable.skin_2,R.drawable.skin_3,R.drawable.skin_4,R.drawable.skin_5,R.drawable.skin_6};
+    private static final Integer[] hairColour = {R.drawable.blank,R.drawable.hair_1,R.drawable.hair_2,R.drawable.hair_3,R.drawable.hair_4,R.drawable.hair_5};
     private static final Integer[] eyeColour = {R.drawable.blank,R.drawable.eye_1,R.drawable.eye_2,R.drawable.eye_3,R.drawable.eye_4,R.drawable.eye_5};
     public final static String EXTRA_MESSAGE = "com.example.blunobasicdemo.MESSAGE";
 
@@ -58,18 +59,14 @@ public class MainActivity extends BlunoLibrary {
         });*/
         //test commit
         //buttonScan = (Button) findViewById(R.id.buttonScan); //initial the button for scanning the BLE device
-        addItemsToSkinSpinner();
         addItemsToEyeSpinner();
         addItemsToHairSpinner();
+        addItemsToSkinSpinner();
         addItemsToFrecklesSpinner();
+        addItemsToBurnSpinner();
         addListenerToSpinner();
 
         SharedPreferences sharedPref = getSharedPreferences("MyPref",MODE_PRIVATE);
-        int skinValue = sharedPref.getInt("skin",-1);
-        if(skinValue != -1) {
-            // set the value of the spinner
-            skinSpinner.setSelection(skinValue);
-        }
         int eyeValue = sharedPref.getInt("eye",-1);
         if(eyeValue != -1) {
             eyeSpinner.setSelection(eyeValue);
@@ -78,9 +75,18 @@ public class MainActivity extends BlunoLibrary {
         if(hairValue != -1) {
             hairSpinner.setSelection(hairValue);
         }
+        int skinValue = sharedPref.getInt("skin",-1);
+        if(skinValue != -1) {
+            // set the value of the spinner
+            skinSpinner.setSelection(skinValue);
+        }
         int frecValue = sharedPref.getInt("frec", -1);
         if(frecValue != -1) {
             frecklesSpinner.setSelection(frecValue);
+        }
+        int burnValue = sharedPref.getInt("burn", -1);
+        if(burnValue != -1) {
+            burnSpinner.setSelection(burnValue);
         }
     }
     @Override
@@ -164,74 +170,7 @@ public class MainActivity extends BlunoLibrary {
         System.out.println("BlUNOActivity onResume");
         onResumeProcess();	//onResume Process by BlunoLibrary
     }
-    /*
-    public void addItemsToSkinSpinner() {
-    skinSpinner = (Spinner) findViewById(R.id.skinSpinner);
-    List<String> list = new ArrayList<String>();
-    list.add("Please select the colour of your skin");
-    list.add("Fair");
-    list.add("Tanned");
-    list.add("Very tanned");
-    ArrayAdapter<String> skinDataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
-    skinDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-    skinSpinner.setAdapter(skinDataAdapter);
-    }*/
-    public void addItemsToSkinSpinner() {
-        skinSpinner = (Spinner) findViewById(R.id.skinSpinner);
-        skinSpinner.setAdapter(new MySkinAdapter());
-    }
-    private static class SkinViewHolder {
-        ImageView imageViewSkin;
-    }
-    private class MySkinAdapter extends BaseAdapter {
-        public int getCount(){
-            return skinTone.length;
-        }
-        @Override
-        public Integer getItem(int position) {
-            return skinTone[position];
-        }
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View itemView = convertView;
-            SkinViewHolder skinViewHolder;
-            //do we have a view?
-            if(convertView == null) {
-                //we don't have a view so create one
-                itemView = getLayoutInflater().inflate(R.layout.spinner_row,parent, false);
-                skinViewHolder = new SkinViewHolder();
-                skinViewHolder.imageViewSkin = (ImageView) itemView.findViewById(R.id.spinnerImage);
-                //set the tag for this view to the current image view holder
-                itemView.setTag(skinViewHolder);
-            }
-            else {
-                //we have a view to get the tagged view
-                skinViewHolder = (SkinViewHolder) itemView.getTag();
-            }
-            //display the current image
-            skinViewHolder.imageViewSkin.setImageDrawable(getResources().getDrawable(skinTone[position]));
-            return itemView;
-        }
-    }
-    /*
-    public void addItemsToEyeSpinner() {
-        eyeSpinner = (Spinner) findViewById(R.id.eyeSpinner);
-        List<String> list = new ArrayList<String>();
-        list.add("Please select your natural eye colour");
-        list.add("Light blue, gray or green");
-        list.add("Blue, gray or green");
-        list.add("Dark blue, gray or green");
-        list.add("Brown");
-        list.add("Black");
-        ArrayAdapter<String> eyeDataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
-        eyeDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        eyeSpinner.setAdapter(eyeDataAdapter);
-    }
-    */
+
     public void addItemsToEyeSpinner() {
         eyeSpinner = (Spinner) findViewById(R.id.eyeSpinner);
         eyeSpinner.setAdapter(new MyEyeAdapter());
@@ -275,21 +214,7 @@ public class MainActivity extends BlunoLibrary {
             return itemView;
         }
     }
-    /*
-    public void addItemsToHairSpinner() {
-        hairSpinner = (Spinner) findViewById(R.id.hairSpinner);
-        List<String> list = new ArrayList<String>();
-        list.add("Please select your natural hair colour");
-        list.add("Sandy red");
-        list.add("Blond");
-        list.add("Chestnut or dark blond");
-        list.add("Brown");
-        list.add("Black");
-        ArrayAdapter<String> hairDataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
-        hairDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        hairSpinner.setAdapter(hairDataAdapter);
-    }
-    */
+
     public void addItemsToHairSpinner() {
         hairSpinner = (Spinner) findViewById(R.id.hairSpinner);
         hairSpinner.setAdapter(new MyHairAdapter());
@@ -334,6 +259,48 @@ public class MainActivity extends BlunoLibrary {
         }
     }
 
+    public void addItemsToSkinSpinner() {
+        skinSpinner = (Spinner) findViewById(R.id.skinSpinner);
+        skinSpinner.setAdapter(new MySkinAdapter());
+    }
+    private static class SkinViewHolder {
+        ImageView imageViewSkin;
+    }
+    private class MySkinAdapter extends BaseAdapter {
+        public int getCount(){
+            return skinTone.length;
+        }
+        @Override
+        public Integer getItem(int position) {
+            return skinTone[position];
+        }
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View itemView = convertView;
+            SkinViewHolder skinViewHolder;
+            //do we have a view?
+            if(convertView == null) {
+                //we don't have a view so create one
+                itemView = getLayoutInflater().inflate(R.layout.spinner_row,parent, false);
+                skinViewHolder = new SkinViewHolder();
+                skinViewHolder.imageViewSkin = (ImageView) itemView.findViewById(R.id.spinnerImage);
+                //set the tag for this view to the current image view holder
+                itemView.setTag(skinViewHolder);
+            }
+            else {
+                //we have a view to get the tagged view
+                skinViewHolder = (SkinViewHolder) itemView.getTag();
+            }
+            //display the current image
+            skinViewHolder.imageViewSkin.setImageDrawable(getResources().getDrawable(skinTone[position]));
+            return itemView;
+        }
+    }
+
     public void addItemsToFrecklesSpinner() {
         frecklesSpinner = (Spinner) findViewById(R.id.frecklesSpinner);
         List<String> list = new ArrayList<String>();
@@ -348,11 +315,75 @@ public class MainActivity extends BlunoLibrary {
         frecklesSpinner.setAdapter(frecklesDataAdapter);
     }
 
+    public void addItemsToBurnSpinner() {
+        burnSpinner = (Spinner) findViewById(R.id.burnSpinner);
+        List<String> list = new ArrayList<String>();
+        list.add("What happens when you stay in the sun for too long?");
+        list.add("Painful blisters, peeling");
+        list.add("Mild blisters, peeling");
+        list.add("Burn, mild peeling");
+        list.add("Rare skin, no peeling");
+        list.add("No burning");
+        ArrayAdapter<String> burnDataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
+        burnDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        burnSpinner.setAdapter(burnDataAdapter);
+    }
+    /*
+    public void addItemsToSkinSpinner() {
+    skinSpinner = (Spinner) findViewById(R.id.skinSpinner);
+    List<String> list = new ArrayList<String>();
+    list.add("Please select the colour of your skin");
+    list.add("Fair");
+    list.add("Tanned");
+    list.add("Very tanned");
+    ArrayAdapter<String> skinDataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
+    skinDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+    skinSpinner.setAdapter(skinDataAdapter);
+    }*/
+
+
+
+    /*
+    public void addItemsToEyeSpinner() {
+        eyeSpinner = (Spinner) findViewById(R.id.eyeSpinner);
+        List<String> list = new ArrayList<String>();
+        list.add("Please select your natural eye colour");
+        list.add("Light blue, gray or green");
+        list.add("Blue, gray or green");
+        list.add("Dark blue, gray or green");
+        list.add("Brown");
+        list.add("Black");
+        ArrayAdapter<String> eyeDataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
+        eyeDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        eyeSpinner.setAdapter(eyeDataAdapter);
+    }
+    */
+
+    /*
+    public void addItemsToHairSpinner() {
+        hairSpinner = (Spinner) findViewById(R.id.hairSpinner);
+        List<String> list = new ArrayList<String>();
+        list.add("Please select your natural hair colour");
+        list.add("Sandy red");
+        list.add("Blond");
+        list.add("Chestnut or dark blond");
+        list.add("Brown");
+        list.add("Black");
+        ArrayAdapter<String> hairDataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
+        hairDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        hairSpinner.setAdapter(hairDataAdapter);
+    }
+    */
+
+
+
+
     public void addListenerToSpinner() {
         skinSpinner.setOnItemSelectedListener(new MyOnItemSelectedListener(this));
         eyeSpinner.setOnItemSelectedListener(new MyOnItemSelectedListener(this));
         hairSpinner.setOnItemSelectedListener(new MyOnItemSelectedListener(this));
         frecklesSpinner.setOnItemSelectedListener(new MyOnItemSelectedListener(this));
+        burnSpinner.setOnItemSelectedListener(new MyOnItemSelectedListener(this));
     }
 
     public void displayResults(View V) {
@@ -367,16 +398,19 @@ public class MainActivity extends BlunoLibrary {
             startActivity(intent);
         }
     }
-    public void sendBoth(View V) {
-        skinSpinner = (Spinner) findViewById(R.id.skinSpinner);
+    public void sendData(View V) {
         eyeSpinner = (Spinner) findViewById(R.id.eyeSpinner);
         hairSpinner = (Spinner) findViewById(R.id.hairSpinner);
+        skinSpinner = (Spinner) findViewById(R.id.skinSpinner);
         frecklesSpinner = (Spinner) findViewById(R.id.frecklesSpinner);
-        if(skinSpinner.getSelectedItemPosition()!=0 && eyeSpinner.getSelectedItemPosition()!=0 &&
-                hairSpinner.getSelectedItemPosition() !=0 && frecklesSpinner.getSelectedItemPosition() !=0) {
+        burnSpinner = (Spinner) findViewById(R.id.burnSpinner);
+        if(eyeSpinner.getSelectedItemPosition()!=0 && hairSpinner.getSelectedItemPosition() !=0 &&
+                skinSpinner.getSelectedItemPosition()!=0 && frecklesSpinner.getSelectedItemPosition() !=0 &&
+                burnSpinner.getSelectedItemPosition() !=0) {
             serialReceivedText.getEditableText().clear();
-            serialSend(String.valueOf(skinSpinner.getSelectedItemPosition())+String.valueOf(eyeSpinner.getSelectedItemPosition())+
-                    String.valueOf(hairSpinner.getSelectedItemPosition())+String.valueOf(frecklesSpinner.getSelectedItemPosition()));
+            serialSend(String.valueOf(eyeSpinner.getSelectedItemPosition())+String.valueOf(hairSpinner.getSelectedItemPosition())+
+                    String.valueOf(skinSpinner.getSelectedItemPosition())+String.valueOf(frecklesSpinner.getSelectedItemPosition())+
+                    String.valueOf(burnSpinner.getSelectedItemPosition()));
         }
         else {
             Toast.makeText(this, "Please select an option for each category.", Toast.LENGTH_SHORT).show();
@@ -455,15 +489,15 @@ public class MainActivity extends BlunoLibrary {
      */
     public void ActivateButton(boolean yes_or_no_) {
         Button buttonDisplayResults = (Button) findViewById(R.id.buttonDisplayResults);
-        Button buttonSendBoth = (Button) findViewById(R.id.buttonSendBoth);
+        Button buttonSendData = (Button) findViewById(R.id.buttonSendData);
 
         if (yes_or_no_ == true) {
             buttonDisplayResults.setEnabled(true);
-            buttonSendBoth.setEnabled(true);
+            buttonSendData.setEnabled(true);
         }
         else {
             buttonDisplayResults.setEnabled(false);
-            buttonSendBoth.setEnabled(false);
+            buttonSendData.setEnabled(false);
         }
     }
 }

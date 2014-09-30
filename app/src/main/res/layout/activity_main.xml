@@ -11,6 +11,25 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonDisplayResults"
+            android:text="@string/display_results"
+            android:onClick="displayResults"
+            android:enabled="false"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonSendData"
+            android:text="@string/send_both"
+            android:onClick="sendData"
+            android:enabled="false"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
         <TextView
             android:id="@+id/serialReceivedText"
@@ -25,17 +44,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/skinCat"
-            android:text="@string/skin_cat"
-            android:gravity="center"
-            android:textSize="16sp"/>
-        <Spinner
-            android:id="@+id/skinSpinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -61,6 +69,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/skinCat"
+            android:text="@string/skin_cat"
+            android:gravity="center"
+            android:textSize="16sp"/>
+        <Spinner
+            android:id="@+id/skinSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/freckles_cat"
             android:text="@string/freckles_cat"
             android:gravity="center"
@@ -69,24 +88,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/frecklesSpinner"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <Button
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/buttonDisplayResults"
-            android:text="@string/display_results"
-            android:onClick="displayResults"
-            android:enabled="false"/>
-        <Button
-            android:layout_width="wrap_content"
+            android:id="@+id/burn_cat"
+            android:text="@string/burn_cat"
+            android:gravity="center"
+            android:textSize="16sp"/>
+        <Spinner
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/buttonSendBoth"
-            android:text="@string/send_both"
-            android:onClick="sendBoth"
-            android:enabled="false"/>
+            android:id="@+id/burnSpinner"/>
     </LinearLayout>
+
 </LinearLayout>

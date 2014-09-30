@@ -23,13 +23,6 @@ public class MyOnItemSelectedListener implements OnItemSelectedListener {
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
         switch(parent.getId()) {
-            case R.id.skinSpinner:
-                int skinChoice = pos;
-                editor = pref.edit();
-                editor.putInt("skin", skinChoice);
-                editor.commit();
-                //Toast.makeText(parent.getContext(), Integer.toString(pos),Toast.LENGTH_SHORT).show();
-                break;
             case R.id.eyeSpinner:
                 int eyeChoice = pos;
                 editor = pref.edit();
@@ -48,6 +41,19 @@ public class MyOnItemSelectedListener implements OnItemSelectedListener {
                 editor = pref.edit();
                 editor.putInt("frec", frecChoice);
                 editor.commit();
+            case R.id.skinSpinner:
+                int skinChoice = pos;
+                editor = pref.edit();
+                editor.putInt("skin", skinChoice);
+                editor.commit();
+                //Toast.makeText(parent.getContext(), Integer.toString(pos),Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.burnSpinner:
+                int burnChoice = pos;
+                editor = pref.edit();
+                editor.putInt("burn", burnChoice);
+                editor.commit();
+                break;
             default:
                 break;
         }
