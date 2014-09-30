@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:editable="true"
-            android:textSize="0sp"
+            android:textSize="10sp"
             android:text=""/>
     </LinearLayout>
     <LinearLayout
@@ -99,6 +99,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/burnSpinner"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/brown_freq_cat"
+            android:text="@string/brown_freq_cat"
+            android:gravity="center"
+            android:textSize="16sp"/>
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/brownFreqSpinner"/>
     </LinearLayout>
 
 </LinearLayout>

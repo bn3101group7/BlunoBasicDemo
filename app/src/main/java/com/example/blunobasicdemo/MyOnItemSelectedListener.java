@@ -54,6 +54,12 @@ public class MyOnItemSelectedListener implements OnItemSelectedListener {
                 editor.putInt("burn", burnChoice);
                 editor.commit();
                 break;
+            case R.id.brownFreqSpinner:
+                int brownFreqChoice = pos;
+                editor = pref.edit();
+                editor.putInt("brownFreq", brownFreqChoice);
+                editor.commit();
+                break;
             default:
                 break;
         }

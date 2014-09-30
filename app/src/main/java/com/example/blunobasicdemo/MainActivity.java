@@ -28,9 +28,13 @@ public class MainActivity extends BlunoLibrary {
     private Spinner hairSpinner;
     private Spinner frecklesSpinner;
     private Spinner burnSpinner;
-    private static final Integer[] skinTone = {R.drawable.blank,R.drawable.skin_1,R.drawable.skin_2,R.drawable.skin_3,R.drawable.skin_4,R.drawable.skin_5,R.drawable.skin_6};
-    private static final Integer[] hairColour = {R.drawable.blank,R.drawable.hair_1,R.drawable.hair_2,R.drawable.hair_3,R.drawable.hair_4,R.drawable.hair_5};
-    private static final Integer[] eyeColour = {R.drawable.blank,R.drawable.eye_1,R.drawable.eye_2,R.drawable.eye_3,R.drawable.eye_4,R.drawable.eye_5};
+    private Spinner brownFreqSpinner;
+    private static final Integer[] skinTone = {R.drawable.blank,R.drawable.skin_1,R.drawable.skin_2,
+            R.drawable.skin_3,R.drawable.skin_4,R.drawable.skin_5,R.drawable.skin_6};
+    private static final Integer[] hairColour = {R.drawable.blank,R.drawable.hair_1,R.drawable.hair_2,
+            R.drawable.hair_3,R.drawable.hair_4,R.drawable.hair_5};
+    private static final Integer[] eyeColour = {R.drawable.blank,R.drawable.eye_1,R.drawable.eye_2,
+            R.drawable.eye_3,R.drawable.eye_4,R.drawable.eye_5};
     public final static String EXTRA_MESSAGE = "com.example.blunobasicdemo.MESSAGE";
 
     @Override
@@ -64,6 +68,8 @@ public class MainActivity extends BlunoLibrary {
         addItemsToSkinSpinner();
         addItemsToFrecklesSpinner();
         addItemsToBurnSpinner();
+        addItemsToBrownFreqSpinner();
+
         addListenerToSpinner();
 
         SharedPreferences sharedPref = getSharedPreferences("MyPref",MODE_PRIVATE);
@@ -87,6 +93,10 @@ public class MainActivity extends BlunoLibrary {
         int burnValue = sharedPref.getInt("burn", -1);
         if(burnValue != -1) {
             burnSpinner.setSelection(burnValue);
+        }
+        int brownFreqValue = sharedPref.getInt("brownFreq", -1);
+        if(brownFreqValue != -1) {
+            brownFreqSpinner.setSelection(brownFreqValue);
         }
     }
     @Override
@@ -328,6 +338,20 @@ public class MainActivity extends BlunoLibrary {
         burnDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         burnSpinner.setAdapter(burnDataAdapter);
     }
+
+    public void addItemsToBrownFreqSpinner() {
+        brownFreqSpinner = (Spinner) findViewById(R.id.brownFreqSpinner);
+        List<String> list = new ArrayList<String>();
+        list.add("How often do you get tanned?");
+        list.add("Never");
+        list.add("Seldom");
+        list.add("Sometimes");
+        list.add("Often");
+        list.add("Always");
+        ArrayAdapter<String> brownFreqDataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
+        brownFreqDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        brownFreqSpinner.setAdapter(brownFreqDataAdapter);
+    }
     /*
     public void addItemsToSkinSpinner() {
     skinSpinner = (Spinner) findViewById(R.id.skinSpinner);
@@ -339,11 +363,7 @@ public class MainActivity extends BlunoLibrary {
     ArrayAdapter<String> skinDataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
     skinDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     skinSpinner.setAdapter(skinDataAdapter);
-    }*/
-
-
-
-    /*
+    }
     public void addItemsToEyeSpinner() {
         eyeSpinner = (Spinner) findViewById(R.id.eyeSpinner);
         List<String> list = new ArrayList<String>();
@@ -357,9 +377,6 @@ public class MainActivity extends BlunoLibrary {
         eyeDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         eyeSpinner.setAdapter(eyeDataAdapter);
     }
-    */
-
-    /*
     public void addItemsToHairSpinner() {
         hairSpinner = (Spinner) findViewById(R.id.hairSpinner);
         List<String> list = new ArrayList<String>();
@@ -375,15 +392,13 @@ public class MainActivity extends BlunoLibrary {
     }
     */
 
-
-
-
     public void addListenerToSpinner() {
         skinSpinner.setOnItemSelectedListener(new MyOnItemSelectedListener(this));
         eyeSpinner.setOnItemSelectedListener(new MyOnItemSelectedListener(this));
         hairSpinner.setOnItemSelectedListener(new MyOnItemSelectedListener(this));
         frecklesSpinner.setOnItemSelectedListener(new MyOnItemSelectedListener(this));
         burnSpinner.setOnItemSelectedListener(new MyOnItemSelectedListener(this));
+        brownFreqSpinner.setOnItemSelectedListener(new MyOnItemSelectedListener(this));
     }
 
     public void displayResults(View V) {
@@ -399,18 +414,13 @@ public class MainActivity extends BlunoLibrary {
         }
     }
     public void sendData(View V) {
-        eyeSpinner = (Spinner) findViewById(R.id.eyeSpinner);
-        hairSpinner = (Spinner) findViewById(R.id.hairSpinner);
-        skinSpinner = (Spinner) findViewById(R.id.skinSpinner);
-        frecklesSpinner = (Spinner) findViewById(R.id.frecklesSpinner);
-        burnSpinner = (Spinner) findViewById(R.id.burnSpinner);
-        if(eyeSpinner.getSelectedItemPosition()!=0 && hairSpinner.getSelectedItemPosition() !=0 &&
-                skinSpinner.getSelectedItemPosition()!=0 && frecklesSpinner.getSelectedItemPosition() !=0 &&
-                burnSpinner.getSelectedItemPosition() !=0) {
+        if((eyeSpinner.getSelectedItemPosition() * hairSpinner.getSelectedItemPosition() *
+                skinSpinner.getSelectedItemPosition() * frecklesSpinner.getSelectedItemPosition() *
+                burnSpinner.getSelectedItemPosition() * brownFreqSpinner.getSelectedItemPosition()) != 0) {
             serialReceivedText.getEditableText().clear();
             serialSend(String.valueOf(eyeSpinner.getSelectedItemPosition())+String.valueOf(hairSpinner.getSelectedItemPosition())+
                     String.valueOf(skinSpinner.getSelectedItemPosition())+String.valueOf(frecklesSpinner.getSelectedItemPosition())+
-                    String.valueOf(burnSpinner.getSelectedItemPosition()));
+                    String.valueOf(burnSpinner.getSelectedItemPosition())+String.valueOf(brownFreqSpinner.getSelectedItemPosition()));
         }
         else {
             Toast.makeText(this, "Please select an option for each category.", Toast.LENGTH_SHORT).show();
