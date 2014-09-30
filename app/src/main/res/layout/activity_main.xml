@@ -110,6 +110,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/brownFreqSpinner"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/brown_int_cat"
+            android:text="@string/brown_int_cat"
+            android:gravity="center"
+            android:textSize="16sp"/>
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/brownIntSpinner"/>
     </LinearLayout>
 
 </LinearLayout>
