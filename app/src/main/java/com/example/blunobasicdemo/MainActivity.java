@@ -1,8 +1,11 @@
 package com.example.blunobasicdemo;
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.content.Intent;
 import android.os.Handler;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -31,6 +34,7 @@ public class MainActivity extends BlunoLibrary {
     private Spinner tanFreqSpinner;
     private Spinner tanHistSpinner;
 
+    private static final String[] skinText = {"Please choose your skin colour","Pale", "Fair", "Beige", "Olive", "Brown", "Dark Brown"};
     private static final Integer[] skinTone = {R.drawable.blank,R.drawable.skin_1,R.drawable.skin_2,
             R.drawable.skin_3,R.drawable.skin_4,R.drawable.skin_5,R.drawable.skin_6};
     private static final Integer[] hairColour = {R.drawable.blank,R.drawable.hair_1,R.drawable.hair_2,
@@ -261,11 +265,73 @@ public class MainActivity extends BlunoLibrary {
 
     public void addItemsToSkinSpinner() {
         skinSpinner = (Spinner) findViewById(R.id.skinSpinner);
-        skinSpinner.setAdapter(new MySkinAdapter());
+        //skinSpinner.setAdapter(new MySkinAdapter());
+        skinSpinner.setAdapter(new MySkinAdapter(MainActivity.this, R.layout.multi_spinner, skinText));
     }
+
+    public class MySkinAdapter extends ArrayAdapter {
+
+        public MySkinAdapter(Context context, int textViewResourceId,
+                         String[] objects) {
+            super(context, textViewResourceId, objects);
+        }
+
+        public View getCustomView(int position, View convertView,
+                                  ViewGroup parent) {
+
+            // Inflating the layout for the custom Spinner
+            LayoutInflater inflater = getLayoutInflater();
+            View layout = inflater.inflate(R.layout.multi_spinner, parent, false);
+
+            // Declaring and Typecasting the textview in the inflated layout
+            TextView tvLanguage = (TextView) layout
+                    .findViewById(R.id.tvLanguage);
+
+            // Setting the text using the array
+            tvLanguage.setText(skinText[position]);
+
+            // Setting the color of the text
+            //tvLanguage.setTextColor(Color.rgb(75, 180, 225));
+
+            // Declaring and Typecasting the imageView in the inflated layout
+            ImageView img = (ImageView) layout.findViewById(R.id.imgLanguage);
+
+            // Setting an image using the id's in the array
+            img.setImageResource(skinTone[position]);
+
+            // Setting Special atrributes for 1st element
+            /*
+            if (position == 0) {
+                // Removing the image view
+                img.setVisibility(View.GONE);
+                // Setting the size of the text
+                tvLanguage.setTextSize(20f);
+                // Setting the text Color
+                tvLanguage.setTextColor(Color.BLACK);
+
+            }*/
+
+            return layout;
+        }
+
+        // It gets a View that displays in the drop down popup the data at the specified position
+        @Override
+        public View getDropDownView(int position, View convertView,
+                                    ViewGroup parent) {
+            return getCustomView(position, convertView, parent);
+        }
+
+        // It gets a View that displays the data at the specified position
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            return getCustomView(position, convertView, parent);
+        }
+    }
+    /*
     private static class SkinViewHolder {
         ImageView imageViewSkin;
     }
+
     private class MySkinAdapter extends BaseAdapter {
         public int getCount(){
             return skinTone.length;
@@ -295,7 +361,7 @@ public class MainActivity extends BlunoLibrary {
             return itemView;
         }
     }
-
+    */
     public void addItemsToFrecklesSpinner() {
         frecklesSpinner = (Spinner) findViewById(R.id.frecklesSpinner);
         List<String> list = new ArrayList<String>();
