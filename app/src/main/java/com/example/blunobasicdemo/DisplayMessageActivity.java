@@ -31,29 +31,27 @@ public class DisplayMessageActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_message);
-        receiveResult();
-        getSkinScore();
-        getUvIndex();
-        getAlarmTime();
-    }
-
-    public void receiveResult() {
-        TextView resultDisplay;
         Intent intent = getIntent();
-        String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+        String msg = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+        receiveResult(msg);
+        getSkinScore(msg);
+        getUvIndex(msg);
+        getAlarmTime(msg);
+    }
+
+    public void receiveResult(String msg) {
+        TextView resultDisplay;
         resultDisplay = (TextView) findViewById(R.id.resultDisplay);
-        resultDisplay.append(message);
+        resultDisplay.append(msg);
 
     }
 
-    public void getSkinScore() {
+    public void getSkinScore(String msg) {
         TextView skinView;
         String skinType;
         int score;
-        Intent intent = getIntent();
-        String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
-        skinScore[0] = message.charAt(0);
-        skinScore[1] = message.charAt(1);
+        skinScore[0] = msg.charAt(0);
+        skinScore[1] = msg.charAt(1);
         score = Integer.parseInt(new String(skinScore));
         if(score>-1) {
             skinType = "I";
@@ -77,29 +75,25 @@ public class DisplayMessageActivity extends Activity {
         skinView.append("Type "+skinType);
     }
 
-    public void getUvIndex() {
+    public void getUvIndex(String msg) {
         TextView uvView;
         String uvString;
-        Intent intent = getIntent();
-        String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
-        uvIndex[0] = message.charAt(2);
-        uvIndex[1] = message.charAt(3);
+        uvIndex[0] = msg.charAt(2);
+        uvIndex[1] = msg.charAt(3);
         uvView = (TextView) findViewById(R.id.uvIndex);
         uvString = new String(uvIndex);
         uvView.append(uvString);
     }
 
-    public void getAlarmTime() {
-        Intent intent = getIntent();
-        String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+    public void getAlarmTime(String msg) {
         int msgLength;
         final RadioGroup swimGroup;
         Button alarmBtn;
 
-        msgLength = message.length();
-        uvTime[0] = message.charAt(msgLength - 13);
-        uvTime[1] = message.charAt(msgLength - 12);
-        uvTime[2] = message.charAt(msgLength - 11);
+        msgLength = msg.length();
+        uvTime[0] = msg.charAt(msgLength - 13);
+        uvTime[1] = msg.charAt(msgLength - 12);
+        uvTime[2] = msg.charAt(msgLength - 11);
         Toast.makeText(this, String.valueOf(uvTime), Toast.LENGTH_SHORT).show();
 
         swimGroup = (RadioGroup) findViewById(R.id.isSwimming);
@@ -123,7 +117,6 @@ public class DisplayMessageActivity extends Activity {
                 setAlarm((int)alarmDur);
             }
         });
-        //setAlarm(Integer.parseInt(new String(uvTime)));
     }
 
      public void setAlarm(int time) {
