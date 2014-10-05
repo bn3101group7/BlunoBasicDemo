@@ -4,12 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.blunobasicdemo.DisplayMessageActivity">
-    <TextView
-        android:id="@+id/resultDisplay"
-        android:textSize="16sp"
-        android:editable="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -74,5 +68,10 @@
         android:layout_height="wrap_content"
         android:id="@+id/makeAlarm"
         android:text="@string/make_alarm"/>
-
+    <TextView
+        android:id="@+id/resultDisplay"
+        android:textSize="16sp"
+        android:editable="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </LinearLayout>
