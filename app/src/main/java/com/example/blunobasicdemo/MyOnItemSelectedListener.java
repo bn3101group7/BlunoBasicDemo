@@ -66,7 +66,7 @@ public class MyOnItemSelectedListener implements OnItemSelectedListener {
                 break;
         }
         editor.apply();
-        Toast.makeText(parent.getContext(), Integer.toString(pos), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(parent.getContext(), Integer.toString(pos), Toast.LENGTH_SHORT).show();
     }
     @Override
     public void onNothingSelected(AdapterView<?> parent) {

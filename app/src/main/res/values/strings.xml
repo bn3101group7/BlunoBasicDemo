@@ -19,8 +19,11 @@
     <string name="send_text">Data sending Area</string>
     <string name="received_text">Received Data: </string>
     <string name="button_send1">Send 1</string>
+
+    <!--Main activity-->
     <string name="display_results">Display Results</string>
     <string name="send_both">Send</string>
+    <string name="cancel_alarm">Cancel Alarm</string>
 
     <!--Categories-->
     <string name="eye_cat">Eye Colour</string>

@@ -1,4 +1,6 @@
 package com.example.blunobasicdemo;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -33,6 +35,8 @@ public class MainActivity extends BlunoLibrary {
     private Spinner faceSpinner;
     private Spinner tanFreqSpinner;
     private Spinner tanHistSpinner;
+    private PendingIntent pendingIntent;
+    private AlarmManager manager;
 
     private static final String[] skinText = {"Please choose your skin colour","Pale", "Fair", "Beige", "Olive", "Brown", "Dark Brown"};
     private static final Integer[] skinTone = {R.drawable.blank,R.drawable.skin_1,R.drawable.skin_2,
@@ -298,7 +302,7 @@ public class MainActivity extends BlunoLibrary {
             // Setting an image using the id's in the array
             img.setImageResource(skinTone[position]);
 
-            // Setting Special atrributes for 1st element
+            // Setting Special attributes for 1st element
             /*
             if (position == 0) {
                 // Removing the image view
@@ -492,6 +496,14 @@ public class MainActivity extends BlunoLibrary {
         else {
             Toast.makeText(this, "Please select an option for each category.", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void cancelAlarm(View view) {
+        Intent alarmIntent = new Intent(this, OneShotAlarm.class);
+        pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent,0);
+        manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        manager.cancel(pendingIntent);
+        Toast.makeText(this, "Alarm canceled", Toast.LENGTH_SHORT).show();
     }
 
     @Override

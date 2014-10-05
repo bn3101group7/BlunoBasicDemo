@@ -30,6 +30,12 @@
                 android:text="@string/send_both"
                 android:onClick="sendData"
                 android:enabled="false"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cancelAlarm"
+                android:text="@string/cancel_alarm"
+                android:onClick="cancelAlarm"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
