@@ -7,6 +7,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,7 +18,8 @@ import java.util.Calendar;
 
 
 public class DisplayMessageActivity extends Activity {
-    private char[] uvTime = new char[2];
+    private char[] uvTime = new char[3];
+    private RadioButton swimChoice;
 
     Toast mToast;
 
@@ -39,11 +44,37 @@ public class DisplayMessageActivity extends Activity {
         Intent intent = getIntent();
         String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
         int msgLength;
+        final RadioGroup swimGroup;
+        Button alarmBtn;
+
         msgLength = message.length();
-        uvTime[0] = message.charAt(msgLength - 12);
-        uvTime[1] = message.charAt(msgLength - 11);
+        uvTime[0] = message.charAt(msgLength - 13);
+        uvTime[1] = message.charAt(msgLength - 12);
+        uvTime[2] = message.charAt(msgLength - 11);
         Toast.makeText(this, String.valueOf(uvTime), Toast.LENGTH_SHORT).show();
-        setAlarm(Integer.parseInt(new String(uvTime)));
+
+        swimGroup = (RadioGroup) findViewById(R.id.isSwimming);
+
+
+        alarmBtn = (Button) findViewById(R.id.makeAlarm);
+        alarmBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int selectedId = swimGroup.getCheckedRadioButtonId();
+                swimChoice = (RadioButton) findViewById(selectedId);
+                double multiplier;
+                if(swimChoice.getText().equals("No")) {
+                    multiplier = 1.0;
+                }
+                else {
+                    multiplier = 1.5;
+                }
+                int uvExp = Integer.parseInt(new String(uvTime));
+                double alarmDur = uvExp * multiplier + 0.5;
+                setAlarm((int)alarmDur);
+            }
+        });
+        //setAlarm(Integer.parseInt(new String(uvTime)));
     }
 
      public void setAlarm(int time) {
@@ -66,7 +97,7 @@ public class DisplayMessageActivity extends Activity {
          if (mToast != null) {
              mToast.cancel();
          }
-         mToast = Toast.makeText(DisplayMessageActivity.this, "one_shot_scheduled",
+         mToast = Toast.makeText(DisplayMessageActivity.this, String.valueOf(time),
                  Toast.LENGTH_SHORT);
          mToast.show();
     }

@@ -44,7 +44,14 @@
     <string name="action_settings">Action settings</string>
     <string name="title_activity_display_message">Results</string>
 
+    <!--Radio button-->
+    <string name="swim_yes">Yes</string>
+    <string name="swim_no">No</string>
+    <string name="is_swimming">Will you be swimming later?</string>
+
+    <!--Display message activity-->
     <string name="advice">Please head indoor or seek shade</string>
     <string name="title_activity_notification_receiver">Received Notification</string>
+    <string name="make_alarm">Set Alarm</string>
 
 </resources>
