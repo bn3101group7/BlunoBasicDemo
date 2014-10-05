@@ -23,6 +23,7 @@ public class DisplayMessageActivity extends Activity {
     private char[] uvTime = new char[3];
     private RadioButton swimChoice;
     private char[] skinScore = new char[2];
+    private char[] uvIndex = new char[2];
 
     Toast mToast;
 
@@ -32,6 +33,7 @@ public class DisplayMessageActivity extends Activity {
         setContentView(R.layout.activity_display_message);
         receiveResult();
         getSkinScore();
+        getUvIndex();
         getAlarmTime();
     }
 
@@ -73,6 +75,18 @@ public class DisplayMessageActivity extends Activity {
         }
         skinView = (TextView) findViewById(R.id.skinType);
         skinView.append("Type "+skinType);
+    }
+
+    public void getUvIndex() {
+        TextView uvView;
+        String uvString;
+        Intent intent = getIntent();
+        String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+        uvIndex[0] = message.charAt(2);
+        uvIndex[1] = message.charAt(3);
+        uvView = (TextView) findViewById(R.id.uvIndex);
+        uvString = new String(uvIndex);
+        uvView.append(uvString);
     }
 
     public void getAlarmTime() {
