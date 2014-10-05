@@ -78,26 +78,47 @@ public class DisplayMessageActivity extends Activity {
     public void getUvIndex(String msg) {
         TextView uvView;
         String uvString;
+        int uvInt;
         uvIndex[0] = msg.charAt(2);
         uvIndex[1] = msg.charAt(3);
         uvView = (TextView) findViewById(R.id.uvIndex);
         uvString = new String(uvIndex);
-        uvView.append(uvString);
+        uvInt = Integer.parseInt(uvString);
+        uvView.append(String.valueOf(uvInt));
     }
 
     public void getAlarmTime(String msg) {
-        int msgLength;
         final RadioGroup swimGroup;
         Button alarmBtn;
+        String uvTimeStr;
+        final int uvTimeInt;
+        TextView uvTimeView;
 
-        msgLength = msg.length();
-        uvTime[0] = msg.charAt(msgLength - 13);
-        uvTime[1] = msg.charAt(msgLength - 12);
-        uvTime[2] = msg.charAt(msgLength - 11);
+        uvTime[0] = msg.charAt(4);
+        uvTime[1] = msg.charAt(5);
+        uvTime[2] = msg.charAt(6);
+        uvTimeStr = new String(uvTime);
+        uvTimeInt = Integer.parseInt(uvTimeStr);
+        uvTimeView = (TextView)findViewById(R.id.uvExp);
+        uvTimeView.append(String.valueOf(uvTimeInt));
+
         Toast.makeText(this, String.valueOf(uvTime), Toast.LENGTH_SHORT).show();
 
         swimGroup = (RadioGroup) findViewById(R.id.isSwimming);
-
+        swimGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // checkedId is the RadioButton selected
+                swimChoice = (RadioButton) findViewById(checkedId);
+                TextView uvTimeView = (TextView) findViewById(R.id.uvExp);
+                if(swimChoice.getText().equals("No")){
+                    uvTimeView.setText(String.valueOf(uvTimeInt));
+                }
+                else {
+                    uvTimeView.setText(String.valueOf((int)(uvTimeInt*1.5)));
+                }
+            }
+        });
 
         alarmBtn = (Button) findViewById(R.id.makeAlarm);
         alarmBtn.setOnClickListener(new View.OnClickListener() {

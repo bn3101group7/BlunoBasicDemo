@@ -60,5 +60,6 @@
     <string name="make_alarm">Set Alarm</string>
     <string name="skin_type">Skin Type: </string>
     <string name="uv_index">UV Index: </string>
+    <string name="uv_exp">Max UV Exposure: </string>
 
 </resources>
