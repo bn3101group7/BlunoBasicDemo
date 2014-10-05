@@ -14,12 +14,15 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 import java.util.Calendar;
 
 
 public class DisplayMessageActivity extends Activity {
     private char[] uvTime = new char[3];
     private RadioButton swimChoice;
+    private char[] skinScore = new char[2];
 
     Toast mToast;
 
@@ -28,7 +31,8 @@ public class DisplayMessageActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_message);
         receiveResult();
-        displayMessage();
+        getSkinScore();
+        getAlarmTime();
     }
 
     public void receiveResult() {
@@ -40,7 +44,38 @@ public class DisplayMessageActivity extends Activity {
 
     }
 
-    public void displayMessage(){
+    public void getSkinScore() {
+        TextView skinView;
+        String skinType;
+        int score;
+        Intent intent = getIntent();
+        String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+        skinScore[0] = message.charAt(0);
+        skinScore[1] = message.charAt(1);
+        score = Integer.parseInt(new String(skinScore));
+        if(score>-1) {
+            skinType = "I";
+        }
+        else if(score>6) {
+            skinType = "II";
+        }
+        else if(score>13) {
+            skinType = "III";
+        }
+        else if(score>20) {
+            skinType = "IV";
+        }
+        else if(score>27) {
+            skinType = "V";
+        }
+        else {
+            skinType = "VI";
+        }
+        skinView = (TextView) findViewById(R.id.skinType);
+        skinView.append("Type "+skinType);
+    }
+
+    public void getAlarmTime() {
         Intent intent = getIntent();
         String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
         int msgLength;

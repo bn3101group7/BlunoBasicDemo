@@ -36,7 +36,7 @@ public class OneShotAlarm extends BroadcastReceiver {
                 .setVibrate(pattern)
                 .setAutoCancel(true)
                 .build();
-        NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         nm.notify(0, noti);
     }
 }

@@ -52,9 +52,12 @@
     <string name="swim_no">No</string>
     <string name="is_swimming">Will you be swimming later?</string>
 
-    <!--Display message activity-->
+    <!--Notification-->
     <string name="advice">Please head indoor or seek shade</string>
     <string name="title_activity_notification_receiver">Received Notification</string>
+
+    <!--Display message activity-->
     <string name="make_alarm">Set Alarm</string>
+    <string name="skin_type">Skin Type: </string>
 
 </resources>
