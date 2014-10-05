@@ -265,7 +265,6 @@ public class MainActivity extends BlunoLibrary {
 
     public void addItemsToSkinSpinner() {
         skinSpinner = (Spinner) findViewById(R.id.skinSpinner);
-        //skinSpinner.setAdapter(new MySkinAdapter());
         skinSpinner.setAdapter(new MySkinAdapter(MainActivity.this, R.layout.multi_spinner, skinText));
     }
 
@@ -327,41 +326,7 @@ public class MainActivity extends BlunoLibrary {
             return getCustomView(position, convertView, parent);
         }
     }
-    /*
-    private static class SkinViewHolder {
-        ImageView imageViewSkin;
-    }
 
-    private class MySkinAdapter extends BaseAdapter {
-        public int getCount(){
-            return skinTone.length;
-        }
-        @Override
-        public Integer getItem(int position) {
-            return skinTone[position];
-        }
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View itemView = convertView;
-            SkinViewHolder skinViewHolder;
-            if(convertView == null) {
-                itemView = getLayoutInflater().inflate(R.layout.spinner_row,parent, false);
-                skinViewHolder = new SkinViewHolder();
-                skinViewHolder.imageViewSkin = (ImageView) itemView.findViewById(R.id.spinnerImage);
-                itemView.setTag(skinViewHolder);
-            }
-            else {
-                skinViewHolder = (SkinViewHolder) itemView.getTag();
-            }
-            skinViewHolder.imageViewSkin.setImageDrawable(getResources().getDrawable(skinTone[position]));
-            return itemView;
-        }
-    }
-    */
     public void addItemsToFrecklesSpinner() {
         frecklesSpinner = (Spinner) findViewById(R.id.frecklesSpinner);
         List<String> list = new ArrayList<String>();
@@ -408,9 +373,11 @@ public class MainActivity extends BlunoLibrary {
         brownIntSpinner = (Spinner) findViewById(R.id.brownIntSpinner);
         brownIntSpinner.setAdapter(new MyBrownIntAdapter());
     }
+
     private static class BrownIntViewHolder {
         ImageView imageViewBrownInt;
     }
+
     private class MyBrownIntAdapter extends BaseAdapter {
         public int getCount(){
             return brownInt.length;
@@ -508,6 +475,7 @@ public class MainActivity extends BlunoLibrary {
             startActivity(intent);
         }
     }
+
     public void sendData(View V) {
         if((eyeSpinner.getSelectedItemPosition() * hairSpinner.getSelectedItemPosition() *
                 skinSpinner.getSelectedItemPosition() * frecklesSpinner.getSelectedItemPosition() *
@@ -525,20 +493,24 @@ public class MainActivity extends BlunoLibrary {
             Toast.makeText(this, "Please select an option for each category.", Toast.LENGTH_SHORT).show();
         }
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         onActivityResultProcess(requestCode, resultCode, data);	//onActivityResult Process by BlunoLibrary
         super.onActivityResult(requestCode, resultCode, data);
     }
+
     @Override
     protected void onPause() {
         super.onPause();
         onPauseProcess();	//onPause Process by BlunoLibrary
     }
+
     protected void onStop() {
         super.onStop();
         onStopProcess();	//onStop Process by BlunoLibrary
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -554,11 +526,10 @@ public class MainActivity extends BlunoLibrary {
         }
         return true;
     }
+
     @Override
     public void onSerialReceived(String theString) {	//Once connection data received, this function will be called
-        // TODO Auto-generated method stub
         serialReceivedText.append(theString);	//append the text into the EditText
-        //The Serial data from the BLUNO may be sub-packaged, so using a buffer to hold the String is a good choice.
         final Toast toast = Toast.makeText(this, "Sending data...", Toast.LENGTH_SHORT);
         toast.show();
 
