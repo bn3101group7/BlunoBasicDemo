@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.blunobasicdemo.DisplayMessageActivity"
-    android:stretchColumns="0,1,2">
+    android:stretchColumns="0,1,2"
+    android:background="@drawable/background">
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -58,7 +59,7 @@
             android:text=" Result 1"
             android:gravity="center"
             android:textSize="15sp"
-            android:background="#A4C639"
+            android:background="#F0F8FF"
             android:layout_margin="2dip"/>
         <TextView
             android:layout_width="match_parent"
@@ -67,7 +68,7 @@
             android:text=" Result 2"
             android:gravity="center"
             android:textSize="15sp"
-            android:background="#A4C639"
+            android:background="#F0F8FF"
             android:layout_margin="2dip"/>
         <TextView
             android:layout_width="match_parent"
@@ -76,7 +77,7 @@
             android:text=" Result 3"
             android:gravity="center"
             android:textSize="15sp"
-            android:background="#A4C639"
+            android:background="#F0F8FF"
             android:layout_margin="2dip"/>
     </TableRow>
     <TextView
@@ -86,14 +87,14 @@
         android:gravity="center_horizontal"
         android:textStyle="bold"
         android:textSize="17sp"
-        android:background="#71A6D2"/>
+        android:background="#30D5C8"/>
     <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/isSwimming"
         android:orientation="horizontal"
         android:gravity="center_horizontal"
-        android:background="#87CEEB">
+        android:background="#00FF6F">
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -106,15 +107,29 @@
             android:text="@string/swim_no"
             android:checked="true"/>
     </RadioGroup>
+    <TableRow>
+        <RelativeLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="17sp"/>
+        </RelativeLayout>
+    </TableRow>
+    <RelativeLayout>
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="250sp"
+        android:layout_height="250sp"
+        android:background="@drawable/clock"
         android:id="@+id/makeAlarm"
         android:text="@string/make_alarm"
-        android:paddingTop="10sp"/>
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
     <TextView
         android:id="@+id/resultDisplay"
-        android:textSize="16sp"
+        android:textSize="30sp"
         android:editable="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
