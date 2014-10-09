@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -89,7 +90,7 @@ public class DisplayMessageActivity extends Activity {
 
     public void getAlarmTime(String msg) {
         final RadioGroup swimGroup;
-        Button alarmBtn;
+        LinearLayout alarmBtn;
         String uvTimeStr;
         final int uvTimeInt;
         TextView uvTimeView;
@@ -115,12 +116,12 @@ public class DisplayMessageActivity extends Activity {
                     uvTimeView.setText(String.valueOf(uvTimeInt));
                 }
                 else {
-                    uvTimeView.setText(String.valueOf((int)(uvTimeInt*1.5)));
+                    uvTimeView.setText(String.valueOf((int)(uvTimeInt/1.5)));
                 }
             }
         });
 
-        alarmBtn = (Button) findViewById(R.id.makeAlarm);
+        alarmBtn = (LinearLayout) findViewById(R.id.makeAlarm);
         alarmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -134,7 +135,7 @@ public class DisplayMessageActivity extends Activity {
                     multiplier = 1.5;
                 }
                 int uvExp = Integer.parseInt(new String(uvTime));
-                double alarmDur = uvExp * multiplier + 0.5;
+                double alarmDur = uvExp / multiplier + 0.5;
                 setAlarm((int)alarmDur);
             }
         });
