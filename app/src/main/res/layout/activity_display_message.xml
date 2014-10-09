@@ -13,25 +13,17 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/skin_type"
+            android:text="@string/uv_index"
             android:textSize="16sp"
             android:textStyle="bold"
             android:layout_margin="2dp"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/uv_index"
+            android:text="@string/psi_lvl"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:layout_margin="2dip"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/uv_exp"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_margin="2dip"/>
-
+            android:layout_margin="2dp" />
     </TableRow>
     <TableRow
         android:layout_width="match_parent"
@@ -40,14 +32,42 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/skinType"
+            android:id="@+id/uvIndex"
             android:textSize="15sp"
             android:gravity="end"
-            android:layout_margin="5dip"/>
+            android:layout_margin="5dp"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/uvIndex"
+            android:id="@+id/psiLvl"
+            android:textSize="15sp"
+            android:gravity="end"
+            android:layout_margin="5dp"/>
+
+    </TableRow>
+    <TableRow
+        android:background="#8F8FD9">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/skin_type"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_margin="2dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/uv_exp"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_margin="2dp"/>
+    </TableRow>
+    <TableRow
+        android:background="#BFBFEE">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/skinType"
             android:textSize="15sp"
             android:gravity="end"
             android:layout_margin="5dip"/>
@@ -108,16 +128,16 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="9dp"
             android:layout_marginLeft="10dp"
             android:src="@drawable/alarm_clock"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/make_alarm"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="20dp"
             android:layout_gravity="center"
-            android:textSize="28sp"/>
+            android:textSize="24sp"/>
         </LinearLayout>
     </RelativeLayout>
     <TextView

@@ -25,6 +25,7 @@ public class DisplayMessageActivity extends Activity {
     private RadioButton swimChoice;
     private char[] skinScore = new char[2];
     private char[] uvIndex = new char[2];
+    private char psiLvl;
 
     Toast mToast;
 
@@ -38,6 +39,7 @@ public class DisplayMessageActivity extends Activity {
         getSkinScore(msg);
         getUvIndex(msg);
         getAlarmTime(msg);
+        getPsiLvl(msg);
     }
 
     public void receiveResult(String msg) {
@@ -73,7 +75,7 @@ public class DisplayMessageActivity extends Activity {
             skinType = "VI";
         }
         skinView = (TextView) findViewById(R.id.skinType);
-        skinView.append("Type "+skinType);
+        skinView.setText("Type "+skinType);
     }
 
     public void getUvIndex(String msg) {
@@ -85,7 +87,7 @@ public class DisplayMessageActivity extends Activity {
         uvView = (TextView) findViewById(R.id.uvIndex);
         uvString = new String(uvIndex);
         uvInt = Integer.parseInt(uvString);
-        uvView.append(String.valueOf(uvInt));
+        uvView.setText(String.valueOf(uvInt));
     }
 
     public void getAlarmTime(String msg) {
@@ -101,7 +103,7 @@ public class DisplayMessageActivity extends Activity {
         uvTimeStr = new String(uvTime);
         uvTimeInt = Integer.parseInt(uvTimeStr);
         uvTimeView = (TextView)findViewById(R.id.uvExp);
-        uvTimeView.append(String.valueOf(uvTimeInt));
+        uvTimeView.setText(String.valueOf(uvTimeInt));
 
         Toast.makeText(this, String.valueOf(uvTime), Toast.LENGTH_SHORT).show();
 
@@ -139,6 +141,28 @@ public class DisplayMessageActivity extends Activity {
                 setAlarm((int)alarmDur);
             }
         });
+    }
+
+    public void getPsiLvl(String msg) {
+        TextView psiView;
+        psiLvl = msg.charAt(7);
+        String psiRange;
+        switch(Character.getNumericValue(psiLvl)) {
+            case 1:
+                psiRange = "Low";
+                break;
+            case 2:
+                psiRange = "Moderate";
+                break;
+            case 3:
+                psiRange = "Dangerous";
+                break;
+            default:
+                psiRange = "Error";
+                break;
+        }
+        psiView = (TextView) findViewById(R.id.psiLvl);
+        psiView.setText(psiRange);
     }
 
      public void setAlarm(int time) {
