@@ -116,17 +116,12 @@
                 android:textSize="17sp"/>
         </RelativeLayout>
     </TableRow>
-    <RelativeLayout>
     <Button
-        android:layout_width="250sp"
-        android:layout_height="250sp"
-        android:background="@drawable/clock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/makeAlarm"
         android:text="@string/make_alarm"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:layout_centerHorizontal="true"/>
-    </RelativeLayout>
+        android:paddingTop="10sp"/>
     <TextView
         android:id="@+id/resultDisplay"
         android:textSize="30sp"
