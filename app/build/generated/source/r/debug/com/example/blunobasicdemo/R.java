@@ -41,12 +41,13 @@ public final class R {
         public static final int skin_4=0x7f020017;
         public static final int skin_5=0x7f020018;
         public static final int skin_6=0x7f020019;
-        public static final int type_i=0x7f02001a;
-        public static final int type_ii=0x7f02001b;
-        public static final int type_iii=0x7f02001c;
-        public static final int type_iv=0x7f02001d;
-        public static final int type_v=0x7f02001e;
-        public static final int type_vi=0x7f02001f;
+        public static final int sky_nature_wallpaper_hd_=0x7f02001a;
+        public static final int type_i=0x7f02001b;
+        public static final int type_ii=0x7f02001c;
+        public static final int type_iii=0x7f02001d;
+        public static final int type_iv=0x7f02001e;
+        public static final int type_v=0x7f02001f;
+        public static final int type_vi=0x7f020020;
     }
     public static final class id {
         public static final int action_settings=0x7f080025;
