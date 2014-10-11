@@ -50,7 +50,7 @@
     <!--Radio button-->
     <string name="swim_yes">Yes</string>
     <string name="swim_no">No</string>
-    <string name="is_swimming">Will you be swimming later?</string>
+    <string name="is_swimming">Swimming later?</string>
 
     <!--Notification-->
     <string name="advice">Please head indoor or seek shade</string>

@@ -8,10 +8,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,7 +21,6 @@ import java.util.Calendar;
 
 public class DisplayMessageActivity extends Activity {
     private char[] uvTime = new char[3];
-    private RadioButton swimChoice;
     private char[] skinScore = new char[2];
     private char[] uvIndex = new char[2];
     private char psiLvl;
@@ -91,7 +89,7 @@ public class DisplayMessageActivity extends Activity {
     }
 
     public void getAlarmTime(String msg) {
-        final RadioGroup swimGroup;
+        final Switch swimSwitch;
         LinearLayout alarmBtn;
         String uvTimeStr;
         final int uvTimeInt;
@@ -107,18 +105,16 @@ public class DisplayMessageActivity extends Activity {
 
         Toast.makeText(this, String.valueOf(uvTime), Toast.LENGTH_SHORT).show();
 
-        swimGroup = (RadioGroup) findViewById(R.id.isSwimming);
-        swimGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
-        {
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                // checkedId is the RadioButton selected
-                swimChoice = (RadioButton) findViewById(checkedId);
+        swimSwitch = (Switch) findViewById(R.id.isSwim);
+        swimSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 TextView uvTimeView = (TextView) findViewById(R.id.uvExp);
-                if(swimChoice.getText().equals("No")){
-                    uvTimeView.setText(String.valueOf(uvTimeInt));
+                if(isChecked) {
+                    uvTimeView.setText(String.valueOf((int)(uvTimeInt/1.5)));
                 }
                 else {
-                    uvTimeView.setText(String.valueOf((int)(uvTimeInt/1.5)));
+                    uvTimeView.setText(String.valueOf(uvTimeInt));
                 }
             }
         });
@@ -127,14 +123,12 @@ public class DisplayMessageActivity extends Activity {
         alarmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int selectedId = swimGroup.getCheckedRadioButtonId();
-                swimChoice = (RadioButton) findViewById(selectedId);
                 double multiplier;
-                if(swimChoice.getText().equals("No")) {
-                    multiplier = 1.0;
+                if(swimSwitch.isChecked()) {
+                    multiplier = 1.5;
                 }
                 else {
-                    multiplier = 1.5;
+                    multiplier = 1.0;
                 }
                 int uvExp = Integer.parseInt(new String(uvTime));
                 double alarmDur = uvExp / multiplier + 0.5;
