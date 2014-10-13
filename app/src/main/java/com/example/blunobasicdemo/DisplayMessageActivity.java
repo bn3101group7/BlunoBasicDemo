@@ -9,15 +9,21 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 
 public class DisplayMessageActivity extends Activity {
@@ -25,6 +31,7 @@ public class DisplayMessageActivity extends Activity {
     private char[] skinScore = new char[2];
     private char[] uvIndex = new char[2];
     private char psiLvl;
+    private Spinner spfSpinner;
 
     Toast mToast;
 
@@ -39,6 +46,8 @@ public class DisplayMessageActivity extends Activity {
         getUvIndex(msg);
         getAlarmTime(msg);
         getPsiLvl(msg);
+        addItemsToSpfSpinner();
+        addListenerToSpfSpinner();
     }
 
     public void receiveResult(String msg) {
@@ -160,6 +169,40 @@ public class DisplayMessageActivity extends Activity {
         }
         psiView = (TextView) findViewById(R.id.psiLvl);
         psiView.setText(psiRange);
+    }
+
+    public void addItemsToSpfSpinner() {
+        spfSpinner = (Spinner) findViewById(R.id.spfSpinner);
+        List<String> list = new ArrayList<String>();
+        list.add("Didn't apply");
+        list.add("SPF 15");
+        list.add("SPF 30");
+        list.add("SPF 50");
+        list.add("SPF 100");
+        list.add("Others");
+        ArrayAdapter<String> spfDataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
+        spfDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spfSpinner.setAdapter(spfDataAdapter);
+    }
+
+    public void addListenerToSpfSpinner() {
+        spfSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
+                TableRow spfRow = (TableRow) findViewById(R.id.spfRow);
+                if(pos == 5) {
+                    spfRow.setVisibility(View.VISIBLE);
+                }
+                else {
+                    spfRow.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
     }
 
      public void setAlarm(int time) {

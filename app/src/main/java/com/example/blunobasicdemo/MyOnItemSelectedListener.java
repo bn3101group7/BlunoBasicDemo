@@ -6,6 +6,7 @@ import android.content.SharedPreferences.Editor;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.TableRow;
 import android.widget.Toast;
 
 /**
@@ -14,6 +15,8 @@ import android.widget.Toast;
 public class MyOnItemSelectedListener implements OnItemSelectedListener {
     SharedPreferences pref;
     Editor editor;
+    TableRow spfRow;
+
 
     public MyOnItemSelectedListener(Context context) {
         pref = context.getSharedPreferences("MyPref", 0);

@@ -62,5 +62,7 @@
     <string name="uv_index">UV Index</string>
     <string name="uv_exp">Max UV Exposure</string>
     <string name="psi_lvl">PSI Level</string>
+    <string name="spf_cat">SPF of Sunblock</string>
+    <string name="specify">Please specify:</string>
 
 </resources>
