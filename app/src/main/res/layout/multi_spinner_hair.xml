@@ -7,7 +7,7 @@
     <ImageView
         android:id="@+id/imgLanguage"
         android:layout_width="72dp"
-        android:layout_height="91dp"
+        android:layout_height="56dp"
         android:src="@drawable/ic_launcher" >
     </ImageView>
 

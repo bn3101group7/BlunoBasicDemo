@@ -38,11 +38,14 @@ public class MainActivity extends BlunoLibrary {
     private PendingIntent pendingIntent;
     private AlarmManager manager;
 
-    private static final String[] skinText = {"Please choose your skin colour","Pale", "Fair", "Beige", "Olive", "Brown", "Dark Brown"};
+    private static final String[] skinText = {"Please choose your skin colour","Pale", "Fair",
+            "Beige", "Olive", "Brown", "Dark Brown"};
     private static final Integer[] skinTone = {R.drawable.blank,R.drawable.skin_1,R.drawable.skin_2,
             R.drawable.skin_3,R.drawable.skin_4,R.drawable.skin_5,R.drawable.skin_6};
+    private static final String[] hairText = {"Please choose your hair colour", "Sandy red",
+            "Blond", "Dark blond", "Chestnut", "Brown", "Black"};
     private static final Integer[] hairColour = {R.drawable.blank,R.drawable.hair_1,R.drawable.hair_2,
-            R.drawable.hair_3,R.drawable.hair_4,R.drawable.hair_5};
+            R.drawable.hair_3,R.drawable.hair_4,R.drawable.hair_5,R.drawable.hair_6};
     private static final Integer[] eyeColour = {R.drawable.blank,R.drawable.eye_1,R.drawable.eye_2,
             R.drawable.eye_3,R.drawable.eye_4,R.drawable.eye_5};
     private static final Integer[] brownInt = {R.drawable.blank,R.drawable.brown_1,R.drawable.brown_2,
@@ -230,40 +233,65 @@ public class MainActivity extends BlunoLibrary {
 
     public void addItemsToHairSpinner() {
         hairSpinner = (Spinner) findViewById(R.id.hairSpinner);
-        hairSpinner.setAdapter(new MyHairAdapter());
+        hairSpinner.setAdapter(new MyHairAdapter(MainActivity.this, R.layout.multi_spinner_hair, hairText));
     }
 
-    private static class HairViewHolder {
-        ImageView imageViewHair;
-    }
+    public class MyHairAdapter extends ArrayAdapter {
 
-    private class MyHairAdapter extends BaseAdapter {
-        public int getCount(){
-            return hairColour.length;
+        public MyHairAdapter(Context context, int textViewResourceId,
+                             String[] objects) {
+            super(context, textViewResourceId, objects);
         }
+
+        public View getCustomView(int position, View convertView,
+                                  ViewGroup parent) {
+
+            // Inflating the layout for the custom Spinner
+            LayoutInflater inflater = getLayoutInflater();
+            View layout = inflater.inflate(R.layout.multi_spinner_hair, parent, false);
+
+            // Declaring and Typecasting the textview in the inflated layout
+            TextView tvLanguage = (TextView) layout
+                    .findViewById(R.id.tvLanguage);
+
+            // Setting the text using the array
+            tvLanguage.setText(hairText[position]);
+
+            // Setting the color of the text
+            //tvLanguage.setTextColor(Color.rgb(75, 180, 225));
+
+            // Declaring and Typecasting the imageView in the inflated layout
+            ImageView img = (ImageView) layout.findViewById(R.id.imgLanguage);
+
+            // Setting an image using the id's in the array
+            img.setImageResource(hairColour[position]);
+
+            // Setting Special attributes for 1st element
+            /*
+            if (position == 0) {
+                // Removing the image view
+                img.setVisibility(View.GONE);
+                // Setting the size of the text
+                tvLanguage.setTextSize(20f);
+                // Setting the text Color
+                tvLanguage.setTextColor(Color.BLACK);
+
+            }*/
+
+            return layout;
+        }
+
+        // It gets a View that displays in the drop down popup the data at the specified position
         @Override
-        public Integer getItem(int position) {
-            return hairColour[position];
+        public View getDropDownView(int position, View convertView,
+                                    ViewGroup parent) {
+            return getCustomView(position, convertView, parent);
         }
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
+
+        // It gets a View that displays the data at the specified position
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            View itemView = convertView;
-            HairViewHolder hairViewHolder;
-            if(convertView == null) {
-                itemView = getLayoutInflater().inflate(R.layout.spinner_row,parent, false);
-                hairViewHolder = new HairViewHolder();
-                hairViewHolder.imageViewHair = (ImageView) itemView.findViewById(R.id.spinnerImage);
-                itemView.setTag(hairViewHolder);
-            }
-            else {
-                hairViewHolder = (HairViewHolder) itemView.getTag();
-            }
-            hairViewHolder.imageViewHair.setImageDrawable(getResources().getDrawable(hairColour[position]));
-            return itemView;
+            return getCustomView(position, convertView, parent);
         }
     }
 
