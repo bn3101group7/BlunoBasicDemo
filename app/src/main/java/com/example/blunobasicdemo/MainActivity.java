@@ -48,8 +48,6 @@ public class MainActivity extends BlunoLibrary {
             R.drawable.hair_3,R.drawable.hair_4,R.drawable.hair_5,R.drawable.hair_6};
     private static final Integer[] eyeColour = {R.drawable.blank,R.drawable.eye_1,R.drawable.eye_2,
             R.drawable.eye_3,R.drawable.eye_4,R.drawable.eye_5};
-    private static final Integer[] brownInt = {R.drawable.blank,R.drawable.brown_1,R.drawable.brown_2,
-            R.drawable.brown_3,R.drawable.brown_4,R.drawable.brown_5};
     public final static String EXTRA_MESSAGE = "com.example.blunobasicdemo.MESSAGE";
 
     @Override
