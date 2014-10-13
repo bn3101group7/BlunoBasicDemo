@@ -6,12 +6,14 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
@@ -32,7 +34,13 @@ public class DisplayMessageActivity extends Activity {
     private char[] uvIndex = new char[2];
     private char psiLvl;
     private Spinner spfSpinner;
-
+    private TextView uvTimeView;
+    private EditText spfVal;
+    public int uvTimeInt;
+    public double multiplier = 1.0;
+    public int spfMultiplier = 1;
+    public boolean spfEntry = true;
+    public double uvExp;
     Toast mToast;
 
     @Override
@@ -41,6 +49,9 @@ public class DisplayMessageActivity extends Activity {
         setContentView(R.layout.activity_display_message);
         Intent intent = getIntent();
         String msg = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+        uvTimeView = (TextView) findViewById(R.id.uvExp);
+        spfVal = (EditText) findViewById(R.id.spfVal);
+
         receiveResult(msg);
         getSkinScore(msg);
         getUvIndex(msg);
@@ -102,16 +113,13 @@ public class DisplayMessageActivity extends Activity {
         final Switch swimSwitch;
         LinearLayout alarmBtn;
         String uvTimeStr;
-        final int uvTimeInt;
-        TextView uvTimeView;
 
         uvTime[0] = msg.charAt(4);
         uvTime[1] = msg.charAt(5);
         uvTime[2] = msg.charAt(6);
         uvTimeStr = new String(uvTime);
         uvTimeInt = Integer.parseInt(uvTimeStr);
-        uvTimeView = (TextView)findViewById(R.id.uvExp);
-        uvTimeView.setText(String.valueOf(uvTimeInt)+" minutes");
+        uvTimeView.setText(String.valueOf(uvTimeInt));
 
         Toast.makeText(this, String.valueOf(uvTime), Toast.LENGTH_SHORT).show();
 
@@ -119,13 +127,16 @@ public class DisplayMessageActivity extends Activity {
         swimSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                TextView uvTimeView = (TextView) findViewById(R.id.uvExp);
                 if(isChecked) {
-                    uvTimeView.setText(String.valueOf((int)(uvTimeInt/1.5))+" minutes");
+                    multiplier = 1.5;
+                    uvExp = uvTimeInt/multiplier+0.5;
+                    uvTimeView.setText(String.valueOf((int)uvExp));
                     uvTimeView.setTextColor(Color.RED);
                 }
                 else {
-                    uvTimeView.setText(String.valueOf(uvTimeInt)+" minutes");
+                    multiplier = 1.0;
+                    uvExp = uvTimeInt/multiplier;
+                    uvTimeView.setText(String.valueOf((int)uvExp));
                     uvTimeView.setTextColor(Color.BLACK);
                 }
             }
@@ -135,16 +146,13 @@ public class DisplayMessageActivity extends Activity {
         alarmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                double multiplier;
-                if(swimSwitch.isChecked()) {
-                    multiplier = 1.5;
+                int alarmDur = Integer.parseInt(uvTimeView.getText().toString());
+                if(spfEntry) {
+                    setAlarm(alarmDur);
                 }
                 else {
-                    multiplier = 1.0;
+                    Toast.makeText(getApplicationContext(), "Please select a valid SPF value", Toast.LENGTH_SHORT).show();
                 }
-                int uvExp = Integer.parseInt(new String(uvTime));
-                double alarmDur = uvExp / multiplier + 0.5;
-                setAlarm((int)alarmDur);
             }
         });
     }
@@ -192,9 +200,61 @@ public class DisplayMessageActivity extends Activity {
                 TableRow spfRow = (TableRow) findViewById(R.id.spfRow);
                 if(pos == 5) {
                     spfRow.setVisibility(View.VISIBLE);
+                    spfEntry = false;
+                    spfVal.setOnKeyListener(new EditText.OnKeyListener(){
+                        @Override
+                        public boolean onKey(View view, int arg1, KeyEvent arg2) {
+                            if(!spfVal.getText().toString().equals("")) {
+                                double uvExpDbl;
+                                int spfNo;
+                                int totalDur;
+                                uvExpDbl = uvTimeInt/multiplier+0.5;
+                                spfNo = Integer.parseInt(spfVal.getText().toString());
+                                if(spfNo<151 && spfNo>1) {
+                                    totalDur = (int) (uvExpDbl) * spfNo;
+                                    uvTimeView.setText(String.valueOf(totalDur));
+                                    spfEntry = true;
+                                }
+                                else {
+                                    spfEntry = false;
+                                    Toast.makeText(getApplicationContext(), "Please enter a valid SPF value", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                            else {
+                                spfEntry = false;
+                                Toast.makeText(getApplicationContext(), "Please enter a valid non-zero value", Toast.LENGTH_SHORT).show();
+                            }
+                            return false;
+                        }
+                    });
                 }
                 else {
                     spfRow.setVisibility(View.GONE);
+                    switch(pos){
+                        case 0:
+                            spfMultiplier = 1;
+                            break;
+                        case 1:
+                            spfMultiplier = 15;
+                            break;
+                        case 2:
+                            spfMultiplier = 30;
+                            break;
+                        case 3:
+                            spfMultiplier = 50;
+                            break;
+                        case 4:
+                            spfMultiplier = 100;
+                            break;
+                        default:
+                            spfMultiplier = 1;
+                            break;
+                    }
+                    int totalDur;
+                    double uvExpDbl;
+                    uvExpDbl = uvTimeInt/multiplier+0.5;
+                    totalDur = (int)(uvExpDbl) * spfMultiplier;
+                    uvTimeView.setText(String.valueOf(totalDur));
                 }
             }
 
