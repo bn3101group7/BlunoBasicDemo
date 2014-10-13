@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -101,7 +102,7 @@ public class DisplayMessageActivity extends Activity {
         uvTimeStr = new String(uvTime);
         uvTimeInt = Integer.parseInt(uvTimeStr);
         uvTimeView = (TextView)findViewById(R.id.uvExp);
-        uvTimeView.setText(String.valueOf(uvTimeInt));
+        uvTimeView.setText(String.valueOf(uvTimeInt)+" minutes");
 
         Toast.makeText(this, String.valueOf(uvTime), Toast.LENGTH_SHORT).show();
 
@@ -111,10 +112,12 @@ public class DisplayMessageActivity extends Activity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 TextView uvTimeView = (TextView) findViewById(R.id.uvExp);
                 if(isChecked) {
-                    uvTimeView.setText(String.valueOf((int)(uvTimeInt/1.5)));
+                    uvTimeView.setText(String.valueOf((int)(uvTimeInt/1.5))+" minutes");
+                    uvTimeView.setTextColor(Color.RED);
                 }
                 else {
-                    uvTimeView.setText(String.valueOf(uvTimeInt));
+                    uvTimeView.setText(String.valueOf(uvTimeInt)+" minutes");
+                    uvTimeView.setTextColor(Color.BLACK);
                 }
             }
         });

@@ -403,41 +403,16 @@ public class MainActivity extends BlunoLibrary {
 
     public void addItemsToBrownIntSpinner() {
         brownIntSpinner = (Spinner) findViewById(R.id.brownIntSpinner);
-        brownIntSpinner.setAdapter(new MyBrownIntAdapter());
-    }
-
-    private static class BrownIntViewHolder {
-        ImageView imageViewBrownInt;
-    }
-
-    private class MyBrownIntAdapter extends BaseAdapter {
-        public int getCount(){
-            return brownInt.length;
-        }
-        @Override
-        public Integer getItem(int position) {
-            return brownInt[position];
-        }
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View itemView = convertView;
-            BrownIntViewHolder brownIntViewHolder;
-            if(convertView == null) {
-                itemView = getLayoutInflater().inflate(R.layout.spinner_row,parent, false);
-                brownIntViewHolder = new BrownIntViewHolder();
-                brownIntViewHolder.imageViewBrownInt = (ImageView) itemView.findViewById(R.id.spinnerImage);
-                itemView.setTag(brownIntViewHolder);
-            }
-            else {
-                brownIntViewHolder = (BrownIntViewHolder) itemView.getTag();
-            }
-            brownIntViewHolder.imageViewBrownInt.setImageDrawable(getResources().getDrawable(brownInt[position]));
-            return itemView;
-        }
+        List<String> list = new ArrayList<String>();
+        list.add("How brown do you get?");
+        list.add("Hardly or not at all");
+        list.add("Light tan");
+        list.add("Medium tan");
+        list.add("Dark tan");
+        list.add("Deep dark");
+        ArrayAdapter<String> brownIntDataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
+        brownIntDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        brownIntSpinner.setAdapter(brownIntDataAdapter );
     }
 
     public void addItemsToFaceSpinner() {

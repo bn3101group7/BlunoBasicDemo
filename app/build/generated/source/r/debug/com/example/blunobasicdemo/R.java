@@ -67,7 +67,7 @@ public final class R {
         public static final int hairSpinner=0x7f08000e;
         public static final int hair_cat=0x7f08000d;
         public static final int imgLanguage=0x7f080021;
-        public static final int isSwim=0x7f080004;
+        public static final int isSwim=0x7f080003;
         public static final int makeAlarm=0x7f080005;
         public static final int menu_connecting=0x7f080028;
         public static final int menu_disconnect=0x7f080029;
@@ -87,7 +87,7 @@ public final class R {
         public static final int tan_freq_cat=0x7f08001b;
         public static final int tan_hist_cat=0x7f08001d;
         public static final int tvLanguage=0x7f080022;
-        public static final int uvExp=0x7f080003;
+        public static final int uvExp=0x7f080004;
         public static final int uvIndex=0x7f080000;
     }
     public static final class layout {
