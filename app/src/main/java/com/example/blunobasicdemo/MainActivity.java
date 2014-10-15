@@ -558,7 +558,6 @@ public class MainActivity extends BlunoLibrary {
                 brownIntSpinner.getSelectedItemPosition() * faceSpinner.getSelectedItemPosition() *
                 tanFreqSpinner.getSelectedItemPosition() * tanHistSpinner.getSelectedItemPosition()) != 0) {
             serialReceivedText.getEditableText().clear();
-            //TODO return value of eye spinner to match arduino
             int eyeVal = eyeSpinner.getSelectedItemPosition();
             int eyeOut;
             if(eyeVal>0 && eyeVal<4) {

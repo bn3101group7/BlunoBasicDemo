@@ -207,10 +207,4 @@
             android:textSize="24sp"/>
         </LinearLayout>
     </RelativeLayout>
-    <TextView
-        android:id="@+id/resultDisplay"
-        android:textSize="30sp"
-        android:editable="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
 </TableLayout>

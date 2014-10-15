@@ -52,7 +52,6 @@ public class DisplayMessageActivity extends Activity {
         uvTimeView = (TextView) findViewById(R.id.uvExp);
         spfVal = (EditText) findViewById(R.id.spfVal);
 
-        receiveResult(msg);
         getSkinScore(msg);
         getUvIndex(msg);
         getAlarmTime(msg);
@@ -61,12 +60,6 @@ public class DisplayMessageActivity extends Activity {
         addListenerToSpfSpinner();
     }
 
-    public void receiveResult(String msg) {
-        TextView resultDisplay;
-        resultDisplay = (TextView) findViewById(R.id.resultDisplay);
-        resultDisplay.append(msg);
-
-    }
     /**
      * This function will receive the skin score from Bluno Nano in the a char array of size 2
      * and compute the skin type based on the fitzpatrick skin type chart
