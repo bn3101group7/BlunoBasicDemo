@@ -67,7 +67,10 @@ public class DisplayMessageActivity extends Activity {
         resultDisplay.append(msg);
 
     }
-
+    /**
+     * This function will receive the skin score from Bluno Nano in the a char array of size 2
+     * and compute the skin type based on the fitzpatrick skin type chart
+     */
     public void getSkinScore(String msg) {
         TextView skinView;
         String skinType;
@@ -108,6 +111,11 @@ public class DisplayMessageActivity extends Activity {
         uvInt = Integer.parseInt(uvString);
         uvView.setText(String.valueOf(uvInt));
     }
+
+    /**
+     * Calculates uv Exposure display based on the swimming condition
+     * sets alarm
+     */
 
     public void getAlarmTime(String msg) {
         final Switch swimSwitch;
@@ -151,11 +159,16 @@ public class DisplayMessageActivity extends Activity {
                     setAlarm(alarmDur);
                 }
                 else {
-                    Toast.makeText(getApplicationContext(), "Please select a valid SPF value", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Please select a valid SPF value",
+                            Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
+
+    /**
+     * get input from Bluno Nano and displays PSI range
+     */
 
     public void getPsiLvl(String msg) {
         TextView psiView;
@@ -179,6 +192,10 @@ public class DisplayMessageActivity extends Activity {
         psiView.setText(psiRange);
     }
 
+    /*
+     * populates spinner for SPF values of sunblock
+     */
+
     public void addItemsToSpfSpinner() {
         spfSpinner = (Spinner) findViewById(R.id.spfSpinner);
         List<String> list = new ArrayList<String>();
@@ -188,10 +205,16 @@ public class DisplayMessageActivity extends Activity {
         list.add("SPF 50");
         list.add("SPF 100");
         list.add("Others");
-        ArrayAdapter<String> spfDataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
+        ArrayAdapter<String> spfDataAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, list);
         spfDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spfSpinner.setAdapter(spfDataAdapter);
     }
+
+    /**
+     * adds OnItemSelectedListener to SPF spinner, toggles visibility of EditText for manual entry
+     * of SPF value if "Others" is selected
+     */
 
     public void addListenerToSpfSpinner() {
         spfSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -217,12 +240,16 @@ public class DisplayMessageActivity extends Activity {
                                 }
                                 else {
                                     spfEntry = false;
-                                    Toast.makeText(getApplicationContext(), "Please enter a valid SPF value", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(),
+                                            "Please enter a valid SPF value", Toast.LENGTH_SHORT)
+                                            .show();
                                 }
                             }
                             else {
                                 spfEntry = false;
-                                Toast.makeText(getApplicationContext(), "Please enter a valid non-zero value", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(),
+                                        "Please enter a valid non-zero value", Toast.LENGTH_SHORT)
+                                        .show();
                             }
                             return false;
                         }
@@ -264,6 +291,10 @@ public class DisplayMessageActivity extends Activity {
             }
         });
     }
+
+    /**
+     * sets the alarm, which is non-repeating
+     */
 
      public void setAlarm(int time) {
          // When the alarm goes off, we want to broadcast an Intent to our

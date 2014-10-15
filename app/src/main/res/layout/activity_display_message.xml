@@ -175,7 +175,6 @@
             android:layout_marginBottom="10dp"
             android:layout_marginEnd="10dp"/>
     </TableRow>
-    <TableRow>
         <RelativeLayout>
             <TextView
                 android:layout_width="match_parent"
@@ -183,7 +182,6 @@
                 android:text=""
                 android:textSize="17sp"/>
         </RelativeLayout>
-    </TableRow>
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="80dp"
@@ -198,13 +196,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="9dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:src="@drawable/alarm_clock"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/make_alarm"
-            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
             android:layout_gravity="center"
             android:textSize="24sp"/>
         </LinearLayout>

@@ -22,6 +22,9 @@ public class OneShotAlarm extends BroadcastReceiver {
         Toast.makeText(context, "one_shot_received", Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * customizes the type of alarm and notification when alarm is triggered
+     */
     private void showNotification(Context context) {
         Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
         long[] pattern = {500,500,500,500,500,500,500,500,500,500};

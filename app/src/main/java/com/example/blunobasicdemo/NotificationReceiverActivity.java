@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-
+/**
+ * creates notification
+ */
 public class NotificationReceiverActivity extends Activity {
 
     @Override

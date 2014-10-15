@@ -22,6 +22,9 @@ public class MyOnItemSelectedListener implements OnItemSelectedListener {
         pref = context.getSharedPreferences("MyPref", 0);
     }
 
+    /**
+     * gets position of selected spinner position and saves it to shared preference
+     */
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
         switch(parent.getId()) {
