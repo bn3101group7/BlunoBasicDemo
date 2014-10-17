@@ -37,6 +37,7 @@
     <string name="face_cat">Face sensitivity</string>
     <string name="tan_freq_cat">Tan frequency</string>
     <string name="tan_hist_cat">Tan history</string>
+    <string name="instruction_title">Instructions:</string>
 
     <!-- Menu items -->
     <string name="menu_connecting">Connecting</string>
@@ -65,5 +66,6 @@
     <string name="psi_lvl">PSI Level</string>
     <string name="spf_cat">SPF of Sunblock</string>
     <string name="specify">Please specify:</string>
+
 
 </resources>

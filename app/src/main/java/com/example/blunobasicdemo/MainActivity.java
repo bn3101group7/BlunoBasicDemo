@@ -37,6 +37,7 @@ public class MainActivity extends BlunoLibrary {
     private Spinner tanHistSpinner;
     private PendingIntent pendingIntent;
     private AlarmManager manager;
+    public TextView instructions;
 
     public boolean calState = false;
 
@@ -63,6 +64,7 @@ public class MainActivity extends BlunoLibrary {
         onCreateProcess();	//onCreate Process by BlunoLibrary
         serialBegin(115200);	//set the Uart Baudrate on BLE chip to 115200
         serialReceivedText=(TextView) findViewById(R.id.serialReceivedText);	//initial the EditText of the received data
+        instructions = (TextView) findViewById(R.id.instructions);
 
         addItemsToEyeSpinner();
         addItemsToHairSpinner();
@@ -133,6 +135,7 @@ public class MainActivity extends BlunoLibrary {
             menu.findItem(R.id.menu_refresh).setActionView(null);
 
             ActivateButton(false);
+            instructions.setText("Please scan and connect device.");
         }
         else if(mConnectionState.equals(connectionStateEnum.isScanning)) {
             menu.findItem(R.id.menu_scan).setVisible(false);
@@ -151,6 +154,7 @@ public class MainActivity extends BlunoLibrary {
             menu.findItem(R.id.menu_disconnect).setVisible(false);
             menu.findItem(R.id.menu_disconnecting).setVisible(false);
             menu.findItem(R.id.menu_refresh).setActionView(R.layout.actionbar_progress_indeterminate);
+
         }
         else if(mConnectionState.equals(connectionStateEnum.isConnected)) {
             menu.findItem(R.id.menu_scan).setVisible(false);
@@ -161,6 +165,7 @@ public class MainActivity extends BlunoLibrary {
             menu.findItem(R.id.menu_refresh).setActionView(null);
 
             ActivateButton(true);
+            instructions.setText("Please calibrate the device.");
         }
         else if(mConnectionState.equals(connectionStateEnum.isDisconnecting)) {
             menu.findItem(R.id.menu_scan).setVisible(false);
@@ -594,6 +599,7 @@ public class MainActivity extends BlunoLibrary {
                 Button buttonSendData = (Button) findViewById(R.id.buttonSendData);
                 buttonSendData.setText("Measure");
                 Toast.makeText(this, "Calibrated!", Toast.LENGTH_SHORT).show();
+                instructions.setText("Please press the \"Measure\" button.");
             }
             else {
                 calibrate = "1";
@@ -602,6 +608,7 @@ public class MainActivity extends BlunoLibrary {
                 buttonSendData.setEnabled(false);
                 Button buttonDisplayResults = (Button) findViewById(R.id.buttonDisplayResults);
                 buttonDisplayResults.setEnabled(true);
+                instructions.setText("Please press the \"Get Results\" button.");
             }
             serialSend(String.valueOf(eyeOut)+String.valueOf(hairSpinner.getSelectedItemPosition())+
                     String.valueOf(skinSpinner.getSelectedItemPosition())+String.valueOf(frecklesSpinner.getSelectedItemPosition())+
