@@ -23,16 +23,16 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/buttonDisplayResults"
-                    android:text="@string/display_results"
-                    android:onClick="displayResults"
+                    android:id="@+id/buttonSendData"
+                    android:text="@string/send_both"
+                    android:onClick="sendData"
                     android:enabled="false"/>
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/buttonSendData"
-                    android:text="@string/send_both"
-                    android:onClick="sendData"
+                    android:id="@+id/buttonDisplayResults"
+                    android:text="@string/display_results"
+                    android:onClick="displayResults"
                     android:enabled="false"/>
                 <Button
                     android:layout_width="wrap_content"

@@ -21,8 +21,9 @@
     <string name="button_send1">Send 1</string>
 
     <!--Main activity-->
-    <string name="display_results">Display Results</string>
-    <string name="send_both">Send</string>
+    <string name="display_results">Get Results</string>
+    <string name="send_both">Calibrate</string>
+    <string name="measure">Measure</string>
     <string name="cancel_alarm">Cancel Alarm</string>
 
     <!--Categories-->

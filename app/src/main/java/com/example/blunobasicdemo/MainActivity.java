@@ -38,6 +38,8 @@ public class MainActivity extends BlunoLibrary {
     private PendingIntent pendingIntent;
     private AlarmManager manager;
 
+    public boolean calState = false;
+
     private static final String[] skinText = {"Please choose your skin colour","Pale", "Fair",
             "Beige", "Olive", "Brown", "Dark Brown"};
     private static final Integer[] skinTone = {R.drawable.blank,R.drawable.skin_1,R.drawable.skin_2,
@@ -129,6 +131,8 @@ public class MainActivity extends BlunoLibrary {
             menu.findItem(R.id.menu_disconnect).setVisible(false);
             menu.findItem(R.id.menu_disconnecting).setVisible(false);
             menu.findItem(R.id.menu_refresh).setActionView(null);
+
+            ActivateButton(false);
         }
         else if(mConnectionState.equals(connectionStateEnum.isScanning)) {
             menu.findItem(R.id.menu_scan).setVisible(false);
@@ -137,6 +141,8 @@ public class MainActivity extends BlunoLibrary {
             menu.findItem(R.id.menu_disconnect).setVisible(false);
             menu.findItem(R.id.menu_disconnecting).setVisible(false);
             menu.findItem(R.id.menu_refresh).setActionView(R.layout.actionbar_progress_indeterminate);
+
+            ActivateButton(false);
         }
         else if(mConnectionState.equals(connectionStateEnum.isConnecting)) {
             menu.findItem(R.id.menu_scan).setVisible(false);
@@ -545,6 +551,9 @@ public class MainActivity extends BlunoLibrary {
             Toast.makeText(this,"Please select something", Toast.LENGTH_SHORT).show();
         }
         else {
+            Button buttonSendData = (Button) findViewById(R.id.buttonSendData);
+            buttonSendData.setText("Calibrate");
+            buttonSendData.setEnabled(true);
             String message = textView.getText().toString();
             intent.putExtra(EXTRA_MESSAGE, message);
             startActivity(intent);
@@ -560,6 +569,7 @@ public class MainActivity extends BlunoLibrary {
             serialReceivedText.getEditableText().clear();
             int eyeVal = eyeSpinner.getSelectedItemPosition();
             int eyeOut;
+            String calibrate;
             if(eyeVal>0 && eyeVal<4) {
                 eyeOut = 1;
             }
@@ -578,11 +588,27 @@ public class MainActivity extends BlunoLibrary {
             else {
                 eyeOut = 6;
             }
+            if(!calState){
+                calibrate = "0";
+                calState = true;
+                Button buttonSendData = (Button) findViewById(R.id.buttonSendData);
+                buttonSendData.setText("Measure");
+                Toast.makeText(this, "Calibrated!", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                calibrate = "1";
+                calState = false;
+                Button buttonSendData = (Button) findViewById(R.id.buttonSendData);
+                buttonSendData.setEnabled(false);
+                Button buttonDisplayResults = (Button) findViewById(R.id.buttonDisplayResults);
+                buttonDisplayResults.setEnabled(true);
+            }
             serialSend(String.valueOf(eyeOut)+String.valueOf(hairSpinner.getSelectedItemPosition())+
                     String.valueOf(skinSpinner.getSelectedItemPosition())+String.valueOf(frecklesSpinner.getSelectedItemPosition())+
                     String.valueOf(burnSpinner.getSelectedItemPosition())+String.valueOf(brownFreqSpinner.getSelectedItemPosition())+
                     String.valueOf(brownIntSpinner.getSelectedItemPosition())+String.valueOf(faceSpinner.getSelectedItemPosition())+
-                    String.valueOf(tanFreqSpinner.getSelectedItemPosition())+String.valueOf(tanHistSpinner.getSelectedItemPosition()));
+                    String.valueOf(tanFreqSpinner.getSelectedItemPosition())+String.valueOf(tanHistSpinner.getSelectedItemPosition())+
+                    calibrate);
         }
         else {
             Toast.makeText(this, "Please select an option for each category.", Toast.LENGTH_SHORT).show();
@@ -654,12 +680,15 @@ public class MainActivity extends BlunoLibrary {
         Button buttonSendData = (Button) findViewById(R.id.buttonSendData);
 
         if (trueFalse) {
-            buttonDisplayResults.setEnabled(true);
             buttonSendData.setEnabled(true);
+            buttonSendData.setText("Calibrate");
+            calState = false;
         }
         else {
             buttonDisplayResults.setEnabled(false);
             buttonSendData.setEnabled(false);
+            buttonSendData.setText("Calibrate");
+            calState = false;
         }
     }
 }
