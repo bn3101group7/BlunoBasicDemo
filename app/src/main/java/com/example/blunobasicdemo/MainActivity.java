@@ -550,6 +550,7 @@ public class MainActivity extends BlunoLibrary {
     }
 
     public void displayResults(View V) {
+        char psiCheck;
         Intent intent = new Intent(this, DisplayMessageActivity.class);
         TextView textView = (TextView) findViewById(R.id.serialReceivedText);
         if(textView.getText().toString().equals("")){
@@ -557,11 +558,21 @@ public class MainActivity extends BlunoLibrary {
         }
         else {
             Button buttonSendData = (Button) findViewById(R.id.buttonSendData);
+            Button buttonGetResult = (Button) findViewById(R.id.buttonDisplayResults);
             buttonSendData.setText("Calibrate");
             buttonSendData.setEnabled(true);
             String message = textView.getText().toString();
-            intent.putExtra(EXTRA_MESSAGE, message);
-            startActivity(intent);
+            psiCheck = message.charAt(7);
+            if(Character.getNumericValue(psiCheck)==9){
+                Toast.makeText(this,"Please re-calibrate device.",Toast.LENGTH_SHORT).show();
+                calState = false;
+                buttonSendData.setEnabled(true);
+                buttonGetResult.setEnabled(false);
+            }
+            else {
+                intent.putExtra(EXTRA_MESSAGE, message);
+                startActivity(intent);
+            }
         }
     }
 
