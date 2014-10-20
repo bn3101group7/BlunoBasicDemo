@@ -122,7 +122,7 @@ public class DisplayMessageActivity extends Activity {
         uvTimeInt = Integer.parseInt(uvTimeStr);
         uvTimeView.setText(String.valueOf(uvTimeInt));
 
-        Toast.makeText(this, String.valueOf(uvTime), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, String.valueOf(uvTime), Toast.LENGTH_SHORT).show();
 
         swimSwitch = (Switch) findViewById(R.id.isSwim);
         swimSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -309,8 +309,8 @@ public class DisplayMessageActivity extends Activity {
          if (mToast != null) {
              mToast.cancel();
          }
-         mToast = Toast.makeText(DisplayMessageActivity.this, String.valueOf(time),
-                 Toast.LENGTH_SHORT);
+         mToast = Toast.makeText(DisplayMessageActivity.this, "Alarm set for "+String.valueOf(time)+
+                         " minutes.", Toast.LENGTH_SHORT);
          mToast.show();
     }
 

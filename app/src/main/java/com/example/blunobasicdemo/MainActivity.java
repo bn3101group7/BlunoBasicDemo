@@ -596,10 +596,20 @@ public class MainActivity extends BlunoLibrary {
             if(!calState){
                 calibrate = "0";
                 calState = true;
-                Button buttonSendData = (Button) findViewById(R.id.buttonSendData);
+                final Button buttonSendData = (Button) findViewById(R.id.buttonSendData);
                 buttonSendData.setText("Measure");
                 Toast.makeText(this, "Calibrated!", Toast.LENGTH_SHORT).show();
-                instructions.setText("Please press the \"Measure\" button.");
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Do something after 5s = 5000ms
+                        instructions.setText("Please press the \"Measure\" button.");
+                        buttonSendData.setEnabled(true);
+                    }
+                }, 5000);
+                instructions.setText("Please slide both doors open for 30 seconds.");
+                buttonSendData.setEnabled(false);
             }
             else {
                 calibrate = "1";
