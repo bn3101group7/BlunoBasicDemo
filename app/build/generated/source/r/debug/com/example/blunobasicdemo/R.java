@@ -39,12 +39,13 @@ public final class R {
         public static final int hair_5=0x7f020015;
         public static final int hair_6=0x7f020016;
         public static final int ic_launcher=0x7f020017;
-        public static final int skin_1=0x7f020018;
-        public static final int skin_2=0x7f020019;
-        public static final int skin_3=0x7f02001a;
-        public static final int skin_4=0x7f02001b;
-        public static final int skin_5=0x7f02001c;
-        public static final int skin_6=0x7f02001d;
+        public static final int logo=0x7f020018;
+        public static final int skin_1=0x7f020019;
+        public static final int skin_2=0x7f02001a;
+        public static final int skin_3=0x7f02001b;
+        public static final int skin_4=0x7f02001c;
+        public static final int skin_5=0x7f02001d;
+        public static final int skin_6=0x7f02001e;
     }
     public static final class id {
         public static final int action_settings=0x7f080027;

@@ -32,7 +32,7 @@ public class OneShotAlarm extends BroadcastReceiver {
         PendingIntent pIntent = PendingIntent.getActivity(context, 1, contentIntent, 0);
         Notification noti = new Notification.Builder(context)
                 .setContentTitle("UV Exposure Warning")
-                .setContentText("You should head indoors now").setSmallIcon(R.drawable.ic_launcher)
+                .setContentText("You should head indoors now").setSmallIcon(R.drawable.logo)
                 .setContentIntent(pIntent)
                 .setLights(0xff00ff00, 300, 1000)
                 .setSound(uri)
