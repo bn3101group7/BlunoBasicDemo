@@ -1,19 +1,35 @@
 package com.example.blunobasicdemo;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * creates notification
  */
 public class NotificationReceiverActivity extends Activity {
 
+    TextView spfAdv;
+    Boolean spfAppl;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification_receiver);
+        Intent intent = getIntent();
+        spfAppl = intent.getExtras().getBoolean("spfAppl");
+        spfMessage(spfAppl);
+    }
+
+    public void spfMessage(Boolean spfAppl) {
+        if(!spfAppl) {
+            spfAdv = (TextView) findViewById(R.id.spfKnow);
+            spfAdv.setText("Never apply");
+        }
     }
 
 

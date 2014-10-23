@@ -41,6 +41,7 @@ public class DisplayMessageActivity extends Activity {
     public int spfMultiplier = 1;
     public boolean spfEntry = true;
     public double uvExp;
+    public boolean spfAppl = false;
     Toast mToast;
 
     @Override
@@ -214,6 +215,12 @@ public class DisplayMessageActivity extends Activity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
                 TableRow spfRow = (TableRow) findViewById(R.id.spfRow);
+                if(pos == 0){
+                    spfAppl = false;
+                }
+                else {
+                    spfAppl = true;
+                }
                 if(pos == 5) {
                     spfRow.setVisibility(View.VISIBLE);
                     spfEntry = false;
@@ -249,6 +256,7 @@ public class DisplayMessageActivity extends Activity {
                     });
                 }
                 else {
+                    spfEntry = true;
                     spfRow.setVisibility(View.GONE);
                     switch(pos){
                         case 0:
@@ -296,6 +304,7 @@ public class DisplayMessageActivity extends Activity {
          // AndroidManifest.xml) instantiated and called, and then create an
          // IntentSender to have the intent executed as a broadcast.
          Intent intent = new Intent(DisplayMessageActivity.this, OneShotAlarm.class);
+         intent.putExtra("spfAppl", spfAppl);
          PendingIntent sender = PendingIntent.getBroadcast(DisplayMessageActivity.this, 0,
                 intent, 0);
          // We want the alarm to go off 30 seconds from now.

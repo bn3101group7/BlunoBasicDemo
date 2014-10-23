@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 public class OneShotAlarm extends BroadcastReceiver {
     NotificationManager nm;
+    boolean spfAppl;
 
     public OneShotAlarm() {
     }
@@ -19,7 +20,8 @@ public class OneShotAlarm extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         showNotification(context);
-        Toast.makeText(context, "one_shot_received", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "gCactus Alarm triggered", Toast.LENGTH_SHORT).show();
+        spfAppl = intent.getExtras().getBoolean("spfAppl");
     }
 
     /**
@@ -29,10 +31,11 @@ public class OneShotAlarm extends BroadcastReceiver {
         Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
         long[] pattern = {500,500,500,500,500,500,500,500,500,500};
         Intent contentIntent = new Intent(context, NotificationReceiverActivity.class);
-        PendingIntent pIntent = PendingIntent.getActivity(context, 1, contentIntent, 0);
+        contentIntent.putExtra("spfAppl", spfAppl);
+        PendingIntent pIntent = PendingIntent.getActivity(context, 1, contentIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         Notification noti = new Notification.Builder(context)
-                .setContentTitle("UV Exposure Warning")
-                .setContentText("You should head indoors now").setSmallIcon(R.drawable.logo)
+                .setContentTitle("gCactus alarm")
+                .setContentText("You should head indoors now.").setSmallIcon(R.drawable.logo)
                 .setContentIntent(pIntent)
                 .setLights(0xff00ff00, 300, 1000)
                 .setSound(uri)
