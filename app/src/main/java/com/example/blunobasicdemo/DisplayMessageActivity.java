@@ -131,13 +131,13 @@ public class DisplayMessageActivity extends Activity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
                     multiplier = 1.5;
-                    uvExp = uvTimeInt/multiplier+0.5;
+                    uvExp = uvTimeInt/multiplier*spfMultiplier+0.5;
                     uvTimeView.setText(String.valueOf((int)uvExp));
                     uvTimeView.setTextColor(Color.RED);
                 }
                 else {
                     multiplier = 1.0;
-                    uvExp = uvTimeInt/multiplier;
+                    uvExp = uvTimeInt/multiplier*spfMultiplier;
                     uvTimeView.setText(String.valueOf((int)uvExp));
                     uvTimeView.setTextColor(Color.BLACK);
                 }
