@@ -58,6 +58,7 @@
     <string name="advice">Please head indoor or seek shade</string>
     <string name="title_activity_notification_receiver">Received Notification</string>
     <string name="alarm_advice">Advice</string>
+    <string name="did_you_know">Did you know?</string>
 
     <!--Display message activity-->
     <string name="make_alarm">Set Alarm</string>

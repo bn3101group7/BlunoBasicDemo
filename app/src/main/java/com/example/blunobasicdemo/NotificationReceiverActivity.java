@@ -28,7 +28,8 @@ public class NotificationReceiverActivity extends Activity {
     public void spfMessage(Boolean spfAppl) {
         if(!spfAppl) {
             spfAdv = (TextView) findViewById(R.id.spfKnow);
-            spfAdv.setText("Never apply");
+            spfAdv.setText("You can prolong your UV exposure duration by applying sunblock.\n\nNew Exposure " +
+                    "duration = Baseline duration x SPF factor");
         }
     }
 
