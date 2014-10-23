@@ -3,6 +3,7 @@ package com.example.blunobasicdemo;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -14,22 +15,36 @@ import android.widget.Toast;
 public class NotificationReceiverActivity extends Activity {
 
     TextView spfAdv;
-    Boolean spfAppl;
+    public String spfFactor;
+    String TAG = "alarm";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification_receiver);
+        Log.d(TAG,"setcontentview" );
         Intent intent = getIntent();
-        spfAppl = intent.getExtras().getBoolean("spfAppl");
-        spfMessage(spfAppl);
+        Log.d(TAG,"getintent");
+        spfFactor = intent.getExtras().getString("spfAppl");
+        if(spfFactor==null) {
+            Log.d(TAG,"null");
+        }
+        else if(spfFactor.equals("")) {
+            Log.d(TAG,"empty");
+        }
+        Log.d(TAG, "getextras");
+        spfMessage(spfFactor);
+
     }
 
-    public void spfMessage(Boolean spfAppl) {
-        if(!spfAppl) {
-            spfAdv = (TextView) findViewById(R.id.spfKnow);
+    public void spfMessage(String spfFact) {
+        spfAdv = (TextView) findViewById(R.id.spfKnow);
+        if(spfFact.equals("0")) {
             spfAdv.setText("You can prolong your UV exposure duration by applying sunblock.\n\nNew Exposure " +
                     "duration = Baseline duration x SPF factor");
+        }
+        else {
+            spfAdv.setText(spfFact);
         }
     }
 

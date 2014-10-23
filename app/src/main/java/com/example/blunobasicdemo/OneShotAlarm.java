@@ -12,16 +12,16 @@ import android.widget.Toast;
 
 public class OneShotAlarm extends BroadcastReceiver {
     NotificationManager nm;
-    boolean spfAppl;
+    private String spfFact;
 
     public OneShotAlarm() {
     }
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        showNotification(context);
         Toast.makeText(context, "gCactus Alarm triggered", Toast.LENGTH_SHORT).show();
-        spfAppl = intent.getExtras().getBoolean("spfAppl");
+        spfFact = intent.getExtras().getString("spfAppl");
+        showNotification(context);
     }
 
     /**
@@ -31,7 +31,7 @@ public class OneShotAlarm extends BroadcastReceiver {
         Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
         long[] pattern = {500,500,500,500,500,500,500,500,500,500};
         Intent contentIntent = new Intent(context, NotificationReceiverActivity.class);
-        contentIntent.putExtra("spfAppl", spfAppl);
+        contentIntent.putExtra("spfAppl", spfFact);
         PendingIntent pIntent = PendingIntent.getActivity(context, 1, contentIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         Notification noti = new Notification.Builder(context)
                 .setContentTitle("gCactus alarm")

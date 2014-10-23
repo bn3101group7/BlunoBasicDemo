@@ -41,7 +41,7 @@ public class DisplayMessageActivity extends Activity {
     public int spfMultiplier = 1;
     public boolean spfEntry = true;
     public double uvExp;
-    public boolean spfAppl = false;
+    public String spfFact = "";
     Toast mToast;
 
     @Override
@@ -149,8 +149,28 @@ public class DisplayMessageActivity extends Activity {
             @Override
             public void onClick(View view) {
                 int alarmDur = Integer.parseInt(uvTimeView.getText().toString());
+                switch(spfSpinner.getSelectedItemPosition()) {
+                    case 0:
+                        spfFact = "0";
+                        break;
+                    case 1:
+                        spfFact = "15";
+                        break;
+                    case 2:
+                        spfFact = "30";
+                        break;
+                    case 3:
+                        spfFact = "50";
+                        break;
+                    case 4:
+                        spfFact = "100";
+                        break;
+                    case 5:
+                        spfFact = spfVal.getText().toString();
+                        break;
+                }
                 if(spfEntry) {
-                    setAlarm(alarmDur);
+                    setAlarm(alarmDur, spfFact);
                 }
                 else {
                     Toast.makeText(getApplicationContext(), "Please select a valid SPF value",
@@ -215,12 +235,6 @@ public class DisplayMessageActivity extends Activity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
                 TableRow spfRow = (TableRow) findViewById(R.id.spfRow);
-                if(pos == 0){
-                    spfAppl = false;
-                }
-                else {
-                    spfAppl = true;
-                }
                 if(pos == 5) {
                     spfRow.setVisibility(View.VISIBLE);
                     spfEntry = false;
@@ -297,14 +311,14 @@ public class DisplayMessageActivity extends Activity {
      * sets the alarm, which is non-repeating
      */
 
-     public void setAlarm(int time) {
+     public void setAlarm(int time, String spfFact) {
          // When the alarm goes off, we want to broadcast an Intent to our
          // BroadcastReceiver. Here we make an Intent with an explicit class
          // name to have our own receiver (which has been published in
          // AndroidManifest.xml) instantiated and called, and then create an
          // IntentSender to have the intent executed as a broadcast.
          Intent intent = new Intent(DisplayMessageActivity.this, OneShotAlarm.class);
-         intent.putExtra("spfAppl", spfAppl);
+         intent.putExtra("spfAppl", spfFact);
          PendingIntent sender = PendingIntent.getBroadcast(DisplayMessageActivity.this, 0,
                 intent, 0);
          // We want the alarm to go off 30 seconds from now.
