@@ -44,7 +44,8 @@ public class NotificationReceiverActivity extends Activity {
                     "duration = Baseline duration x SPF factor");
         }
         else {
-            spfAdv.setText(spfFact);
+            spfAdv.setText("By applying sunblock, you have prolonged your UV exposure by "+
+                    spfFactor+" times.");
         }
     }
 
