@@ -6,11 +6,13 @@
     tools:context="com.example.blunobasicdemo.DisplayMessageActivity"
     android:stretchColumns="0,1,2"
     android:background="@drawable/background">
+
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#B5DEF7"
         android:gravity="center_vertical">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -19,7 +21,8 @@
             android:textStyle="bold"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:layout_marginStart="10dp"/>
+            android:layout_marginStart="10dp" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -29,13 +32,15 @@
             android:gravity="end"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:layout_marginEnd="10dp"/>
+            android:layout_marginEnd="10dp" />
     </TableRow>
+
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#B5DEF7"
         android:gravity="center_vertical">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -44,7 +49,8 @@
             android:textStyle="bold"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:layout_marginStart="10dp"/>
+            android:layout_marginStart="10dp" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -54,14 +60,16 @@
             android:text="def"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:layout_marginEnd="10dp"/>
+            android:layout_marginEnd="10dp" />
 
     </TableRow>
+
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#B5DEF7"
         android:gravity="center_vertical">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -70,7 +78,8 @@
             android:textStyle="bold"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:layout_marginStart="10dp"/>
+            android:layout_marginStart="10dp" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -80,13 +89,15 @@
             android:text="ghi"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:layout_marginEnd="10dp"/>
+            android:layout_marginEnd="10dp" />
     </TableRow>
+
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:background="#B5DEF7">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -95,7 +106,8 @@
             android:textSize="20sp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:layout_marginStart="10dp"/>
+            android:layout_marginStart="10dp" />
+
         <Switch
             android:id="@+id/isSwim"
             android:layout_width="wrap_content"
@@ -105,13 +117,15 @@
             android:textOff="NO"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:layout_marginEnd="10dp"/>
+            android:layout_marginEnd="10dp" />
     </TableRow>
+
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#B5DEF7"
         android:gravity="center_vertical">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -120,17 +134,20 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:layout_marginStart="10dp"
-            android:text="@string/spf_cat"/>
+            android:text="@string/spf_cat" />
+
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/spfSpinner"/>
+            android:id="@+id/spfSpinner" />
     </TableRow>
+
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#B5DEF7"
         android:id="@+id/spfRow">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -139,7 +156,8 @@
             android:text="@string/specify"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:layout_marginStart="10dp"/>
+            android:layout_marginStart="10dp" />
+
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -148,13 +166,15 @@
             android:textSize="20sp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:layout_marginEnd="10dp"/>
+            android:layout_marginEnd="10dp" />
     </TableRow>
+
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#B5DEF7"
         android:gravity="center_vertical">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -163,7 +183,8 @@
             android:textStyle="bold"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:layout_marginStart="10dp"/>
+            android:layout_marginStart="10dp" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -173,38 +194,44 @@
             android:text="jkl"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:layout_marginEnd="10dp"/>
+            android:layout_marginEnd="10dp" />
     </TableRow>
-        <RelativeLayout>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textSize="17sp"/>
-        </RelativeLayout>
+
+    <RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="17sp" />
+    </RelativeLayout>
+
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="80dp"
         android:gravity="center_horizontal">
-    <LinearLayout
-        android:id="@+id/makeAlarm"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:background="@drawable/custom_button"
-        android:orientation="horizontal">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="9dp"
-            android:layout_marginStart="10dp"
-            android:src="@drawable/alarm_clock"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/make_alarm"
-            android:layout_marginStart="20dp"
-            android:layout_gravity="center"
-            android:textSize="24sp"/>
+
+        <LinearLayout
+            android:id="@+id/makeAlarm"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:background="@drawable/custom_button"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/alarm_clock" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/make_alarm"
+                android:layout_marginStart="20dp"
+                android:layout_gravity="center"
+                android:textSize="24sp" />
         </LinearLayout>
     </RelativeLayout>
 </TableLayout>

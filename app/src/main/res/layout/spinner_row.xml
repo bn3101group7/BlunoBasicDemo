@@ -5,9 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center">
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/spinnerImage"
-        android:padding="1dp"/>
+        android:padding="1dp" />
 </LinearLayout>

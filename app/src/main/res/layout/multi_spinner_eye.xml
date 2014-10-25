@@ -4,19 +4,18 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <ImageView
         android:id="@+id/imgLanguage"
         android:layout_width="72dp"
         android:layout_height="44dp"
-        android:src="@drawable/ic_launcher" >
-    </ImageView>
+        android:src="@drawable/ic_launcher"></ImageView>
 
     <TextView
         android:id="@+id/tvLanguage"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:gravity="center"
-        android:text="Text Here" >
-    </TextView>
+        android:text="Text Here"></TextView>
 
 </LinearLayout>

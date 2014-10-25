@@ -21,8 +21,6 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -72,26 +70,21 @@ public class DisplayMessageActivity extends Activity {
         skinScore[0] = msg.charAt(0);
         skinScore[1] = msg.charAt(1);
         score = Integer.parseInt(new String(skinScore));
-        if(score>-1) {
+        if (score > -1) {
             skinType = "I";
-        }
-        else if(score>6) {
+        } else if (score > 6) {
             skinType = "II";
-        }
-        else if(score>13) {
+        } else if (score > 13) {
             skinType = "III";
-        }
-        else if(score>20) {
+        } else if (score > 20) {
             skinType = "IV";
-        }
-        else if(score>27) {
+        } else if (score > 27) {
             skinType = "V";
-        }
-        else {
+        } else {
             skinType = "VI";
         }
         skinView = (TextView) findViewById(R.id.skinType);
-        skinView.setText("Type "+skinType);
+        skinView.setText("Type " + skinType);
     }
 
     public void getUvIndex(String msg) {
@@ -129,16 +122,15 @@ public class DisplayMessageActivity extends Activity {
         swimSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked) {
+                if (isChecked) {
                     multiplier = 1.5;
-                    uvExp = uvTimeInt/multiplier*spfMultiplier+0.5;
-                    uvTimeView.setText(String.valueOf((int)uvExp));
+                    uvExp = uvTimeInt / multiplier * spfMultiplier + 0.5;
+                    uvTimeView.setText(String.valueOf((int) uvExp));
                     uvTimeView.setTextColor(Color.RED);
-                }
-                else {
+                } else {
                     multiplier = 1.0;
-                    uvExp = uvTimeInt/multiplier*spfMultiplier;
-                    uvTimeView.setText(String.valueOf((int)uvExp));
+                    uvExp = uvTimeInt / multiplier * spfMultiplier;
+                    uvTimeView.setText(String.valueOf((int) uvExp));
                     uvTimeView.setTextColor(Color.BLACK);
                 }
             }
@@ -149,7 +141,7 @@ public class DisplayMessageActivity extends Activity {
             @Override
             public void onClick(View view) {
                 int alarmDur = Integer.parseInt(uvTimeView.getText().toString());
-                switch(spfSpinner.getSelectedItemPosition()) {
+                switch (spfSpinner.getSelectedItemPosition()) {
                     case 0:
                         spfFact = "0";
                         break;
@@ -169,10 +161,9 @@ public class DisplayMessageActivity extends Activity {
                         spfFact = spfVal.getText().toString();
                         break;
                 }
-                if(spfEntry) {
+                if (spfEntry) {
                     setAlarm(alarmDur, spfFact);
-                }
-                else {
+                } else {
                     Toast.makeText(getApplicationContext(), "Please select a valid SPF value",
                             Toast.LENGTH_SHORT).show();
                 }
@@ -188,7 +179,7 @@ public class DisplayMessageActivity extends Activity {
         TextView psiView;
         psiLvl = msg.charAt(7);
         String psiRange;
-        switch(Character.getNumericValue(psiLvl)) {
+        switch (Character.getNumericValue(psiLvl)) {
             case 1:
                 psiRange = "Low";
                 break;
@@ -235,30 +226,28 @@ public class DisplayMessageActivity extends Activity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
                 TableRow spfRow = (TableRow) findViewById(R.id.spfRow);
-                if(pos == 5) {
+                if (pos == 5) {
                     spfRow.setVisibility(View.VISIBLE);
                     spfEntry = false;
-                    spfVal.setOnKeyListener(new EditText.OnKeyListener(){
+                    spfVal.setOnKeyListener(new EditText.OnKeyListener() {
                         @Override
                         public boolean onKey(View view, int arg1, KeyEvent arg2) {
-                            if(!spfVal.getText().toString().equals("")) {
+                            if (!spfVal.getText().toString().equals("")) {
                                 double uvExpDbl;
                                 int totalDur;
                                 spfMultiplier = Integer.parseInt(spfVal.getText().toString());
-                                uvExpDbl = uvTimeInt/multiplier+0.5;
-                                if(spfMultiplier<151 && spfMultiplier>1) {
+                                uvExpDbl = uvTimeInt / multiplier + 0.5;
+                                if (spfMultiplier < 151 && spfMultiplier > 1) {
                                     totalDur = (int) (uvExpDbl) * spfMultiplier;
                                     uvTimeView.setText(String.valueOf(totalDur));
                                     spfEntry = true;
-                                }
-                                else {
+                                } else {
                                     spfEntry = false;
                                     Toast.makeText(getApplicationContext(),
                                             "Please enter a valid SPF value", Toast.LENGTH_SHORT)
                                             .show();
                                 }
-                            }
-                            else {
+                            } else {
                                 spfEntry = false;
                                 Toast.makeText(getApplicationContext(),
                                         "Please enter a valid non-zero value", Toast.LENGTH_SHORT)
@@ -267,11 +256,10 @@ public class DisplayMessageActivity extends Activity {
                             return false;
                         }
                     });
-                }
-                else {
+                } else {
                     spfEntry = true;
                     spfRow.setVisibility(View.GONE);
-                    switch(pos){
+                    switch (pos) {
                         case 0:
                             spfMultiplier = 1;
                             break;
@@ -293,8 +281,8 @@ public class DisplayMessageActivity extends Activity {
                     }
                     int totalDur;
                     double uvExpDbl;
-                    uvExpDbl = uvTimeInt/multiplier+0.5;
-                    totalDur = (int)(uvExpDbl) * spfMultiplier;
+                    uvExpDbl = uvTimeInt / multiplier + 0.5;
+                    totalDur = (int) (uvExpDbl) * spfMultiplier;
                     uvTimeView.setText(String.valueOf(totalDur));
                 }
             }
@@ -310,30 +298,30 @@ public class DisplayMessageActivity extends Activity {
      * sets the alarm, which is non-repeating
      */
 
-     public void setAlarm(int time, String spfFact) {
-         // When the alarm goes off, we want to broadcast an Intent to our
-         // BroadcastReceiver. Here we make an Intent with an explicit class
-         // name to have our own receiver (which has been published in
-         // AndroidManifest.xml) instantiated and called, and then create an
-         // IntentSender to have the intent executed as a broadcast.
-         Intent intent = new Intent(DisplayMessageActivity.this, OneShotAlarm.class);
-         intent.putExtra("spfAppl", spfFact);
-         PendingIntent sender = PendingIntent.getBroadcast(DisplayMessageActivity.this, 0,
+    public void setAlarm(int time, String spfFact) {
+        // When the alarm goes off, we want to broadcast an Intent to our
+        // BroadcastReceiver. Here we make an Intent with an explicit class
+        // name to have our own receiver (which has been published in
+        // AndroidManifest.xml) instantiated and called, and then create an
+        // IntentSender to have the intent executed as a broadcast.
+        Intent intent = new Intent(DisplayMessageActivity.this, OneShotAlarm.class);
+        intent.putExtra("spfAppl", spfFact);
+        PendingIntent sender = PendingIntent.getBroadcast(DisplayMessageActivity.this, 0,
                 intent, 0);
-         // We want the alarm to go off 30 seconds from now.
-         Calendar calendar = Calendar.getInstance();
-         calendar.setTimeInMillis(System.currentTimeMillis());
-         calendar.add(Calendar.SECOND, time);
-         // Schedule the alarm!
-         AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
-         am.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), sender);
-         // Tell the user about what we did.
-         if (mToast != null) {
-             mToast.cancel();
-         }
-         mToast = Toast.makeText(DisplayMessageActivity.this, "Alarm set for "+String.valueOf(time)+
-                         " minutes.", Toast.LENGTH_SHORT);
-         mToast.show();
+        // We want the alarm to go off 30 seconds from now.
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.add(Calendar.SECOND, time);
+        // Schedule the alarm!
+        AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
+        am.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), sender);
+        // Tell the user about what we did.
+        if (mToast != null) {
+            mToast.cancel();
+        }
+        mToast = Toast.makeText(DisplayMessageActivity.this, "Alarm set for " + String.valueOf(time) +
+                " minutes.", Toast.LENGTH_SHORT);
+        mToast.show();
     }
 
     @Override

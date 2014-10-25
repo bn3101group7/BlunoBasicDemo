@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * creates notification
@@ -22,15 +21,14 @@ public class NotificationReceiverActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification_receiver);
-        Log.d(TAG,"setcontentview" );
+        Log.d(TAG, "setcontentview");
         Intent intent = getIntent();
-        Log.d(TAG,"getintent");
+        Log.d(TAG, "getintent");
         spfFactor = intent.getExtras().getString("spfAppl");
-        if(spfFactor==null) {
-            Log.d(TAG,"null");
-        }
-        else if(spfFactor.equals("")) {
-            Log.d(TAG,"empty");
+        if (spfFactor == null) {
+            Log.d(TAG, "null");
+        } else if (spfFactor.equals("")) {
+            Log.d(TAG, "empty");
         }
         Log.d(TAG, "getextras");
         spfMessage(spfFactor);
@@ -39,13 +37,12 @@ public class NotificationReceiverActivity extends Activity {
 
     public void spfMessage(String spfFact) {
         spfAdv = (TextView) findViewById(R.id.spfKnow);
-        if(spfFact.equals("0")) {
+        if (spfFact.equals("0")) {
             spfAdv.setText("You can prolong your UV exposure duration by applying sunblock.\n\nNew Exposure " +
                     "duration = Baseline duration x SPF factor");
-        }
-        else {
-            spfAdv.setText("By applying sunblock, you have prolonged your UV exposure by "+
-                    spfFactor+" times.");
+        } else {
+            spfAdv.setText("By applying sunblock, you have prolonged your UV exposure by " +
+                    spfFactor + " times.");
         }
     }
 

@@ -1,11 +1,11 @@
 package com.example.blunobasicdemo;
+
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.os.Bundle;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -14,12 +14,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,29 +41,29 @@ public class MainActivity extends BlunoLibrary {
 
     public boolean calState = false;
 
-    private static final String[] skinText = {"Please choose your skin colour","Pale", "Fair",
+    private static final String[] skinText = {"Please choose your skin colour", "Pale", "Fair",
             "Beige", "Olive", "Brown", "Dark Brown"};
-    private static final Integer[] skinTone = {R.drawable.blank,R.drawable.skin_1,R.drawable.skin_2,
-            R.drawable.skin_3,R.drawable.skin_4,R.drawable.skin_5,R.drawable.skin_6};
+    private static final Integer[] skinTone = {R.drawable.blank, R.drawable.skin_1, R.drawable.skin_2,
+            R.drawable.skin_3, R.drawable.skin_4, R.drawable.skin_5, R.drawable.skin_6};
     private static final String[] hairText = {"Please choose your hair colour", "Sandy red",
             "Blond", "Dark blond", "Chestnut", "Brown", "Black"};
-    private static final Integer[] hairColour = {R.drawable.blank,R.drawable.hair_1,R.drawable.hair_2,
-            R.drawable.hair_3,R.drawable.hair_4,R.drawable.hair_5,R.drawable.hair_6};
+    private static final Integer[] hairColour = {R.drawable.blank, R.drawable.hair_1, R.drawable.hair_2,
+            R.drawable.hair_3, R.drawable.hair_4, R.drawable.hair_5, R.drawable.hair_6};
     private static final String[] eyeText = {"Please choose your natural eye colour", "Light blue",
             "Light green", "Light gray", "Blue", "Green", "Gray", "Dark blue", "Dark green",
             "Dark gray", "Brown", "Black"};
-    private static final Integer[] eyeColour = {R.drawable.blank,R.drawable.eye_1,R.drawable.eye_2,
-            R.drawable.eye_3,R.drawable.eye_4,R.drawable.eye_5,R.drawable.eye_6,R.drawable.eye_7,
-            R.drawable.eye_8,R.drawable.eye_9,R.drawable.eye_10,R.drawable.eye_11};
+    private static final Integer[] eyeColour = {R.drawable.blank, R.drawable.eye_1, R.drawable.eye_2,
+            R.drawable.eye_3, R.drawable.eye_4, R.drawable.eye_5, R.drawable.eye_6, R.drawable.eye_7,
+            R.drawable.eye_8, R.drawable.eye_9, R.drawable.eye_10, R.drawable.eye_11};
     public final static String EXTRA_MESSAGE = "com.example.blunobasicdemo.MESSAGE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        onCreateProcess();	//onCreate Process by BlunoLibrary
-        serialBegin(115200);	//set the Uart Baudrate on BLE chip to 115200
-        serialReceivedText=(TextView) findViewById(R.id.serialReceivedText);	//initial the EditText of the received data
+        onCreateProcess();    //onCreate Process by BlunoLibrary
+        serialBegin(115200);    //set the Uart Baudrate on BLE chip to 115200
+        serialReceivedText = (TextView) findViewById(R.id.serialReceivedText);    //initial the EditText of the received data
         instructions = (TextView) findViewById(R.id.instructions);
 
         addItemsToEyeSpinner();
@@ -79,54 +79,55 @@ public class MainActivity extends BlunoLibrary {
 
         addListenerToSpinner();
 
-        SharedPreferences sharedPref = getSharedPreferences("MyPref",MODE_PRIVATE);
-        int eyeValue = sharedPref.getInt("eye",-1);
-        if(eyeValue != -1) {
+        SharedPreferences sharedPref = getSharedPreferences("MyPref", MODE_PRIVATE);
+        int eyeValue = sharedPref.getInt("eye", -1);
+        if (eyeValue != -1) {
             eyeSpinner.setSelection(eyeValue);
         }
         int hairValue = sharedPref.getInt("hair", -1);
-        if(hairValue != -1) {
+        if (hairValue != -1) {
             hairSpinner.setSelection(hairValue);
         }
-        int skinValue = sharedPref.getInt("skin",-1);
-        if(skinValue != -1) {
+        int skinValue = sharedPref.getInt("skin", -1);
+        if (skinValue != -1) {
             skinSpinner.setSelection(skinValue);
         }
         int frecValue = sharedPref.getInt("frec", -1);
-        if(frecValue != -1) {
+        if (frecValue != -1) {
             frecklesSpinner.setSelection(frecValue);
         }
         int burnValue = sharedPref.getInt("burn", -1);
-        if(burnValue != -1) {
+        if (burnValue != -1) {
             burnSpinner.setSelection(burnValue);
         }
         int brownFreqValue = sharedPref.getInt("brownFreq", -1);
-        if(brownFreqValue != -1) {
+        if (brownFreqValue != -1) {
             brownFreqSpinner.setSelection(brownFreqValue);
         }
         int brownIntValue = sharedPref.getInt("brownInt", -1);
-        if(brownIntValue != -1) {
+        if (brownIntValue != -1) {
             brownIntSpinner.setSelection(brownIntValue);
         }
         int faceValue = sharedPref.getInt("face", -1);
-        if(faceValue != -1) {
+        if (faceValue != -1) {
             faceSpinner.setSelection(faceValue);
         }
         int tanFreqValue = sharedPref.getInt("tanFreq", -1);
-        if(tanFreqValue != -1) {
+        if (tanFreqValue != -1) {
             tanFreqSpinner.setSelection(tanFreqValue);
         }
         int tanHistValue = sharedPref.getInt("tanHist", -1);
-        if(tanHistValue != -1) {
+        if (tanHistValue != -1) {
             tanHistSpinner.setSelection(tanHistValue);
         }
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-    // Inflate the menu items for use in the action bar
+        // Inflate the menu items for use in the action bar
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main, menu);
-        if(mConnectionState.equals(connectionStateEnum.isNull)||mConnectionState.equals(connectionStateEnum.isToScan)){
+        if (mConnectionState.equals(connectionStateEnum.isNull) || mConnectionState.equals(connectionStateEnum.isToScan)) {
             menu.findItem(R.id.menu_scan).setVisible(true);
             menu.findItem(R.id.menu_scanning).setVisible(false);
             menu.findItem(R.id.menu_connecting).setVisible(false);
@@ -136,8 +137,7 @@ public class MainActivity extends BlunoLibrary {
 
             ActivateButton(false);
             instructions.setText("Please scan and connect device.");
-        }
-        else if(mConnectionState.equals(connectionStateEnum.isScanning)) {
+        } else if (mConnectionState.equals(connectionStateEnum.isScanning)) {
             menu.findItem(R.id.menu_scan).setVisible(false);
             menu.findItem(R.id.menu_scanning).setVisible(true);
             menu.findItem(R.id.menu_connecting).setVisible(false);
@@ -146,8 +146,7 @@ public class MainActivity extends BlunoLibrary {
             menu.findItem(R.id.menu_refresh).setActionView(R.layout.actionbar_progress_indeterminate);
 
             ActivateButton(false);
-        }
-        else if(mConnectionState.equals(connectionStateEnum.isConnecting)) {
+        } else if (mConnectionState.equals(connectionStateEnum.isConnecting)) {
             menu.findItem(R.id.menu_scan).setVisible(false);
             menu.findItem(R.id.menu_scanning).setVisible(false);
             menu.findItem(R.id.menu_connecting).setVisible(true);
@@ -155,8 +154,7 @@ public class MainActivity extends BlunoLibrary {
             menu.findItem(R.id.menu_disconnecting).setVisible(false);
             menu.findItem(R.id.menu_refresh).setActionView(R.layout.actionbar_progress_indeterminate);
 
-        }
-        else if(mConnectionState.equals(connectionStateEnum.isConnected)) {
+        } else if (mConnectionState.equals(connectionStateEnum.isConnected)) {
             menu.findItem(R.id.menu_scan).setVisible(false);
             menu.findItem(R.id.menu_scanning).setVisible(false);
             menu.findItem(R.id.menu_connecting).setVisible(false);
@@ -166,8 +164,7 @@ public class MainActivity extends BlunoLibrary {
 
             ActivateButton(true);
             instructions.setText("Please calibrate the device.");
-        }
-        else if(mConnectionState.equals(connectionStateEnum.isDisconnecting)) {
+        } else if (mConnectionState.equals(connectionStateEnum.isDisconnecting)) {
             menu.findItem(R.id.menu_scan).setVisible(false);
             menu.findItem(R.id.menu_scanning).setVisible(false);
             menu.findItem(R.id.menu_connecting).setVisible(false);
@@ -179,6 +176,7 @@ public class MainActivity extends BlunoLibrary {
         }
         return super.onCreateOptionsMenu(menu);
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -194,10 +192,10 @@ public class MainActivity extends BlunoLibrary {
         return true;
     }
 
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
         System.out.println("BlUNOActivity onResume");
-        onResumeProcess();	//onResume Process by BlunoLibrary
+        onResumeProcess();    //onResume Process by BlunoLibrary
     }
 
     /*
@@ -214,7 +212,7 @@ public class MainActivity extends BlunoLibrary {
     public class MyEyeAdapter extends ArrayAdapter {
 
         public MyEyeAdapter(Context context, int textViewResourceId,
-                             String[] objects) {
+                            String[] objects) {
             super(context, textViewResourceId, objects);
         }
 
@@ -382,7 +380,7 @@ public class MainActivity extends BlunoLibrary {
     public class MySkinAdapter extends ArrayAdapter {
 
         public MySkinAdapter(Context context, int textViewResourceId,
-                         String[] objects) {
+                             String[] objects) {
             super(context, textViewResourceId, objects);
         }
 
@@ -491,7 +489,7 @@ public class MainActivity extends BlunoLibrary {
         list.add("Deep dark");
         ArrayAdapter<String> brownIntDataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
         brownIntDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        brownIntSpinner.setAdapter(brownIntDataAdapter );
+        brownIntSpinner.setAdapter(brownIntDataAdapter);
     }
 
     public void addItemsToFaceSpinner() {
@@ -553,23 +551,21 @@ public class MainActivity extends BlunoLibrary {
         char psiCheck;
         Intent intent = new Intent(this, DisplayMessageActivity.class);
         TextView textView = (TextView) findViewById(R.id.serialReceivedText);
-        if(textView.getText().toString().equals("")){
-            Toast.makeText(this,"Please select something", Toast.LENGTH_SHORT).show();
-        }
-        else {
+        if (textView.getText().toString().equals("")) {
+            Toast.makeText(this, "Please select something", Toast.LENGTH_SHORT).show();
+        } else {
             Button buttonSendData = (Button) findViewById(R.id.buttonSendData);
             Button buttonGetResult = (Button) findViewById(R.id.buttonDisplayResults);
             buttonSendData.setText("Calibrate");
             buttonSendData.setEnabled(true);
             String message = textView.getText().toString();
             psiCheck = message.charAt(7);
-            if(Character.getNumericValue(psiCheck)==9){
-                Toast.makeText(this,"Please re-calibrate device.",Toast.LENGTH_SHORT).show();
+            if (Character.getNumericValue(psiCheck) == 9) {
+                Toast.makeText(this, "Please re-calibrate device.", Toast.LENGTH_SHORT).show();
                 calState = false;
                 buttonSendData.setEnabled(true);
                 buttonGetResult.setEnabled(false);
-            }
-            else {
+            } else {
                 intent.putExtra(EXTRA_MESSAGE, message);
                 startActivity(intent);
             }
@@ -577,7 +573,7 @@ public class MainActivity extends BlunoLibrary {
     }
 
     public void sendData(View V) {
-        if((eyeSpinner.getSelectedItemPosition() * hairSpinner.getSelectedItemPosition() *
+        if ((eyeSpinner.getSelectedItemPosition() * hairSpinner.getSelectedItemPosition() *
                 skinSpinner.getSelectedItemPosition() * frecklesSpinner.getSelectedItemPosition() *
                 burnSpinner.getSelectedItemPosition() * brownFreqSpinner.getSelectedItemPosition() *
                 brownIntSpinner.getSelectedItemPosition() * faceSpinner.getSelectedItemPosition() *
@@ -586,25 +582,20 @@ public class MainActivity extends BlunoLibrary {
             int eyeVal = eyeSpinner.getSelectedItemPosition();
             int eyeOut;
             String calibrate;
-            if(eyeVal>0 && eyeVal<4) {
+            if (eyeVal > 0 && eyeVal < 4) {
                 eyeOut = 1;
-            }
-            else if(eyeVal>3 && eyeVal<7) {
+            } else if (eyeVal > 3 && eyeVal < 7) {
                 eyeOut = 2;
-            }
-            else if(eyeVal>6 && eyeVal<10) {
+            } else if (eyeVal > 6 && eyeVal < 10) {
                 eyeOut = 3;
-            }
-            else if(eyeVal==10) {
+            } else if (eyeVal == 10) {
                 eyeOut = 4;
-            }
-            else if(eyeVal==11){
+            } else if (eyeVal == 11) {
                 eyeOut = 5;
-            }
-            else {
+            } else {
                 eyeOut = 6;
             }
-            if(!calState){
+            if (!calState) {
                 calibrate = "0";
                 calState = true;
                 final Button buttonSendData = (Button) findViewById(R.id.buttonSendData);
@@ -621,8 +612,7 @@ public class MainActivity extends BlunoLibrary {
                 }, 5000);
                 instructions.setText("Please slide both doors open for 30 seconds.");
                 buttonSendData.setEnabled(false);
-            }
-            else {
+            } else {
                 calibrate = "1";
                 calState = false;
                 Button buttonSendData = (Button) findViewById(R.id.buttonSendData);
@@ -631,62 +621,60 @@ public class MainActivity extends BlunoLibrary {
                 buttonDisplayResults.setEnabled(true);
                 instructions.setText("Please press the \"Get Results\" button.");
             }
-            serialSend(String.valueOf(eyeOut)+String.valueOf(hairSpinner.getSelectedItemPosition())+
-                    String.valueOf(skinSpinner.getSelectedItemPosition())+String.valueOf(frecklesSpinner.getSelectedItemPosition())+
-                    String.valueOf(burnSpinner.getSelectedItemPosition())+String.valueOf(brownFreqSpinner.getSelectedItemPosition())+
-                    String.valueOf(brownIntSpinner.getSelectedItemPosition())+String.valueOf(faceSpinner.getSelectedItemPosition())+
-                    String.valueOf(tanFreqSpinner.getSelectedItemPosition())+String.valueOf(tanHistSpinner.getSelectedItemPosition())+
+            serialSend(String.valueOf(eyeOut) + String.valueOf(hairSpinner.getSelectedItemPosition()) +
+                    String.valueOf(skinSpinner.getSelectedItemPosition()) + String.valueOf(frecklesSpinner.getSelectedItemPosition()) +
+                    String.valueOf(burnSpinner.getSelectedItemPosition()) + String.valueOf(brownFreqSpinner.getSelectedItemPosition()) +
+                    String.valueOf(brownIntSpinner.getSelectedItemPosition()) + String.valueOf(faceSpinner.getSelectedItemPosition()) +
+                    String.valueOf(tanFreqSpinner.getSelectedItemPosition()) + String.valueOf(tanHistSpinner.getSelectedItemPosition()) +
                     calibrate);
-        }
-        else {
+        } else {
             Toast.makeText(this, "Please select an option for each category.", Toast.LENGTH_SHORT).show();
         }
     }
 
     public void cancelAlarm(View view) {
         Intent alarmIntent = new Intent(this, OneShotAlarm.class);
-        pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent,0);
-        manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent, 0);
+        manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         manager.cancel(pendingIntent);
         Toast.makeText(this, "Alarm canceled", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        onActivityResultProcess(requestCode, resultCode, data);	//onActivityResult Process by BlunoLibrary
+        onActivityResultProcess(requestCode, resultCode, data);    //onActivityResult Process by BlunoLibrary
         super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        onPauseProcess();	//onPause Process by BlunoLibrary
+        onPauseProcess();    //onPause Process by BlunoLibrary
     }
 
     protected void onStop() {
         super.onStop();
-        onStopProcess();	//onStop Process by BlunoLibrary
+        onStopProcess();    //onStop Process by BlunoLibrary
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        onDestroyProcess();	//onDestroy Process by BlunoLibrary
+        onDestroyProcess();    //onDestroy Process by BlunoLibrary
     }
 
     public Boolean isNumeric(String str) {
         try {
             float f = Float.parseFloat(str);
-        }
-        catch(NumberFormatException nfe) {
+        } catch (NumberFormatException nfe) {
             return false;
         }
         return true;
     }
 
     @Override
-    public void onSerialReceived(String theString) {	//Once connection data received, this function will be called
-        serialReceivedText.append(theString);	//append the text into the EditText
+    public void onSerialReceived(String theString) {    //Once connection data received, this function will be called
+        serialReceivedText.append(theString);    //append the text into the EditText
         final Toast toast = Toast.makeText(this, "Sending data...", Toast.LENGTH_SHORT);
         toast.show();
 
@@ -700,8 +688,8 @@ public class MainActivity extends BlunoLibrary {
     }
 
     /**
-     *  This functions will enable or disable the buttons depending on the bluetooth connectivity
-     *  status.
+     * This functions will enable or disable the buttons depending on the bluetooth connectivity
+     * status.
      */
     public void ActivateButton(boolean trueFalse) {
         Button buttonDisplayResults = (Button) findViewById(R.id.buttonDisplayResults);
@@ -711,8 +699,7 @@ public class MainActivity extends BlunoLibrary {
             buttonSendData.setEnabled(true);
             buttonSendData.setText("Calibrate");
             calState = false;
-        }
-        else {
+        } else {
             buttonDisplayResults.setEnabled(false);
             buttonSendData.setEnabled(false);
             buttonSendData.setText("Calibrate");

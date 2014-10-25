@@ -29,7 +29,7 @@ public class OneShotAlarm extends BroadcastReceiver {
      */
     private void showNotification(Context context) {
         Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
-        long[] pattern = {500,500,500,500,500,500,500,500,500,500};
+        long[] pattern = {500, 500, 500, 500, 500, 500, 500, 500, 500, 500};
         Intent contentIntent = new Intent(context, NotificationReceiverActivity.class);
         contentIntent.putExtra("spfAppl", spfFact);
         PendingIntent pIntent = PendingIntent.getActivity(context, 1, contentIntent, PendingIntent.FLAG_UPDATE_CURRENT);

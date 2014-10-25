@@ -1,34 +1,34 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/menu_refresh"
         android:checkable="false"
         android:orderInCategory="1"
         android:showAsAction="ifRoom"
-        android:title="@string/blank"/>
+        android:title="@string/blank" />
     <item
         android:id="@+id/menu_scan"
         android:orderInCategory="100"
         android:showAsAction="ifRoom|withText"
-        android:title="@string/menu_scan"/>
+        android:title="@string/menu_scan" />
     <item
         android:id="@+id/menu_scanning"
         android:orderInCategory="101"
         android:showAsAction="ifRoom|withText"
-        android:title="@string/menu_scanning"/>
+        android:title="@string/menu_scanning" />
     <item
         android:id="@+id/menu_connecting"
         android:orderInCategory="102"
         android:showAsAction="always|withText"
-        android:title="@string/menu_connecting"/>
+        android:title="@string/menu_connecting" />
     <item
         android:id="@+id/menu_disconnect"
         android:orderInCategory="103"
         android:showAsAction="ifRoom|withText"
-        android:title="@string/menu_disconnect"/>
+        android:title="@string/menu_disconnect" />
     <item
         android:id="@+id/menu_disconnecting"
         android:orderInCategory="103"
         android:showAsAction="ifRoom|withText"
-        android:title="@string/menu_disconnecting"/>
+        android:title="@string/menu_disconnecting" />
 
 </menu>

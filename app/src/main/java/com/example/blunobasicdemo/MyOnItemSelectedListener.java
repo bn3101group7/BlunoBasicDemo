@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.TableRow;
-import android.widget.Toast;
 
 /**
  * Created by User on 9/28/2014.
@@ -27,7 +26,7 @@ public class MyOnItemSelectedListener implements OnItemSelectedListener {
      */
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-        switch(parent.getId()) {
+        switch (parent.getId()) {
             case R.id.eyeSpinner:
                 editor = pref.edit();
                 editor.putInt("eye", pos);
@@ -74,6 +73,7 @@ public class MyOnItemSelectedListener implements OnItemSelectedListener {
         editor.apply();
         //Toast.makeText(parent.getContext(), Integer.toString(pos), Toast.LENGTH_SHORT).show();
     }
+
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
