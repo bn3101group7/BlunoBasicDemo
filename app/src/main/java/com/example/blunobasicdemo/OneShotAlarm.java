@@ -26,6 +26,8 @@ public class OneShotAlarm extends BroadcastReceiver {
 
     /**
      * customizes the type of alarm and notification when alarm is triggered
+     *
+     * @param context context in which the receiver is running
      */
     private void showNotification(Context context) {
         Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);

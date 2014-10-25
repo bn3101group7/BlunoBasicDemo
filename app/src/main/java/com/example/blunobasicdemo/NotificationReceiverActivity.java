@@ -35,6 +35,11 @@ public class NotificationReceiverActivity extends Activity {
 
     }
 
+    /**
+     * display warning message/advice to user after alarm is triggered
+     *
+     * @param spfFact SPF factor sent through intent
+     */
     public void spfMessage(String spfFact) {
         spfAdv = (TextView) findViewById(R.id.spfKnow);
         if (spfFact.equals("0")) {

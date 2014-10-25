@@ -206,18 +206,18 @@ public class MainActivity extends BlunoLibrary {
         onResumeProcess();    //onResume Process by BlunoLibrary
     }
 
-    /*
-    public void addItemsToEyeSpinner() {
-        eyeSpinner = (Spinner) findViewById(R.id.eyeSpinner);
-        eyeSpinner.setAdapter(new MyEyeAdapter());
-    }*/
-
+    /**
+     * populated the eye colour spinner
+     */
     public void addItemsToEyeSpinner() {
         eyeSpinner = (Spinner) findViewById(R.id.eyeSpinner);
         eyeSpinner.setAdapter(new MyEyeAdapter(MainActivity.this, R.layout.multi_spinner_eye,
                 eyeText));
     }
 
+    /**
+     * array adapter for eyeSpinner to display image and text in each spinner row
+     */
     public class MyEyeAdapter extends ArrayAdapter {
 
         public MyEyeAdapter(Context context, int textViewResourceId,
@@ -239,26 +239,11 @@ public class MainActivity extends BlunoLibrary {
             // Setting the text using the array
             tvLanguage.setText(eyeText[position]);
 
-            // Setting the color of the text
-            //tvLanguage.setTextColor(Color.rgb(75, 180, 225));
-
             // Declaring and Typecasting the imageView in the inflated layout
             ImageView img = (ImageView) layout.findViewById(R.id.imgLanguage);
 
             // Setting an image using the id's in the array
             img.setImageResource(eyeColour[position]);
-
-            // Setting Special attributes for 1st element
-            /*
-            if (position == 0) {
-                // Removing the image view
-                img.setVisibility(View.GONE);
-                // Setting the size of the text
-                tvLanguage.setTextSize(20f);
-                // Setting the text Color
-                tvLanguage.setTextColor(Color.BLACK);
-
-            }*/
 
             return layout;
         }
@@ -276,53 +261,19 @@ public class MainActivity extends BlunoLibrary {
             return getCustomView(position, convertView, parent);
         }
     }
-    /*
-    private static class EyeViewHolder {
-        ImageView imageViewEye;
-    }
 
-    private class MyEyeAdapter extends BaseAdapter {
-        public int getCount(){
-            return eyeColour.length;
-        }
-        @Override
-        public Integer getItem(int position) {
-            return eyeColour[position];
-        }
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View itemView = convertView;
-            EyeViewHolder eyeViewHolder;
-            //do we have a view?
-            if(convertView == null) {
-                //we don't have a view so create one
-                itemView = getLayoutInflater().inflate(R.layout.spinner_row,parent, false);
-                eyeViewHolder = new EyeViewHolder();
-                eyeViewHolder.imageViewEye = (ImageView) itemView.findViewById(R.id.spinnerImage);
-                //set the tag for this view to the current image view holder
-                itemView.setTag(eyeViewHolder);
-            }
-            else {
-                //we have a view to get the tagged view
-                eyeViewHolder = (EyeViewHolder) itemView.getTag();
-            }
-            //display the current image
-            eyeViewHolder.imageViewEye.setImageDrawable(getResources().getDrawable(eyeColour[position]));
-            return itemView;
-        }
-    }
-    */
-
+    /**
+     * populates the hair colour spinner
+     */
     public void addItemsToHairSpinner() {
         hairSpinner = (Spinner) findViewById(R.id.hairSpinner);
         hairSpinner.setAdapter(new MyHairAdapter(MainActivity.this, R.layout.multi_spinner_hair,
                 hairText));
     }
 
+    /**
+     * array adapter for hairSpinner to display image and text in each spinner row
+     */
     public class MyHairAdapter extends ArrayAdapter {
 
         public MyHairAdapter(Context context, int textViewResourceId,
@@ -344,26 +295,11 @@ public class MainActivity extends BlunoLibrary {
             // Setting the text using the array
             tvLanguage.setText(hairText[position]);
 
-            // Setting the color of the text
-            //tvLanguage.setTextColor(Color.rgb(75, 180, 225));
-
             // Declaring and Typecasting the imageView in the inflated layout
             ImageView img = (ImageView) layout.findViewById(R.id.imgLanguage);
 
             // Setting an image using the id's in the array
             img.setImageResource(hairColour[position]);
-
-            // Setting Special attributes for 1st element
-            /*
-            if (position == 0) {
-                // Removing the image view
-                img.setVisibility(View.GONE);
-                // Setting the size of the text
-                tvLanguage.setTextSize(20f);
-                // Setting the text Color
-                tvLanguage.setTextColor(Color.BLACK);
-
-            }*/
 
             return layout;
         }
@@ -382,12 +318,18 @@ public class MainActivity extends BlunoLibrary {
         }
     }
 
+    /**
+     * populates the skin colour spinner
+     */
     public void addItemsToSkinSpinner() {
         skinSpinner = (Spinner) findViewById(R.id.skinSpinner);
         skinSpinner.setAdapter(new MySkinAdapter(MainActivity.this, R.layout.multi_spinner,
                 skinText));
     }
 
+    /**
+     * array adapter for skinSpinner to display image and text in each spinner row
+     */
     public class MySkinAdapter extends ArrayAdapter {
 
         public MySkinAdapter(Context context, int textViewResourceId,
@@ -409,26 +351,12 @@ public class MainActivity extends BlunoLibrary {
             // Setting the text using the array
             tvLanguage.setText(skinText[position]);
 
-            // Setting the color of the text
-            //tvLanguage.setTextColor(Color.rgb(75, 180, 225));
 
             // Declaring and Typecasting the imageView in the inflated layout
             ImageView img = (ImageView) layout.findViewById(R.id.imgLanguage);
 
             // Setting an image using the id's in the array
             img.setImageResource(skinTone[position]);
-
-            // Setting Special attributes for 1st element
-            /*
-            if (position == 0) {
-                // Removing the image view
-                img.setVisibility(View.GONE);
-                // Setting the size of the text
-                tvLanguage.setTextSize(20f);
-                // Setting the text Color
-                tvLanguage.setTextColor(Color.BLACK);
-
-            }*/
 
             return layout;
         }
@@ -447,6 +375,9 @@ public class MainActivity extends BlunoLibrary {
         }
     }
 
+    /**
+     * populate the freckles spinner with text
+     */
     public void addItemsToFrecklesSpinner() {
         frecklesSpinner = (Spinner) findViewById(R.id.frecklesSpinner);
         List<String> list = new ArrayList<String>();
@@ -462,6 +393,9 @@ public class MainActivity extends BlunoLibrary {
         frecklesSpinner.setAdapter(frecklesDataAdapter);
     }
 
+    /**
+     * populate the sun burn spinner with text
+     */
     public void addItemsToBurnSpinner() {
         burnSpinner = (Spinner) findViewById(R.id.burnSpinner);
         List<String> list = new ArrayList<String>();
@@ -477,6 +411,9 @@ public class MainActivity extends BlunoLibrary {
         burnSpinner.setAdapter(burnDataAdapter);
     }
 
+    /**
+     * populate the brown frequency spinner with text
+     */
     public void addItemsToBrownFreqSpinner() {
         brownFreqSpinner = (Spinner) findViewById(R.id.brownFreqSpinner);
         List<String> list = new ArrayList<String>();
@@ -492,6 +429,9 @@ public class MainActivity extends BlunoLibrary {
         brownFreqSpinner.setAdapter(brownFreqDataAdapter);
     }
 
+    /**
+     * populate the brown intensity spinner with text
+     */
     public void addItemsToBrownIntSpinner() {
         brownIntSpinner = (Spinner) findViewById(R.id.brownIntSpinner);
         List<String> list = new ArrayList<String>();
@@ -507,6 +447,9 @@ public class MainActivity extends BlunoLibrary {
         brownIntSpinner.setAdapter(brownIntDataAdapter);
     }
 
+    /**
+     * populate the face sensitivity spinner with text
+     */
     public void addItemsToFaceSpinner() {
         faceSpinner = (Spinner) findViewById(R.id.faceSpinner);
         List<String> list = new ArrayList<String>();
@@ -522,6 +465,9 @@ public class MainActivity extends BlunoLibrary {
         faceSpinner.setAdapter(faceDataAdapter);
     }
 
+    /**
+     * populate the tan frequency spinner with text
+     */
     public void addItemsToTanFreqSpinner() {
         tanFreqSpinner = (Spinner) findViewById(R.id.tanFreqSpinner);
         List<String> list = new ArrayList<String>();
@@ -537,6 +483,9 @@ public class MainActivity extends BlunoLibrary {
         tanFreqSpinner.setAdapter(tanFreqDataAdapter);
     }
 
+    /**
+     * populate the tan history spinner with text
+     */
     public void addItemsToTanHistSpinner() {
         tanHistSpinner = (Spinner) findViewById(R.id.tanHistSpinner);
         List<String> list = new ArrayList<String>();
@@ -552,6 +501,9 @@ public class MainActivity extends BlunoLibrary {
         tanHistSpinner.setAdapter(tanHistDataAdapter);
     }
 
+    /**
+     * adds on item selected listeners to all spinners
+     */
     public void addListenerToSpinner() {
         skinSpinner.setOnItemSelectedListener(new MyOnItemSelectedListener(this));
         eyeSpinner.setOnItemSelectedListener(new MyOnItemSelectedListener(this));
@@ -565,6 +517,14 @@ public class MainActivity extends BlunoLibrary {
         tanHistSpinner.setOnItemSelectedListener(new MyOnItemSelectedListener(this));
     }
 
+    /**
+     * get results from Bluno Nano
+     * checks if questions are answered
+     * checks if psi reading is correctly
+     * prompts recalibration if necessary
+     *
+     * @param V view that was clicked
+     */
     public void displayResults(View V) {
         char psiCheck;
         Intent intent = new Intent(this, DisplayMessageActivity.class);
@@ -590,6 +550,13 @@ public class MainActivity extends BlunoLibrary {
         }
     }
 
+    /**
+     * get values from spinners and send as string array to Bluno Nano
+     * changes button name between "calibrate" and "measure" depending on stage of calibration
+     * process
+     *
+     * @param V view that was clicked
+     */
     public void sendData(View V) {
         if ((eyeSpinner.getSelectedItemPosition() * hairSpinner.getSelectedItemPosition() *
                 skinSpinner.getSelectedItemPosition() * frecklesSpinner.getSelectedItemPosition() *
@@ -657,6 +624,9 @@ public class MainActivity extends BlunoLibrary {
         }
     }
 
+    /**
+     * cancels existing alarm
+     */
     public void cancelAlarm(View view) {
         Intent alarmIntent = new Intent(this, OneShotAlarm.class);
         pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent, 0);
@@ -689,15 +659,6 @@ public class MainActivity extends BlunoLibrary {
         onDestroyProcess();    //onDestroy Process by BlunoLibrary
     }
 
-    public Boolean isNumeric(String str) {
-        try {
-            float f = Float.parseFloat(str);
-        } catch (NumberFormatException nfe) {
-            return false;
-        }
-        return true;
-    }
-
     @Override
     //Once connection data received, this function will be called
     public void onSerialReceived(String theString) {
@@ -717,6 +678,8 @@ public class MainActivity extends BlunoLibrary {
     /**
      * This functions will enable or disable the buttons depending on the bluetooth connectivity
      * status.
+     * @param trueFalse boolean variable representing bluetooth connection status of app
+     *                  true is connected, false is disconnected
      */
     public void ActivateButton(boolean trueFalse) {
         Button buttonDisplayResults = (Button) findViewById(R.id.buttonDisplayResults);

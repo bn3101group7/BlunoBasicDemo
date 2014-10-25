@@ -62,7 +62,10 @@ public class DisplayMessageActivity extends Activity {
     /**
      * This function will receive the skin score from Bluno Nano in the a char array of size 2
      * and compute the skin type based on the fitzpatrick skin type chart
+     *
+     * @param msg message from Bluno Nano
      */
+
     public void getSkinScore(String msg) {
         TextView skinView;
         String skinType;
@@ -87,6 +90,10 @@ public class DisplayMessageActivity extends Activity {
         skinView.setText("Type " + skinType);
     }
 
+    /**
+     * Extracts the UV index from Bluno sessage
+     * @param msg message from Bluno Nano
+     */
     public void getUvIndex(String msg) {
         TextView uvView;
         String uvString;
@@ -100,10 +107,11 @@ public class DisplayMessageActivity extends Activity {
     }
 
     /**
-     * Calculates uv Exposure display based on the swimming condition
+     * Calculates uv Exposure display based on the swimming condition and SPF factor applied
      * sets alarm
+     *
+     * @param msg message from Bluno Nano
      */
-
     public void getAlarmTime(String msg) {
         final Switch swimSwitch;
         LinearLayout alarmBtn;
@@ -172,9 +180,10 @@ public class DisplayMessageActivity extends Activity {
     }
 
     /**
-     * get input from Bluno Nano and displays PSI range
+     * extracts PSI level from Bluno message
+     *
+     * @param msg message from Bluno Nano
      */
-
     public void getPsiLvl(String msg) {
         TextView psiView;
         psiLvl = msg.charAt(7);
@@ -197,10 +206,9 @@ public class DisplayMessageActivity extends Activity {
         psiView.setText(psiRange);
     }
 
-    /*
+    /**
      * populates spinner for SPF values of sunblock
      */
-
     public void addItemsToSpfSpinner() {
         spfSpinner = (Spinner) findViewById(R.id.spfSpinner);
         List<String> list = new ArrayList<String>();
@@ -220,7 +228,6 @@ public class DisplayMessageActivity extends Activity {
      * adds OnItemSelectedListener to SPF spinner, toggles visibility of EditText for manual entry
      * of SPF value if "Others" is selected
      */
-
     public void addListenerToSpfSpinner() {
         spfSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -296,8 +303,9 @@ public class DisplayMessageActivity extends Activity {
 
     /**
      * sets the alarm, which is non-repeating
+     * @param time duration of alarm to be set
+     * @param spfFact SPF factor applied to be sent to notification through putExtra()
      */
-
     public void setAlarm(int time, String spfFact) {
         // When the alarm goes off, we want to broadcast an Intent to our
         // BroadcastReceiver. Here we make an Intent with an explicit class

@@ -23,6 +23,11 @@ public class MyOnItemSelectedListener implements OnItemSelectedListener {
 
     /**
      * gets position of selected spinner position and saves it to shared preference
+     *
+     * @param parent the AdapterView where click happened
+     * @param view the view with the AdapterView that was clicked
+     * @param pos position of the view in the adapter
+     * @param id row id of the item that was clicked
      */
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
@@ -71,7 +76,6 @@ public class MyOnItemSelectedListener implements OnItemSelectedListener {
                 break;
         }
         editor.apply();
-        //Toast.makeText(parent.getContext(), Integer.toString(pos), Toast.LENGTH_SHORT).show();
     }
 
     @Override
