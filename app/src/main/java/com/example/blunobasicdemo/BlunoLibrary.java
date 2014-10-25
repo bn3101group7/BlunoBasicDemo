@@ -50,7 +50,8 @@ public abstract class BlunoLibrary extends Activity {
     private String mPassword = "AT+PASSWOR=DFRobot\r\n";
     private String mBaudrateBuffer = "AT+CURRUART=" + mBaudrate + "\r\n";
 
-    // byte[] mBaudrateBuffer={0x32,0x00,(byte) (mBaudrate & 0xFF),(byte) ((mBaudrate>>8) & 0xFF),(byte) ((mBaudrate>>16) & 0xFF),0x00};;
+    // byte[] mBaudrateBuffer={0x32,0x00,(byte) (mBaudrate & 0xFF),(byte) ((mBaudrate>>8) & 0xFF),
+    // (byte) ((mBaudrate>>16) & 0xFF),0x00};;
     public void serialBegin(int baud) {
         mBaudrate = baud;
         mBaudrateBuffer = "AT+CURRUART=" + mBaudrate + "\r\n";
@@ -61,7 +62,8 @@ public abstract class BlunoLibrary extends Activity {
         TextView deviceAddress;
     }
 
-    private static BluetoothGattCharacteristic mSCharacteristic, mModelNumberCharacteristic, mSerialPortCharacteristic, mCommandCharacteristic;
+    private static BluetoothGattCharacteristic mSCharacteristic, mModelNumberCharacteristic,
+            mSerialPortCharacteristic, mCommandCharacteristic;
     BluetoothLeService mBluetoothLeService;
     private ArrayList<ArrayList<BluetoothGattCharacteristic>> mGattCharacteristics =
             new ArrayList<ArrayList<BluetoothGattCharacteristic>>();
@@ -72,7 +74,8 @@ public abstract class BlunoLibrary extends Activity {
     private String mDeviceName;
     private String mDeviceAddress;
 
-    public enum connectionStateEnum {isNull, isScanning, isToScan, isConnecting, isConnected, isDisconnecting}
+    public enum connectionStateEnum {isNull, isScanning, isToScan, isConnecting, isConnected,
+        isDisconnecting}
 
     ;
     public connectionStateEnum mConnectionState = connectionStateEnum.isNull;
@@ -117,7 +120,8 @@ public abstract class BlunoLibrary extends Activity {
         mLeDeviceListAdapter = new LeDeviceListAdapter();
         // Initializes and show the scan Device Dialog
         mScanDeviceDialog = new AlertDialog.Builder(mainContext)
-                .setTitle("BLE Device Scan...").setAdapter(mLeDeviceListAdapter, new DialogInterface.OnClickListener() {
+                .setTitle("BLE Device Scan...").setAdapter(mLeDeviceListAdapter,
+                        new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         final BluetoothDevice device = mLeDeviceListAdapter.getDevice(which);
@@ -125,10 +129,12 @@ public abstract class BlunoLibrary extends Activity {
                             return;
                         scanLeDevice(false);
                         System.out.println("onListItemClick " + device.getName().toString());
-                        System.out.println("Device Name:" + device.getName() + " " + "Device Name:" + device.getAddress());
+                        System.out.println("Device Name:" + device.getName() + " " +
+                                "Device Name:" + device.getAddress());
                         mDeviceName = device.getName().toString();
                         mDeviceAddress = device.getAddress().toString();
-                        if (mDeviceName.equals("No Device Available") && mDeviceAddress.equals("No Address Available")) {
+                        if (mDeviceName.equals("No Device Available") && mDeviceAddress
+                                .equals("No Address Available")) {
                             mConnectionState = connectionStateEnum.isToScan;
                             //onConectionStateChange(mConnectionState);
                             invalidateOptionsMenu();
@@ -230,7 +236,8 @@ public abstract class BlunoLibrary extends Activity {
         // Initializes a Bluetooth adapter. For API level 18 and above, get a
         // reference to
         // BluetoothAdapter through BluetoothManager.
-        final BluetoothManager bluetoothManager = (BluetoothManager) mainContext.getSystemService(Context.BLUETOOTH_SERVICE);
+        final BluetoothManager bluetoothManager = (BluetoothManager) mainContext
+                .getSystemService(Context.BLUETOOTH_SERVICE);
         mBluetoothAdapter = bluetoothManager.getAdapter();
         // Checks if Bluetooth is supported on the device.
         if (mBluetoothAdapter == null) {
@@ -263,14 +270,16 @@ public abstract class BlunoLibrary extends Activity {
                 mBluetoothLeService.close();
             } else if (BluetoothLeService.ACTION_GATT_SERVICES_DISCOVERED.equals(action)) {
                 // Show all the supported services and characteristics on the user interface.
-                for (BluetoothGattService gattService : mBluetoothLeService.getSupportedGattServices()) {
+                for (BluetoothGattService gattService : mBluetoothLeService
+                        .getSupportedGattServices()) {
                     System.out.println("ACTION_GATT_SERVICES_DISCOVERED " +
                             gattService.getUuid().toString());
                 }
                 getGattServices(mBluetoothLeService.getSupportedGattServices());
             } else if (BluetoothLeService.ACTION_DATA_AVAILABLE.equals(action)) {
                 if (mSCharacteristic == mModelNumberCharacteristic) {
-                    if (intent.getStringExtra(BluetoothLeService.EXTRA_DATA).toUpperCase().startsWith("DF BLUNO")) {
+                    if (intent.getStringExtra(BluetoothLeService.EXTRA_DATA).toUpperCase()
+                            .startsWith("DF BLUNO")) {
                         mBluetoothLeService.setCharacteristicNotification(mSCharacteristic, false);
                         mSCharacteristic = mCommandCharacteristic;
                         mSCharacteristic.setValue(mPassword);
@@ -283,7 +292,8 @@ public abstract class BlunoLibrary extends Activity {
                         //onConectionStateChange(mConnectionState);
                         invalidateOptionsMenu();
                     } else {
-                        Toast.makeText(mainContext, "Please select DFRobot devices", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mainContext, "Please select DFRobot devices",
+                                Toast.LENGTH_SHORT).show();
                         mConnectionState = connectionStateEnum.isToScan;
                         //onConectionStateChange(mConnectionState);
                         invalidateOptionsMenu();
@@ -291,8 +301,10 @@ public abstract class BlunoLibrary extends Activity {
                 } else if (mSCharacteristic == mSerialPortCharacteristic) {
                     onSerialReceived(intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
                 }
-                System.out.println("displayData " + intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
-                // mPlainProtocol.mReceivedframe.append(intent.getStringExtra(BluetoothLeService.EXTRA_DATA)) ;
+                System.out.println("displayData " + intent.getStringExtra(BluetoothLeService
+                        .EXTRA_DATA));
+                // mPlainProtocol.mReceivedframe.append(intent.getStringExtra(BluetoothLeService
+                // .EXTRA_DATA)) ;
                 // System.out.print("mPlainProtocol.mReceivedframe:");
                 // System.out.println(mPlainProtocol.mReceivedframe.toString());
             }
@@ -373,7 +385,8 @@ public abstract class BlunoLibrary extends Activity {
         }
     };
     // Device scan callback.
-    private BluetoothAdapter.LeScanCallback mLeScanCallback = new BluetoothAdapter.LeScanCallback() {
+    private BluetoothAdapter.LeScanCallback mLeScanCallback =
+            new BluetoothAdapter.LeScanCallback() {
         @Override
         public void onLeScan(final BluetoothDevice device, int rssi,
                              byte[] scanRecord) {
@@ -409,20 +422,24 @@ public abstract class BlunoLibrary extends Activity {
                 uuid = gattCharacteristic.getUuid().toString();
                 if (uuid.equals(ModelNumberStringUUID)) {
                     mModelNumberCharacteristic = gattCharacteristic;
-                    System.out.println("mModelNumberCharacteristic " + mModelNumberCharacteristic.getUuid().toString());
+                    System.out.println("mModelNumberCharacteristic " + mModelNumberCharacteristic
+                            .getUuid().toString());
                 } else if (uuid.equals(SerialPortUUID)) {
                     mSerialPortCharacteristic = gattCharacteristic;
-                    System.out.println("mSerialPortCharacteristic " + mSerialPortCharacteristic.getUuid().toString());
+                    System.out.println("mSerialPortCharacteristic " + mSerialPortCharacteristic
+                            .getUuid().toString());
                     // updateConnectionState(R.string.comm_establish);
                 } else if (uuid.equals(CommandUUID)) {
                     mCommandCharacteristic = gattCharacteristic;
-                    System.out.println("mSerialPortCharacteristic " + mSerialPortCharacteristic.getUuid().toString());
+                    System.out.println("mSerialPortCharacteristic " + mSerialPortCharacteristic
+                            .getUuid().toString());
                     // updateConnectionState(R.string.comm_establish);
                 }
             }
             mGattCharacteristics.add(charas);
         }
-        if (mModelNumberCharacteristic == null || mSerialPortCharacteristic == null || mCommandCharacteristic == null) {
+        if (mModelNumberCharacteristic == null || mSerialPortCharacteristic == null ||
+                mCommandCharacteristic == null) {
             Toast.makeText(mainContext, "Please select DFRobot devices", Toast.LENGTH_SHORT).show();
             mConnectionState = connectionStateEnum.isToScan;
             //onConectionStateChange(mConnectionState);

@@ -43,17 +43,20 @@ public class MainActivity extends BlunoLibrary {
 
     private static final String[] skinText = {"Please choose your skin colour", "Pale", "Fair",
             "Beige", "Olive", "Brown", "Dark Brown"};
-    private static final Integer[] skinTone = {R.drawable.blank, R.drawable.skin_1, R.drawable.skin_2,
-            R.drawable.skin_3, R.drawable.skin_4, R.drawable.skin_5, R.drawable.skin_6};
+    private static final Integer[] skinTone = {R.drawable.blank, R.drawable.skin_1,
+            R.drawable.skin_2,R.drawable.skin_3, R.drawable.skin_4, R.drawable.skin_5,
+            R.drawable.skin_6};
     private static final String[] hairText = {"Please choose your hair colour", "Sandy red",
             "Blond", "Dark blond", "Chestnut", "Brown", "Black"};
-    private static final Integer[] hairColour = {R.drawable.blank, R.drawable.hair_01, R.drawable.hair_02,
-            R.drawable.hair_03, R.drawable.hair_04, R.drawable.hair_05, R.drawable.hair_06};
+    private static final Integer[] hairColour = {R.drawable.blank, R.drawable.hair_01,
+            R.drawable.hair_02,R.drawable.hair_03, R.drawable.hair_04, R.drawable.hair_05,
+            R.drawable.hair_06};
     private static final String[] eyeText = {"Please choose your natural eye colour", "Light blue",
             "Light green", "Light gray", "Blue", "Green", "Gray", "Dark blue", "Dark green",
             "Dark gray", "Brown", "Black"};
-    private static final Integer[] eyeColour = {R.drawable.blank, R.drawable.eye_01, R.drawable.eye_02,
-            R.drawable.eye_03, R.drawable.eye_04, R.drawable.eye_05, R.drawable.eye_06, R.drawable.eye_07,
+    private static final Integer[] eyeColour = {R.drawable.blank, R.drawable.eye_01,
+            R.drawable.eye_02,R.drawable.eye_03, R.drawable.eye_04, R.drawable.eye_05,
+            R.drawable.eye_06, R.drawable.eye_07,
             R.drawable.eye_08, R.drawable.eye_09, R.drawable.eye_10, R.drawable.eye_11};
     public final static String EXTRA_MESSAGE = "com.example.blunobasicdemo.MESSAGE";
 
@@ -63,7 +66,8 @@ public class MainActivity extends BlunoLibrary {
         setContentView(R.layout.activity_main);
         onCreateProcess();    //onCreate Process by BlunoLibrary
         serialBegin(115200);    //set the Uart Baudrate on BLE chip to 115200
-        serialReceivedText = (TextView) findViewById(R.id.serialReceivedText);    //initial the EditText of the received data
+        //initial the EditText of the received data
+        serialReceivedText = (TextView) findViewById(R.id.serialReceivedText);
         instructions = (TextView) findViewById(R.id.instructions);
 
         addItemsToEyeSpinner();
@@ -127,7 +131,8 @@ public class MainActivity extends BlunoLibrary {
         // Inflate the menu items for use in the action bar
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main, menu);
-        if (mConnectionState.equals(connectionStateEnum.isNull) || mConnectionState.equals(connectionStateEnum.isToScan)) {
+        if (mConnectionState.equals(connectionStateEnum.isNull) ||
+                mConnectionState.equals(connectionStateEnum.isToScan)) {
             menu.findItem(R.id.menu_scan).setVisible(true);
             menu.findItem(R.id.menu_scanning).setVisible(false);
             menu.findItem(R.id.menu_connecting).setVisible(false);
@@ -143,7 +148,8 @@ public class MainActivity extends BlunoLibrary {
             menu.findItem(R.id.menu_connecting).setVisible(false);
             menu.findItem(R.id.menu_disconnect).setVisible(false);
             menu.findItem(R.id.menu_disconnecting).setVisible(false);
-            menu.findItem(R.id.menu_refresh).setActionView(R.layout.actionbar_progress_indeterminate);
+            menu.findItem(R.id.menu_refresh)
+                    .setActionView(R.layout.actionbar_progress_indeterminate);
 
             ActivateButton(false);
         } else if (mConnectionState.equals(connectionStateEnum.isConnecting)) {
@@ -152,7 +158,8 @@ public class MainActivity extends BlunoLibrary {
             menu.findItem(R.id.menu_connecting).setVisible(true);
             menu.findItem(R.id.menu_disconnect).setVisible(false);
             menu.findItem(R.id.menu_disconnecting).setVisible(false);
-            menu.findItem(R.id.menu_refresh).setActionView(R.layout.actionbar_progress_indeterminate);
+            menu.findItem(R.id.menu_refresh)
+                    .setActionView(R.layout.actionbar_progress_indeterminate);
 
         } else if (mConnectionState.equals(connectionStateEnum.isConnected)) {
             menu.findItem(R.id.menu_scan).setVisible(false);
@@ -170,7 +177,8 @@ public class MainActivity extends BlunoLibrary {
             menu.findItem(R.id.menu_connecting).setVisible(false);
             menu.findItem(R.id.menu_disconnect).setVisible(false);
             menu.findItem(R.id.menu_disconnecting).setVisible(true);
-            menu.findItem(R.id.menu_refresh).setActionView(R.layout.actionbar_progress_indeterminate);
+            menu.findItem(R.id.menu_refresh)
+                    .setActionView(R.layout.actionbar_progress_indeterminate);
 
             ActivateButton(false);
         }
@@ -206,7 +214,8 @@ public class MainActivity extends BlunoLibrary {
 
     public void addItemsToEyeSpinner() {
         eyeSpinner = (Spinner) findViewById(R.id.eyeSpinner);
-        eyeSpinner.setAdapter(new MyEyeAdapter(MainActivity.this, R.layout.multi_spinner_eye, eyeText));
+        eyeSpinner.setAdapter(new MyEyeAdapter(MainActivity.this, R.layout.multi_spinner_eye,
+                eyeText));
     }
 
     public class MyEyeAdapter extends ArrayAdapter {
@@ -310,7 +319,8 @@ public class MainActivity extends BlunoLibrary {
 
     public void addItemsToHairSpinner() {
         hairSpinner = (Spinner) findViewById(R.id.hairSpinner);
-        hairSpinner.setAdapter(new MyHairAdapter(MainActivity.this, R.layout.multi_spinner_hair, hairText));
+        hairSpinner.setAdapter(new MyHairAdapter(MainActivity.this, R.layout.multi_spinner_hair,
+                hairText));
     }
 
     public class MyHairAdapter extends ArrayAdapter {
@@ -374,7 +384,8 @@ public class MainActivity extends BlunoLibrary {
 
     public void addItemsToSkinSpinner() {
         skinSpinner = (Spinner) findViewById(R.id.skinSpinner);
-        skinSpinner.setAdapter(new MySkinAdapter(MainActivity.this, R.layout.multi_spinner, skinText));
+        skinSpinner.setAdapter(new MySkinAdapter(MainActivity.this, R.layout.multi_spinner,
+                skinText));
     }
 
     public class MySkinAdapter extends ArrayAdapter {
@@ -445,7 +456,8 @@ public class MainActivity extends BlunoLibrary {
         list.add("Few");
         list.add("Rare");
         list.add("None");
-        ArrayAdapter<String> frecklesDataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
+        ArrayAdapter<String> frecklesDataAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, list);
         frecklesDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         frecklesSpinner.setAdapter(frecklesDataAdapter);
     }
@@ -459,7 +471,8 @@ public class MainActivity extends BlunoLibrary {
         list.add("Burn, mild peeling");
         list.add("Rare skin, no peeling");
         list.add("No burning");
-        ArrayAdapter<String> burnDataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
+        ArrayAdapter<String> burnDataAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, list);
         burnDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         burnSpinner.setAdapter(burnDataAdapter);
     }
@@ -473,7 +486,8 @@ public class MainActivity extends BlunoLibrary {
         list.add("Sometimes");
         list.add("Often");
         list.add("Always");
-        ArrayAdapter<String> brownFreqDataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
+        ArrayAdapter<String> brownFreqDataAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, list);
         brownFreqDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         brownFreqSpinner.setAdapter(brownFreqDataAdapter);
     }
@@ -487,7 +501,8 @@ public class MainActivity extends BlunoLibrary {
         list.add("Medium tan");
         list.add("Dark tan");
         list.add("Deep dark");
-        ArrayAdapter<String> brownIntDataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
+        ArrayAdapter<String> brownIntDataAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, list);
         brownIntDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         brownIntSpinner.setAdapter(brownIntDataAdapter);
     }
@@ -501,7 +516,8 @@ public class MainActivity extends BlunoLibrary {
         list.add("Sometimes");
         list.add("Resistant");
         list.add("Never had a problem");
-        ArrayAdapter<String> faceDataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
+        ArrayAdapter<String> faceDataAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, list);
         faceDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         faceSpinner.setAdapter(faceDataAdapter);
     }
@@ -515,7 +531,8 @@ public class MainActivity extends BlunoLibrary {
         list.add("Sometimes");
         list.add("Often");
         list.add("Always");
-        ArrayAdapter<String> tanFreqDataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
+        ArrayAdapter<String> tanFreqDataAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, list);
         tanFreqDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         tanFreqSpinner.setAdapter(tanFreqDataAdapter);
     }
@@ -529,7 +546,8 @@ public class MainActivity extends BlunoLibrary {
         list.add("1-2 months ago");
         list.add("A few weeks ago");
         list.add("A few days ago");
-        ArrayAdapter<String> tanHistDataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
+        ArrayAdapter<String> tanHistDataAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, list);
         tanHistDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         tanHistSpinner.setAdapter(tanHistDataAdapter);
     }
@@ -577,7 +595,8 @@ public class MainActivity extends BlunoLibrary {
                 skinSpinner.getSelectedItemPosition() * frecklesSpinner.getSelectedItemPosition() *
                 burnSpinner.getSelectedItemPosition() * brownFreqSpinner.getSelectedItemPosition() *
                 brownIntSpinner.getSelectedItemPosition() * faceSpinner.getSelectedItemPosition() *
-                tanFreqSpinner.getSelectedItemPosition() * tanHistSpinner.getSelectedItemPosition()) != 0) {
+                tanFreqSpinner.getSelectedItemPosition() * tanHistSpinner.getSelectedItemPosition())
+                != 0) {
             serialReceivedText.getEditableText().clear();
             int eyeVal = eyeSpinner.getSelectedItemPosition();
             int eyeOut;
@@ -621,14 +640,20 @@ public class MainActivity extends BlunoLibrary {
                 buttonDisplayResults.setEnabled(true);
                 instructions.setText("Please press the \"Get Results\" button.");
             }
-            serialSend(String.valueOf(eyeOut) + String.valueOf(hairSpinner.getSelectedItemPosition()) +
-                    String.valueOf(skinSpinner.getSelectedItemPosition()) + String.valueOf(frecklesSpinner.getSelectedItemPosition()) +
-                    String.valueOf(burnSpinner.getSelectedItemPosition()) + String.valueOf(brownFreqSpinner.getSelectedItemPosition()) +
-                    String.valueOf(brownIntSpinner.getSelectedItemPosition()) + String.valueOf(faceSpinner.getSelectedItemPosition()) +
-                    String.valueOf(tanFreqSpinner.getSelectedItemPosition()) + String.valueOf(tanHistSpinner.getSelectedItemPosition()) +
+            serialSend(String.valueOf(eyeOut) +
+                    String.valueOf(hairSpinner.getSelectedItemPosition()) +
+                    String.valueOf(skinSpinner.getSelectedItemPosition()) +
+                    String.valueOf(frecklesSpinner.getSelectedItemPosition()) +
+                    String.valueOf(burnSpinner.getSelectedItemPosition()) +
+                    String.valueOf(brownFreqSpinner.getSelectedItemPosition()) +
+                    String.valueOf(brownIntSpinner.getSelectedItemPosition()) +
+                    String.valueOf(faceSpinner.getSelectedItemPosition()) +
+                    String.valueOf(tanFreqSpinner.getSelectedItemPosition()) +
+                    String.valueOf(tanHistSpinner.getSelectedItemPosition()) +
                     calibrate);
         } else {
-            Toast.makeText(this, "Please select an option for each category.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please select an option for each category.",
+                    Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -642,7 +667,8 @@ public class MainActivity extends BlunoLibrary {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        onActivityResultProcess(requestCode, resultCode, data);    //onActivityResult Process by BlunoLibrary
+        //onActivityResult Process by BlunoLibrary
+        onActivityResultProcess(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
     }
 
@@ -673,7 +699,8 @@ public class MainActivity extends BlunoLibrary {
     }
 
     @Override
-    public void onSerialReceived(String theString) {    //Once connection data received, this function will be called
+    //Once connection data received, this function will be called
+    public void onSerialReceived(String theString) {
         serialReceivedText.append(theString);    //append the text into the EditText
         final Toast toast = Toast.makeText(this, "Sending data...", Toast.LENGTH_SHORT);
         toast.show();

@@ -32,7 +32,8 @@ public class OneShotAlarm extends BroadcastReceiver {
         long[] pattern = {500, 500, 500, 500, 500, 500, 500, 500, 500, 500};
         Intent contentIntent = new Intent(context, NotificationReceiverActivity.class);
         contentIntent.putExtra("spfAppl", spfFact);
-        PendingIntent pIntent = PendingIntent.getActivity(context, 1, contentIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pIntent = PendingIntent.getActivity(context, 1, contentIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
         Notification noti = new Notification.Builder(context)
                 .setContentTitle("gCactus alarm")
                 .setContentText("You should head indoors now.").setSmallIcon(R.drawable.logo)

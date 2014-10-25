@@ -319,8 +319,8 @@ public class DisplayMessageActivity extends Activity {
         if (mToast != null) {
             mToast.cancel();
         }
-        mToast = Toast.makeText(DisplayMessageActivity.this, "Alarm set for " + String.valueOf(time) +
-                " minutes.", Toast.LENGTH_SHORT);
+        mToast = Toast.makeText(DisplayMessageActivity.this, "Alarm set for " +
+                String.valueOf(time) + " minutes.", Toast.LENGTH_SHORT);
         mToast.show();
     }
 
