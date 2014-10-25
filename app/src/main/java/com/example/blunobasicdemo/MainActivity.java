@@ -47,14 +47,14 @@ public class MainActivity extends BlunoLibrary {
             R.drawable.skin_3, R.drawable.skin_4, R.drawable.skin_5, R.drawable.skin_6};
     private static final String[] hairText = {"Please choose your hair colour", "Sandy red",
             "Blond", "Dark blond", "Chestnut", "Brown", "Black"};
-    private static final Integer[] hairColour = {R.drawable.blank, R.drawable.hair_1, R.drawable.hair_2,
-            R.drawable.hair_3, R.drawable.hair_4, R.drawable.hair_5, R.drawable.hair_6};
+    private static final Integer[] hairColour = {R.drawable.blank, R.drawable.hair_01, R.drawable.hair_02,
+            R.drawable.hair_03, R.drawable.hair_04, R.drawable.hair_05, R.drawable.hair_06};
     private static final String[] eyeText = {"Please choose your natural eye colour", "Light blue",
             "Light green", "Light gray", "Blue", "Green", "Gray", "Dark blue", "Dark green",
             "Dark gray", "Brown", "Black"};
-    private static final Integer[] eyeColour = {R.drawable.blank, R.drawable.eye_1, R.drawable.eye_2,
-            R.drawable.eye_3, R.drawable.eye_4, R.drawable.eye_5, R.drawable.eye_6, R.drawable.eye_7,
-            R.drawable.eye_8, R.drawable.eye_9, R.drawable.eye_10, R.drawable.eye_11};
+    private static final Integer[] eyeColour = {R.drawable.blank, R.drawable.eye_01, R.drawable.eye_02,
+            R.drawable.eye_03, R.drawable.eye_04, R.drawable.eye_05, R.drawable.eye_06, R.drawable.eye_07,
+            R.drawable.eye_08, R.drawable.eye_09, R.drawable.eye_10, R.drawable.eye_11};
     public final static String EXTRA_MESSAGE = "com.example.blunobasicdemo.MESSAGE";
 
     @Override
