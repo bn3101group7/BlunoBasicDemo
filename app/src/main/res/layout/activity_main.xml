@@ -62,7 +62,7 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:editable="true"
-                    android:textSize="10sp"
+                    android:textSize="0sp"
                     android:text=""/>
             </LinearLayout>
             <LinearLayout

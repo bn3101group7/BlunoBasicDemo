@@ -243,12 +243,11 @@ public class DisplayMessageActivity extends Activity {
                         public boolean onKey(View view, int arg1, KeyEvent arg2) {
                             if(!spfVal.getText().toString().equals("")) {
                                 double uvExpDbl;
-                                int spfNo;
                                 int totalDur;
+                                spfMultiplier = Integer.parseInt(spfVal.getText().toString());
                                 uvExpDbl = uvTimeInt/multiplier+0.5;
-                                spfNo = Integer.parseInt(spfVal.getText().toString());
-                                if(spfNo<151 && spfNo>1) {
-                                    totalDur = (int) (uvExpDbl) * spfNo;
+                                if(spfMultiplier<151 && spfMultiplier>1) {
+                                    totalDur = (int) (uvExpDbl) * spfMultiplier;
                                     uvTimeView.setText(String.valueOf(totalDur));
                                     spfEntry = true;
                                 }
