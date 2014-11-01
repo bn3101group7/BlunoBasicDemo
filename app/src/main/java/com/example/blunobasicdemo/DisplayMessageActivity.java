@@ -73,7 +73,6 @@ public class DisplayMessageActivity extends Activity {
         skinScore[0] = msg.charAt(0);
         skinScore[1] = msg.charAt(1);
         score = Integer.parseInt(new String(skinScore));
-        Toast.makeText(this, new String(skinScore),Toast.LENGTH_SHORT).show();
         if(score > 34) {
             skinType = "VI";
         } else if(score > 27) {
